@@ -1,0 +1,106 @@
+.list-page {
+    padding: 0.5%; // antes 2%
+  }
+  
+  .list-container {
+    position: relative;
+    min-height: 200px;
+  }
+  
+  .list-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 1000px;
+    height: 72vh; //~72% tomando como referencia el alto de la pantalla
+    overflow: auto;
+  }
+
+  .input-box {
+    width: 300px;
+    margin-top: 10px;
+  }
+
+
+  .list-filter-container {
+    position: relative;
+    min-height: 100px;
+    max-height: 100px;
+    height: 72vh; //~72% tomando como referencia el alto de la pantalla
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  // Para el efecto loader
+  .spinner-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .spinner-rate-limit-reached {
+    color: #980000;
+    max-width: 360px;
+    text-align: center;
+  }
+  
+  input {
+    text-transform: uppercase;
+  }
+  
+  // personalizaciones
+  .filter-input {
+    margin-bottom: -1.3em !important;
+    min-width: 8rem !important;
+    width: auto !important;
+    padding: 0px 2px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    top: 5px;
+  }
+  
+  .small-row {
+    min-height: 28px !important;
+    height: 28px;
+  }
+  
+  .hideFilter {
+    display: none !important;
+  }
+  
+  .config-table-btn {
+    right: 8px;
+    position: absolute;
+  }
+  
+  .config-table-btn-large {
+    display: none;
+  }
+  
+  .options-column {
+    display: block;
+  }
+  
+  @media (max-width: 800px) {
+    .config-table-btn-large {
+      display: block;
+    }
+  
+    .options-column {
+      display: none;
+    }
+  
+    .config-table-btn {
+      display: none;
+    }
+  }

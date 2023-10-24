@@ -1,0 +1,19 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-cliente" (click)="clienteService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR CLIENTE
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-cliente" *ngIf="!clienteService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR CLIENTE
+    </a>
+
+    <a mat-tab-link routerLink="editar-cliente" *ngIf="clienteService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR CLIENTE
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

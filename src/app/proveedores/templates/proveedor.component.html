@@ -1,0 +1,19 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-proveedor" (click)="proveedorService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR PROVEEDOR
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-proveedor" *ngIf="!proveedorService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR PROVEEDOR
+    </a>
+
+    <a mat-tab-link routerLink="editar-proveedor" *ngIf="proveedorService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR PROVEEDOR
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

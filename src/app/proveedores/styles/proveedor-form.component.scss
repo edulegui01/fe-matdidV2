@@ -1,0 +1,50 @@
+.form-container {
+    margin: 0.5%;
+  }
+  
+  .form {
+    padding: 2% 0 3% 0%;
+    margin-bottom: 1%;
+  }
+  
+  .mat-form-field {
+    width: auto;
+    min-width: 70%;
+    max-width: 80%;
+  }
+  
+  .page-header {
+    text-align: center;
+  }
+  
+  .buttons-container {
+    text-align: center;
+    margin-top: 3%;
+  
+    button {
+      margin: 1% 1%;
+      width: 10rem;
+    }
+  }
+  
+  input {
+    height: 20px !important;
+    text-transform: uppercase;
+  }
+  
+  .field-locked {
+    min-width: 65%;
+    margin-left: 3%;
+  }
+  
+  .active-toggle {
+    margin-right: 10%;
+  }
+  
+  .lock-unlock {
+    cursor: pointer;
+  }
+  
+  textarea {
+    min-height: 72px !important;
+  }

@@ -1,0 +1,121 @@
+/* estilos para el menu de navegacion (lista de botones/opciones en la barra de menu) */
+
+.mat-list-base {
+    /* se remueve padding top por defecto del mat-nav-list */
+    padding-top: 0 !important;
+  }
+  
+  .mat-list-item {
+    height: 2.2rem !important;
+    // background-color: #eaeaea !important;
+  }
+  
+  .mat-list-item:hover {
+    // background-color: #c3c3c3 !important;
+  }
+  
+  .mat-list-item-content {
+    height: 36px !important;
+  }
+  
+  .mat-list-item span {
+    padding: 0 5px !important;
+  }
+  
+  .mat-expansion-panel-spacing {
+    margin: 0 !important;
+  }
+  
+  .mat-expansion-panel-header {
+    padding-left: 10px !important;
+  }
+  
+  @media (max-width: 600px) {
+    mat-sidenav {
+      top: 54px !important;
+    }
+  }
+  
+  // estilos para el panel lateral
+  .menu-items mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
+    padding: 0% !important;
+  }
+  
+  .mat-list-base .mat-list-item .mat-list-item-content {
+    font-size: 0.9rem !important;
+  }
+  
+  // remueve el foco del boton luego de pulsarlo
+  .mat-button-focus-overlay {
+    //background-color: transparent !important;
+  }
+  
+  .menu-link {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+  }
+
+ 
+  
+  .route-link {
+    color: black;
+  }
+
+  .route-link:link {
+    background-color: aqua;
+    color: #3f51b5;
+    font-size: 0.9rem;
+  }
+
+
+ 
+
+
+
+  
+  //.active,
+  .route-link:hover {
+    color: #3f51b5;
+    font-size: 0.9rem;
+  }
+
+ 
+ 
+
+
+  
+  // item activo
+  .active span {
+    font-weight: bold;
+  }
+  
+  .expansion-text {
+    font-size: 0.9rem !important;
+    padding-top: 4% !important;
+    //font-weight: bold;
+  }
+  
+  .menu-solid {
+    // background-color: #ffffff !important;
+    height: 44px !important;
+    a {
+      // background-color: #ffffff !important;
+      height: 44px !important;
+  
+      .mat-list-item-content {
+        padding: 0 10px !important;
+      }
+    }
+  }
+  
+  .accordeon-child {
+    padding-left: 16px !important;
+  }
+  
+  .no-child {
+    height: 48px !important;
+  }

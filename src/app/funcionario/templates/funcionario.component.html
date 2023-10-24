@@ -1,0 +1,19 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-funcionario"  (click)="funcionarioService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR FUNCIONARIO
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-funcionario" *ngIf="!funcionarioService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR FUNCIONARIO
+    </a>
+
+    <a mat-tab-link routerLink="editar-funcionario" *ngIf="funcionarioService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR FUNCIONARIO
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

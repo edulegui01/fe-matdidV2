@@ -1,0 +1,53 @@
+<mat-accordion class="menu-items" multi='true'>
+    
+
+    <div *ngFor="let menu of menuList">
+
+        <!-- Profundidad 1 menu-solid-->
+        <div class="" *ngIf="menu.menus.length === 0">
+            <a mat-list-item #link (click)="!preview ? goRoute(menu, link) : null" class="menu-link no-child route-link ">
+                <mat-icon>{{ menu.icono ? menu.icono : 'adjust' }}</mat-icon>
+                <span>{{ menu.nombre }} </span>
+            </a>
+        </div>
+
+        <!-- Profundidad 2 -->
+        <div *ngIf="menu.menus.length > 0">
+            <mat-expansion-panel [expanded]="openCascade">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="menu-link">
+                        <mat-icon [ngStyle]="{'padding-left' : getSize()}" style="font-size: 1.4rem;">
+                            {{ menu.icono ? menu.icono : 'adjust' }}
+                        </mat-icon>
+                        <span class="expansion-text">
+                            {{ menu.nombre }}
+                        </span>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div *ngFor="let submenu of menu.menus">
+
+                    <!-- Si no tiene hijos es un menu final -->
+                    <a mat-list-item #link (click)="!preview ? goRoute(submenu, link) : null" class="route-link"
+                        *ngIf="submenu.menus.length === 0">
+                        <mat-icon [ngStyle]="{'padding-left' : getSize()}">
+                            {{ submenu.icono ? submenu.icono : 'adjust' }}
+                        </mat-icon>
+                        <span>{{ submenu.nombre }} </span>
+                    </a>
+                    
+                    <!-- Si tiene hijos se envia el menu dentro de una lista para volver a iterar -->
+                    <div *ngIf="submenu.menus.length > 0">
+                        <app-menu-navigation [menuList]="[submenu]" [preview]="preview" [childAccordeon]="true" [paddingL]="paddingL + 10"></app-menu-navigation>
+                    </div>
+
+                </div>
+
+            </mat-expansion-panel>
+        </div>
+        <mat-divider *ngIf="!childAccordeon"></mat-divider>
+    </div>
+
+</mat-accordion>

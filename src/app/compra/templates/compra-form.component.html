@@ -1,0 +1,128 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="12" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+            
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA</mat-label>
+                       <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="FECHA">
+                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('fecha') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        RUC/CEDULA
+                    </mat-label>
+                    <input formControlName="rucCedula" matInput placeholder="RUC/CEDULA" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('rucCedula') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        N° FOLIO
+                    </mat-label>
+                    <input formControlName="folio" matInput placeholder="N° FOLIO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('folio') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TIMBRADO
+                    </mat-label>
+                    <input formControlName="timbrado" matInput placeholder="TIMBRADO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('timbrado') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        RAZÓN SOCIAL
+                    </mat-label>
+                    <input formControlName="razonSocial" matInput placeholder="RAZÓN SOCIAL" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('razonSocial') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        FUNCIONARIO
+                    </mat-label>
+                    <input formControlName="funcionario" matInput placeholder="FUNCIONARIO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('funcionario') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+
+           
+        
+
+          
+            
+           
+
+        </mat-grid-list>
+
+        <div  formArrayName="detalles" class="list-table-container">  
+            
+                   <table >
+                    <tr>
+                        <th>producto</th>
+                        <th>cantidad</th>
+                        <th>descuento</th>  
+
+                    </tr>
+                    
+
+                        <tr [formGroupName]="i" *ngFor="let detalle of getControls(); let i = index">
+                            <td> <input matInput placeholder="producto" formControlName="producto"></td>
+                            <td> <input matInput placeholder="cantidad" formControlName="cantidad"></td>
+                            <td> <input matInput placeholder="descuento" formControlName="descuento"></td>
+                        </tr>
+
+
+                    
+                    
+                   </table> 
+            
+        </div>
+
+       
+
+
+
+        
+
+    </form>
+
+
+   
+   
+</div>

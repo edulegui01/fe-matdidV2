@@ -1,0 +1,25 @@
+.sidenav-container {
+    flex: 1;
+    height: 93.5vh;
+  }
+  
+  .is-mobile .sidenav-container {
+    flex: 1 0 auto;
+  }
+  
+  .mat-list-base {
+    /* se remueve padding top por defecto del mat-nav-list */
+    padding-top: 0% !important;
+  }
+  
+  /* estilos para el menu de navegacion (lista de botones/opciones en la barra de menu) */
+  mat-sidenav {
+    min-width: 180px !important;
+    width: auto;
+  }
+  
+  @media (max-width: 600px) {
+    mat-sidenav {
+      top: 54px !important;
+    }
+  }

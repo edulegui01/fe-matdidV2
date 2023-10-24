@@ -1,0 +1,152 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required readonly="entity.readOnly" >
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('nombre') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        DESCRIPCION
+                    </mat-label>
+                    <input formControlName="descripcion" matInput placeholder="DESCRIPCION" required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('descripcion') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        AUTOR
+                    </mat-label>
+                    <input formControlName="autor" matInput placeholder="AUTOR" required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('autor') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        EDITORIAL
+                    </mat-label>
+                    <input formControlName="editorial" matInput placeholder="EDITORIAL" required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('editorial') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        ISBN
+                    </mat-label>
+                    <input formControlName="isbn" matInput placeholder="ISBN" readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('isbn') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        MATERIA
+                    </mat-label>
+                    <input formControlName="materia" matInput placeholder="MATERIA" required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('materia') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        GRADO/CURSO
+                    </mat-label>
+                    <input formControlName="gradoCurso" matInput placeholder="GRADO/CURSO" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('gradoCurso') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        COSTO
+                    </mat-label>
+                    <input formControlName="costo" matInput placeholder="COSTO" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('costo') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        PRECIO
+                    </mat-label>
+                    <input formControlName="precio" matInput placeholder="PRECIO" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('precio') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        IVA
+                    </mat-label>
+                    <input formControlName="iva" matInput placeholder="IVA" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('iva') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            
+           
+
+        </mat-grid-list>
+
+        <div class="buttons-container">
+            <button id="register" *ngIf="!params && !readOnlyDetalle"  mat-raised-button color="primary" type="button" (click)="saveProducto()" >
+                {{ viewText.REGISTER }}
+                <mat-icon>save</mat-icon>
+            </button>
+            <button id="update" *ngIf="params && !readOnlyDetalle"  mat-raised-button color="primary"  type="button" (click) ="updateProducto()" >
+                {{ viewText.UPDATE }}
+                <mat-icon>update</mat-icon>
+            </button>
+            <button *ngIf = "!readOnlyDetalle" type="button" mat-raised-button (click)="closeForm()" >
+                {{ viewText.CANCEL }}
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </form>
+</div>

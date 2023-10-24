@@ -1,0 +1,85 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+        <!-- <ng-container>
+            
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="cedula" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            
+        </ng-container>
+
+        <ng-container matColumnDef="name-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container> -->
+
+
+        <!-- <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR DESCRIPCIÓN DEL PRODUCTO
+                        </mat-label>
+                        <input formControlName="nombre" matInput placeholder="INGRESE LA DESCRIPCIÓN" (keydown.enter)="doFilter()">
+                    </mat-form-field>
+                </div>
+
+            </mat-grid-tile>
+
+           
+            
+        </mat-grid-list> -->
+        <div  class="list-table-container">
+           <div class="container responsive-grid" style="padding: 24px;  display: grid;
+           grid-template-columns: repeat(4,1fr);
+           gap: 24px;">
+                <mat-card *ngFor="let card of dataSource.content">
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{card.nombre}}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{card.descripcion}}
+                        <p></p>
+                       <p><b>AUTOR: </b>{{card.autor}}</p>
+                        <p><b>EDITORIAL: </b>{{card.editorial}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button  mat-stroked-button color="primary" (click)="OnClickEditCliente(card)">DETALLES</button>
+                        <button  mat-stroked-button color="primary">EDITAR</button>
+                    </mat-card-actions>
+                </mat-card>
+
+           </div>
+        </div>
+        
+
+        <mat-paginator
+          [pageSizeOptions]="paginatorRange"
+          [length]="dataSource.totalElements"
+          [pageSize]="dataSource.pageable.pageSize"
+          (page)="pageEvent = $event; onPaginateChange($event)"
+          showFirstLastButtons #pagi>
+        </mat-paginator> 
+        
+
+        
+
+        
+
+        
+
+    </div>
+</div>
+

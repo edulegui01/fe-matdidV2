@@ -1,0 +1,49 @@
+<div class="login-page">
+
+    <div class="login-box mat-elevation-z10">
+
+        <mat-card>
+            <mat-card-header class="bold">
+                <h3 style="font-weight: bold;">{{ appName }}</h3>
+                <h5>INICIAR SESION</h5>
+            </mat-card-header>
+
+            <mat-card-content>
+                <form [formGroup]="loginForm">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>USUARIO</mat-label>
+                        <input formControlName="username" matInput placeholder="NOMBRE DE USUARIO">
+                        <mat-icon matSuffix>person</mat-icon>
+                        <mat-error *ngIf="loginForm.invalid">{{getErrorMessage('username')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>CONTRASEÑA</mat-label>
+                        <input formControlName="password" [type]="hidePass ? 'text' : 'password'" (keydown.enter)="onKeydown()" matInput
+                            placeholder="CONTRASEÑA DE USUARIO">
+
+                        <button mat-icon-button matSuffix (click)="hidePass = !hidePass" type="button" tabindex="-1"
+                            [matTooltip]="hidePass ? 'OCULTAR CLAVE' : 'MOSTRAR CLAVE'">
+                            <mat-icon>{{ hidePass ? 'visibility' : 'visibility_off' }}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="loginForm.invalid">{{getErrorMessage('password')}}</mat-error>
+                    </mat-form-field>
+
+                    <div class="button-container">
+                        <button id="acceder" type="button" mat-flat-button color="primary" (click)="dologin()">
+                            ACCEDER
+                        </button>
+                    </div>
+                    <div>
+                        <a style="color: #3f51b5" routerLink="/cuenta/recuperar">
+                            OLVIDE MI CLAVE
+                        </a>
+                    </div>
+                </form>
+            </mat-card-content>
+
+        </mat-card>
+
+    </div>
+</div>

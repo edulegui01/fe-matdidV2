@@ -1,0 +1,62 @@
+// estilos para el matsidenav
+
+/* estilos para la barra de navegacion */
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .app-is-mobile .primary-toolbar {
+    position: fixed;
+    z-index: 2;
+  }
+  
+  h1.app-name {
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .app-name:active,
+  .app-name:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+  }
+  
+  .sidenav-container {
+    flex: 1;
+  }
+  
+  .is-mobile .sidenav-container {
+    flex: 1 0 auto;
+  }
+  
+  .mat-list-base {
+    /* se remueve padding top por defecto del mat-nav-list */
+    padding-top: 0% !important;
+  }
+  
+  /* estilos para el menu de navegacion (lista de botones/opciones en la barra de menu) */
+  mat-sidenav {
+    width: 250px !important;
+  }
+  
+  @media (max-width: 600px) {
+    mat-sidenav {
+      top: 54px !important;
+    }
+  }
+  
+  .nav-left-buttons {
+    margin: 0 77% 0 0; 
+  
+    button {
+      margin: 0 5px;
+    }
+  }

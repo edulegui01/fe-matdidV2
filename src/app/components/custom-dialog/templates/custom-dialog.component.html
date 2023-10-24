@@ -1,0 +1,43 @@
+<!-- Contenido para renderizar el pop up -->
+
+<div class="custom-dialog-toolbar">
+    <mat-toolbar color="primary">
+        <span>{{ params.title }}</span>
+        <span class="toolbar-spacer"></span>
+        <button mat-icon-button (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+</div>
+
+<div class="custom-dialog-container">
+
+    <div class="custom-dialog-header">
+        
+    </div>
+
+    <div class="custom-dialog-body">
+        
+        <div class="body-info" [innerHTML]="params.message"></div>
+
+        <div class="action-buttons">
+
+            <!-- Botones en caso de dialog de confirmacion = confirm -->
+            <button mat-raised-button color="primary" *ngIf="params.typeDialog === 'confirm'" (click)="accept()">
+                {{ params.buttonText.left }}
+            </button>
+
+            <button mat-raised-button *ngIf="params.typeDialog === 'confirm'" (click)="close()">
+                {{ params.buttonText.right }}
+            </button>
+
+            <!-- Botones en caso de dialog informativo = info -->
+            <button mat-raised-button color="primary" *ngIf="params.typeDialog === 'info'" (click)="close()">
+                {{ params.buttonText.left }}
+            </button>
+        </div>
+
+
+    </div>
+
+</div>

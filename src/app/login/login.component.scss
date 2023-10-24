@@ -1,0 +1,71 @@
+.login-page {
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* centrar el contenido de la caja login */
+
+.login-box {
+    position: absolute;
+    /* width: 360px; */
+    width: 348px;
+    min-width: 280px;
+    height: auto;
+    z-index: 15;
+    top: 30%;
+    left: 48%;
+    margin: -100px 0 0 -150px;
+    border-radius: 15px;
+}
+
+.mat-card {
+    border-radius: 15px !important;
+}
+
+.mat-card-header {
+    display: block;
+    text-align: center;
+}
+
+.header-text {
+    text-align: center !important;
+    width: 100%;
+}
+
+.image-content img {
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+    opacity: 0.5;
+}
+
+.button-container {
+    margin: 5% 0;
+    padding: 0% 8%;
+}
+
+.button-container button {
+    width: 100%;
+}
+
+.mat-form-field {
+    width: 85%;
+}
+
+@media(max-width: 600px) {
+    .login-box {
+        left: 45%;
+    }
+    // se remueven sombrar del contenedor
+    .login-box {
+        box-shadow: none !important;
+    }
+    div.mat-elevation-z10,
+    mat-card {
+        box-shadow: none !important;
+    }
+}
+
+.bold{
+    font-weight: bold;
+}

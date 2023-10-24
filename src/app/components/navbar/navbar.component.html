@@ -1,0 +1,40 @@
+<div class="nav-container" [class.app-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="primary-toolbar">
+        <button mat-icon-button (click)="toggle()" *ngIf="true">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="app-name" mat-list-item routerLink="" (click)="clearMenuSelected()">{{ appLabels.APP_NAME }}</h1>
+
+        <!-- espaciado -->
+        <span class="header-spacer"></span>
+
+        <div class="nav-left-buttons">
+            
+        </div>
+
+
+        <span>anonimo</span>
+
+        <button mat-icon-button [matMenuTriggerFor]="account">
+            <mat-icon aria-label="user account">account_circle</mat-icon>
+        </button>
+        <mat-menu #account>
+            <a style="text-decoration: none" routerLink="/perfil">
+                <button mat-menu-item>
+                    <mat-icon class="mat-18">settings</mat-icon>
+                    PERFIL
+                </button>
+            </a>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon class="mat-18">exit_to_app</mat-icon>
+                CERRAR SESION
+            </button>
+        </mat-menu>
+
+    </mat-toolbar>
+
+    <app-sidenav [menuList]="menuList" [marginTop]="mobileQuery.matches ? 54 : 0"
+        [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" [fixedToGap]="54">
+    </app-sidenav>
+
+</div>

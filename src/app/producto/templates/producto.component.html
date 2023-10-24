@@ -1,0 +1,22 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-producto" (click)="productoService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR PRODUCTO
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-producto" *ngIf="!productoService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR PRODUCTO
+    </a>
+
+    <a mat-tab-link routerLink="editar-producto" *ngIf="productoService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR PRODUCTO
+    </a>
+    <a mat-tab-link routerLink="detalle-producto" *ngIf="productoService.detalleForm" routerLinkActive #rl4="routerLinkActive" [active]="rl4.isActive">
+      DETALLE PRODUCTO
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

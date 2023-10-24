@@ -1,0 +1,19 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-localidad" (click)="localidadService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR LOCALIDAD
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-localidad" *ngIf="!localidadService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR LOCALIDAD
+    </a>
+
+    <a mat-tab-link routerLink="editar-localidad" *ngIf="localidadService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR LOCALIDAD
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

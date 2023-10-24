@@ -1,0 +1,19 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-compra"  (click)="compraService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR COMPRA
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-compra" *ngIf="!compraService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR COMPRA
+    </a>
+
+    <a mat-tab-link routerLink="editar-compra" *ngIf="compraService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR COMPRA
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

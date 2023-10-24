@@ -1,0 +1,153 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1" >
+                <mat-form-field >
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('nombre') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        APELLIDO
+                    </mat-label>
+                    <input formControlName="apellido" matInput placeholder="APELLIDO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('apellido') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        CEDULA
+                    </mat-label>
+                    <input formControlName="cedula" matInput placeholder="CEDULA" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('cedula') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA NACIMIENTO</mat-label>
+                       <input matInput formControlName="fechaNac" [matDatepicker]="picker" placeholder="FECHA DE NACIMIENTO">
+                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('fechaNac') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        DIRECCION
+                    </mat-label>
+                    <input formControlName="direccion" matInput placeholder="DIRECCION">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('direccion') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        EMAIL
+                    </mat-label>
+                    <input formControlName="email" matInput placeholder="EMAIL" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('email') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TELEFONO
+                    </mat-label>
+                    <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        ROL
+                    </mat-label>
+                    <input formControlName="rol" matInput placeholder="ROL" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('rol') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            
+           <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>LOCALIDAD</mat-label>
+                    <mat-select formControlName="localidad" id="gestionSelect">
+                        <mat-option>SELECCIONAR LOCALIDAD</mat-option>
+                        <mat-option *ngFor="let localidad of listadoLocalidad" [value]="localidad.id">
+                            {{localidad.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('localidad') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>ESTADO</mat-label>
+                    <mat-select formControlName="activo" id="gestionSelect">
+                        <mat-option>SELECCIONAR LOCALIDAD</mat-option>
+                        <mat-option value="A">ACTIVO</mat-option>
+                        <mat-option value="I">INACTIVO</mat-option>
+                        
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('activo') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <div class="buttons-container">
+            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveFuncionario()">
+                {{ viewText.REGISTER }}
+                <mat-icon>save</mat-icon>
+            </button>
+            <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateFuncionario()">
+                {{ viewText.UPDATE }}
+                <mat-icon>update</mat-icon>
+            </button>
+            <button type="button" mat-raised-button (click)="closeForm()">
+                {{ viewText.CANCEL }}
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </form>
+</div>

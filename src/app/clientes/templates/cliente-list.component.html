@@ -1,0 +1,157 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+        <!-- <ng-container>
+            
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="cedula" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            
+        </ng-container>
+
+        <ng-container matColumnDef="name-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container> -->
+
+
+        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR NOMBRE Y APELLIDO
+                        </mat-label>
+                        <input formControlName="name" matInput placeholder="INGRESE EL NOMBRE Y APELLIDO" (keydown.enter)="doFilter()">
+                    </mat-form-field>
+                </div>
+
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR RUC O CÉDULA
+                        </mat-label>
+                        <input formControlName="cedula" matInput placeholder="INGRESE EL RUC O CÉDULA" (keydown.enter)="doFilter()">
+                    </mat-form-field>
+                </div>
+
+            </mat-grid-tile>
+            
+        </mat-grid-list>
+
+        
+
+       <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                NOMBRE
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.nombre}}
+            </mat-cell>
+        </ng-container>
+
+        
+
+        <ng-container matColumnDef="cedula">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                CÉDULA
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.cedula}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ruc">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                RUC
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.ruc}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="direccion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                DIRECCION
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.direccion}}
+            </mat-cell>
+        </ng-container>
+
+        <!--filters-->
+       
+
+        
+
+        <div *ngIf="true">
+            <ng-container matColumnDef="options">
+                <mat-header-cell *matHeaderCellDef fxFlex="150%">
+
+                    <span class="options-column">
+                        OPCIONES
+                    </span>
+
+                    <button  matTooltip="OPCIONES DE TABLA"
+                        class="config-table-btn-large" mat-flat-button>
+                        OPCIONES
+                    </button>
+
+                    
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex="15%">
+
+                    <button mat-icon-button [matMenuTriggerFor]="actions">
+                        <mat-icon aria-label="actions">
+                            more_horiz
+                        </mat-icon>
+                    </button>
+
+                    <mat-menu #actions>
+                        <button mat-menu-item (click)="OnClickEditCliente(element)">
+                            <mat-icon class="mat-18">edit</mat-icon>
+                            EDITAR
+                        </button>
+
+                        <mat-divider></mat-divider>
+
+                        <button mat-menu-item (click)="OnClickDeleteCliente(element)">
+                            <mat-icon class="mat-18">
+                                delete
+                            </mat-icon>
+                            ELIMINAR
+                        </button>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
+        </div>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+        <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+         <mat-paginator
+          [pageSizeOptions]="paginatorRange"
+          [length]="dataSource.totalElements"
+          [pageSize]="dataSource.pageable.pageSize"
+          (page)="pageEvent = $event; onPaginateChange($event)"
+          showFirstLastButtons #pagi>
+        </mat-paginator> 
+
+    </div>
+</div>
+
