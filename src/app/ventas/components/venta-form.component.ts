@@ -7,17 +7,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
-import { CompraService } from '../services/compra.service';
 import { registerCompraInit } from 'src/app/class/registerCompraInit';
-import { Observable, debounceTime, distinctUntilChanged, map, of, } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, map, of, take, } from 'rxjs';
 import { Producto2 } from 'src/app/class/producto2';
+import { VentaService } from '../services/venta.service';
 
 @Component({
-  selector: 'app-compra-form',
-  templateUrl: '../templates/compra-form.component.html',
-  styleUrls: ['../styles/compra-form.component.scss']
+  selector: 'app-venta-form',
+  templateUrl: '../templates/venta-form.component.html',
+  styleUrls: ['../styles/venta-form.component.scss']
 })
-export class CompraFormComponent implements OnInit {
+export class VentaFormComponent implements OnInit {
 
   entityForm!:FormGroup;
   entity:any=null;
@@ -35,6 +35,8 @@ export class CompraFormComponent implements OnInit {
   Products$!:Observable<Producto2[]>;
 
   Clientes$!:Observable<any[]>;
+
+  timbrado!:any;
 
 
   productoIdSeleccionado!:number;
@@ -56,7 +58,7 @@ export class CompraFormComponent implements OnInit {
 
 
 
-  constructor(public compraService:CompraService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public ventaService:VentaService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
 
     this.routerInstance = router;
 
@@ -75,7 +77,15 @@ export class CompraFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.ventaService.getTimbrado().subscribe(
+      (timbrado:any) =>{
+        this.timbrado = timbrado
+      }
+    );
 
+
+    console.log(this.timbrado)
+    
     
   }
 
@@ -85,7 +95,7 @@ export class CompraFormComponent implements OnInit {
         fecha: [entity ? entity.fecha : ''],
         rucCedula: [entity ? entity.rucCedula : ''],
         folio: [entity ? entity.folio : ''],
-        timbrado: [entity ? entity.timbrado : ''],
+        timbrado: [entity ? entity.timbrado :  this.timbrado?.nroTimbrado],
         razonSocial: [entity ? entity.razonSocial : ''],
         funcionario: [entity ? entity.funcionario : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])
@@ -218,7 +228,7 @@ export class CompraFormComponent implements OnInit {
           if (data) {
               
 
-              this.compraService.saveClientes(this.clienteToSave).subscribe((result:any) => {
+              this.ventaService.saveClientes(this.clienteToSave).subscribe((result:any) => {
                 this.routerInstance.navigate(['../cliente/listar-cliente'])
               });
           }
@@ -263,9 +273,9 @@ export class CompraFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-            this.compraService.updateCliente(this.entity.idPersona,this.clienteToUpdate).subscribe(result => {
+            this.ventaService.updateCliente(this.entity.idPersona,this.clienteToUpdate).subscribe(result => {
               this.routerInstance.navigate(['../cliente/listar-cliente']);
-              this.compraService.editForm = false;
+              this.ventaService.editForm = false;
             });
           }
       });
@@ -284,7 +294,7 @@ export class CompraFormComponent implements OnInit {
 
   closeForm() {
     this.routerInstance.navigate(['../cliente/listar-cliente']);
-    this.compraService.editForm = false;
+    this.ventaService.editForm = false;
   }
 
 
@@ -309,7 +319,7 @@ export class CompraFormComponent implements OnInit {
 
     
     
-    this.Products$ = this.compraService.searchProductsToSelect(target.value);
+    this.Products$ = this.ventaService.searchProductsToSelect(target.value);
 
 
 
@@ -321,7 +331,7 @@ export class CompraFormComponent implements OnInit {
 
     const target = e.target as HTMLInputElement;
 
-    this.Clientes$ = this.compraService.searchClienteToSelect(target.value);
+    this.Clientes$ = this.ventaService.searchClienteToSelect(target.value);
 
   }
 

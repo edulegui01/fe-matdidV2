@@ -12,6 +12,8 @@ import { LocalidadComponent } from 'src/app/localidad/components/localidad.compo
 import {routes as routerLocalidad} from 'src/app/localidad/localidad.routing'
 import { routes as routerCompra } from 'src/app/compra/compra.routing';
 import { CompraComponent } from 'src/app/compra/components/compra.component';
+import { VentaComponent } from 'src/app/ventas/components/venta.component';
+import { routes as routerVenta } from 'src/app/ventas/venta.routing'
 
 export const routes: Routes = [
     {
@@ -43,6 +45,11 @@ export const routes: Routes = [
         path: MENU_URLS.COMPRA.URL_BASE,
         component: CompraComponent,
         children: routerCompra
+    },
+    {
+        path: MENU_URLS.VENTA.URL_BASE,
+        component: VentaComponent,
+        children: routerVenta
     },
    
 

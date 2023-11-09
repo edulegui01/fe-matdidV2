@@ -1,0 +1,19 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-compra"  (click)="ventaService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR VENTA
+    </a>
+
+    <a mat-tab-link routerLink="nuevo-venta" *ngIf="!ventaService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR VENTA
+    </a>
+
+    <a mat-tab-link routerLink="editar-venta" *ngIf="ventaService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR VENTA
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

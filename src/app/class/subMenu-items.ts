@@ -8,9 +8,9 @@ export class subMenu{
     static menuListAcciones:Array<any>=[
        
         {nombre:'COMPRAS',menus:[],icono:'shopping_cart', url:MENU_URLS.COMPRA.URL_BASE},
-        {nombre:'VENTAS',menus:[],icono:'point_of_sale'},
+        {nombre:'VENTAS',menus:[],icono:'point_of_sale',url:MENU_URLS.VENTA.URL_BASE},
         {nombre:'CAJA',menus:[],icono:'monetization_on'},
-        {nombre:'INVENTARIO',menus:[],icono:'assignment', url:MENU_URLS.LOCALIDAD.URL_BASE}
+        {nombre:'INVENTARIO',menus:[],icono:'assignment',}
     ]
 
     static menuListAdministracion:Array<any>=[

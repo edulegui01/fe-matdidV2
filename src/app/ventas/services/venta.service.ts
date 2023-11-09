@@ -11,7 +11,7 @@ import {Settings} from 'src/app/class/settings';
 @Injectable({
   providedIn: 'root'
 })
-export class CompraService {
+export class VentaService {
 
   httpUrls={
     urlListar:'/persona/listar',
@@ -23,7 +23,8 @@ export class CompraService {
     urlActualiazr:'/persona/actualizar/',
     urlEliminar:'/persona/borrar/',
     urlProductoListar:'/producto/listar_select',
-    urlPersonaListar:'/persona/listar_select'
+    urlPersonaListar:'/persona/listar_select',
+    urlTimbradoValido:'/timbrado/valido'
   }
 
   editForm:boolean=false;
@@ -110,6 +111,12 @@ export class CompraService {
 
   public deleteCliente(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  }
+
+  public getTimbrado(): Observable<any>{
+
+     return this.http.get(Settings.URL_BASE+this.httpUrls.urlTimbradoValido);
+
   }
 
 

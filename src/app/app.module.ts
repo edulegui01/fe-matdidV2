@@ -17,6 +17,7 @@ import { FuncionarioModule } from './funcionario/funcionario.module';
 import { LocalidadModule } from './localidad/localidad.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CompraModule } from './compra/compra.module';
+import { VentaModule } from './ventas/venta.module';
 
 
 
@@ -41,7 +42,8 @@ import { CompraModule } from './compra/compra.module';
     ProductoModule,
     FuncionarioModule,
     LocalidadModule,
-    CompraModule
+    CompraModule,
+    VentaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
