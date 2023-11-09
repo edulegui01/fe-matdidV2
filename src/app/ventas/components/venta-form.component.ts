@@ -175,7 +175,7 @@ export class VentaFormComponent implements OnInit {
     
     if(target.value && target.name == "cantidad"){
       subTotal = subTotalParaCantidad-descuento
-      console.log(subTotal);
+      
      
 
     }
