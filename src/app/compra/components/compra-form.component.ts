@@ -332,7 +332,13 @@ export class CompraFormComponent implements OnInit {
 
   removeEmployee(index:number) {
     const control =  this.entityForm.get('detalleProducts') as FormArray;
+    console.log(3213);
     control.removeAt(index);
+
+
+    console.log(3213);
+    this.updateTotal();
+
   }
 
 
