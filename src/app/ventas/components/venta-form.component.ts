@@ -343,6 +343,9 @@ export class VentaFormComponent implements OnInit {
   removeEmployee(index:number) {
     const control =  this.entityForm.get('detalleProducts') as FormArray;
     control.removeAt(index);
+
+    this.updateTotal();
+
   }
 
 
