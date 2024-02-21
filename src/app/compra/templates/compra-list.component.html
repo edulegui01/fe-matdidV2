@@ -1,0 +1,166 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+        <!-- <ng-container>
+            
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="cedula" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            
+        </ng-container>
+
+        <ng-container matColumnDef="name-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container> -->
+
+
+        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR NÚMERO DE FOLIO
+                        </mat-label>
+                        <input formControlName="numFolio" matInput placeholder="INGRESE EL NÚMERO DE FOLIO" (keydown.enter)="doFilter()">
+                    </mat-form-field>
+                </div>
+
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR PROVEEDOR
+                        </mat-label>
+                        <input formControlName="proveedor" matInput placeholder="INGRESE EL PROVEEDOR" (keydown.enter)="doFilter()">
+                    </mat-form-field>
+                </div>
+
+            </mat-grid-tile>
+            
+        </mat-grid-list>
+
+        
+
+       <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="numFolio"   matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="numFolio">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                N° DE FOLIO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.numFolio}}
+            </mat-cell>
+        </ng-container>
+
+        
+
+        <ng-container matColumnDef="proveedor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                PROVEEDOR
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.nombrePersona}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="montoTotal">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                MONTO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.montoTotal}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreFuncionario">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                FUNCIONARIO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.nombreFuncionario}} {{element.apellidoFuncionario}}
+            </mat-cell>
+        </ng-container>
+
+        <!--filters-->
+       
+
+        
+
+        <div *ngIf="true">
+            <ng-container matColumnDef="options">
+                <mat-header-cell *matHeaderCellDef fxFlex="150%">
+
+                    <span class="options-column">
+                        OPCIONES
+                    </span>
+
+                    <button  matTooltip="OPCIONES DE TABLA"
+                        class="config-table-btn-large" mat-flat-button>
+                        OPCIONES
+                    </button>
+
+                    
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex="15%">
+
+                    <button mat-icon-button [matMenuTriggerFor]="actions">
+                        <mat-icon aria-label="actions">
+                            more_horiz
+                        </mat-icon>
+                    </button>
+
+                    <mat-menu #actions>
+                        <button mat-menu-item (click)="OnClickEditCliente(element)">
+                            <mat-icon class="mat-18">edit</mat-icon>
+                            EDITAR
+                        </button>
+
+                        <mat-divider></mat-divider>
+
+                        <button mat-menu-item (click)="OnClickDeleteCliente(element)">
+                            <mat-icon class="mat-18">
+                                delete
+                            </mat-icon>
+                            ELIMINAR
+                        </button>
+
+                        <mat-divider></mat-divider>
+
+                        <button mat-menu-item>
+                            <mat-icon class="mat-18">
+                                navigate_next
+                            </mat-icon>
+                            DETALLE
+                        </button>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
+        </div>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+        <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+         <mat-paginator
+          [pageSizeOptions]="paginatorRange"
+          [length]="dataSource.totalElements"
+          [pageSize]="dataSource.pageable.pageSize"
+          (page)="pageEvent = $event; onPaginateChange($event)"
+          showFirstLastButtons #pagi>
+        </mat-paginator> 
+
+    </div>
+</div>
+

@@ -40,6 +40,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MAT_EXPANSION_PANEL_DEFAULT_OPTIONS } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
 
@@ -64,6 +65,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
+    MatMomentDateModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,

@@ -5,10 +5,26 @@
     <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
         <mat-grid-list [cols]="12" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
             
-            <mat-grid-tile [colspan]="4" [rowspan]="1">
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <mat-form-field>
+              <mat-label>TIPO DE FACTURA</mat-label>  
+              <mat-select formControlName="tipoFactura" (selectionChange)="onFechaSelection($event.value)">
+                  <mat-option  value="contado">CONTADO</mat-option>
+                  <mat-option  value="creditoTreinta">CREDITO 30 DÍAS</mat-option>
+                  <mat-option  value="creditoSesenta">CREDITO 60 DÍAS</mat-option>
+                  <mat-option  value="creditoNoventa">CREDITO 90 DÍAS</mat-option>
+                  <mat-option  value="creditoCientoVeinte">CREDITO 120 DÍAS</mat-option>
+              </mat-select>
+                <mat-error *ngIf="entityForm.invalid">
+                    {{ getErrorMessage('tipoFactura') }}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>  
+          
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>FECHA</mat-label>
-                       <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="FECHA">
+                       <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="FECHA" (dateInput)="onFechaSelection()" (dateChange)="onFechaSelection()">
                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                        <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="entityForm.invalid">
@@ -16,6 +32,44 @@
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <mat-form-field>
+                  <mat-label>
+                    RAZON SOCIAL
+                  </mat-label>
+                  <input #searchInputCliente  matInput type="text"  [matAutocomplete]="auto2" />
+                  <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let cliente of Clientes; let i=index" [value]="cliente.razonSocial"  (onSelectionChange)="selectioChangeCliente(cliente,i)">
+                      {{cliente.razonSocial}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <mat-form-field>
+                <mat-label>
+                    N° FOLIO
+                </mat-label>
+                <input formControlName="folio" matInput placeholder="N° FOLIO" required [value]="folio">
+                <mat-error *ngIf="entityForm.invalid">
+                    {{ getErrorMessage('folio') }}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <mat-form-field>
+                  <mat-label>FECHA DE VENCIMIENTO</mat-label>
+                     <input matInput formControlName="fechaVencimiento" [matDatepicker]="picker1" placeholder="FECHA">
+                     <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                     <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error *ngIf="entityForm.invalid">
+                      {{ getErrorMessage('fechaVencimiento') }}
+                  </mat-error>
+              </mat-form-field>
+          </mat-grid-tile>
 
             
 
@@ -31,17 +85,7 @@
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="4" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        N° FOLIO
-                    </mat-label>
-                    <input formControlName="folio" matInput placeholder="N° FOLIO" required>
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('folio') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
+
 
 
             <mat-grid-tile [colspan]="4" [rowspan]="1">
@@ -49,26 +93,14 @@
                     <mat-label>
                         TIMBRADO
                     </mat-label>
-                    <input formControlName="timbrado" matInput placeholder="TIMBRADO" required>
+                    <input formControlName="timbrado" matInput placeholder="TIMBRADO" required readonly>
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('timbrado') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="4" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                      RAZON SOCIAL
-                    </mat-label>
-                    <input   matInput type="text"  [matAutocomplete]="auto2" (keyup)="searchClientes($event)"/>
-                    <mat-autocomplete #auto2="matAutocomplete">
-                      <mat-option *ngFor="let cliente of Clientes$ | async; let i=index" [value]="cliente.razonSocial"  (onSelectionChange)="selectioChangeCliente(cliente,i)">
-                        {{cliente.razonSocial}}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
-            </mat-grid-tile>
+
 
 
             <mat-grid-tile [colspan]="4" [rowspan]="1">
@@ -76,7 +108,12 @@
                     <mat-label>
                         FUNCIONARIO
                     </mat-label>
-                    <input formControlName="funcionario" matInput placeholder="FUNCIONARIO" required>
+                    <input #searchInputFuncionario formControlName="funcionario" matInput placeholder="FUNCIONARIO" required [matAutocomplete]="auto3" >
+                    <mat-autocomplete #auto3="matAutocomplete">
+                      <mat-option *ngFor="let funcionario of Funcionarios; let i=index" [value]="funcionario.nombre +' '+ funcionario.apellido"  (onSelectionChange)="selectionChangeFuncionario(funcionario,i)">
+                        {{funcionario.nombre}} {{funcionario.apellido}}
+                      </mat-option>
+                    </mat-autocomplete>
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('funcionario') }}
                     </mat-error>
@@ -97,9 +134,9 @@
             <mat-label>
               BUSCAR EL PRODUCTO
             </mat-label>
-            <input   matInput type="text"  [matAutocomplete]="auto1" (keyup)="searchProducts($event)"/>
+            <input #searchInputProducto  matInput type="text"  [matAutocomplete]="auto1" />
             <mat-autocomplete #auto1="matAutocomplete">
-              <mat-option *ngFor="let producto of Products$ | async; let i=index"  (onSelectionChange)="selectioChange(producto,i)">
+              <mat-option *ngFor="let producto of Products; let i=index"  (onSelectionChange)="selectioChange(producto,i)">
                 {{producto.nombre}}
               </mat-option>
             </mat-autocomplete>
@@ -163,7 +200,7 @@
       </div>
 
       <div class="buttons-container">
-        <button id="register"   mat-raised-button color="primary" type="button" >
+        <button id="register"   mat-raised-button color="primary" type="button" (click)="saveFactura()">
             CREAR
             <mat-icon>save</mat-icon>
         </button>

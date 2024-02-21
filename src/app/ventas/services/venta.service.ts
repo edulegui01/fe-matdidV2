@@ -24,7 +24,12 @@ export class VentaService {
     urlEliminar:'/persona/borrar/',
     urlProductoListar:'/producto/listar_select',
     urlPersonaListar:'/persona/listar_select',
-    urlTimbradoValido:'/timbrado/valido'
+    urlTimbradoValido:'/timbrado/valido',
+    urlFuncionarioListar:'/funcionario/listar_select',
+    urlFacturaFolio:'/factura/folio',
+    urlFacturaNumeracion:'/factura/numeracion',
+    urlFacturaGuardar:'/factura/guardar',
+    urlFacturaListar:'/factura/listar'
   }
 
   editForm:boolean=false;
@@ -32,19 +37,18 @@ export class VentaService {
   constructor(private http: HttpClient) { }
 
 
-  public getClientes(page:any='0',size:any='10',cedulaFilter:string='',nombreFilter:string=''): Observable<ClienteData>{
+  public getVentas(page:any='0',size:any='10',numFactura:string='',nombrePersona:string=''): Observable<any>{
     
     let params = new HttpParams();
 
     params = params.append('page',String(page));
     params = params.append('size',String(size));
-    params = params.append('cedulaFilter',String(cedulaFilter));
-    params = params.append('nombreFilter',String(nombreFilter));
-    params = params.append('esCliente',Boolean(true));
+    params = params.append('numFactura',String(numFactura));
+    params = params.append('nombrePersona',String(nombrePersona));
 
 
-    return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
-      map((clienteData:ClienteData) => clienteData)
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFacturaListar,{params}).pipe(
+      map((facturaData:any) => facturaData)
     )
 
   }
@@ -69,6 +73,18 @@ export class VentaService {
 
   }
 
+
+  public searchFuncionarioToSelect(search:string=''):Observable<any>{
+    let params = new HttpParams();
+
+
+    params = params.append('search',String(search));
+
+
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFuncionarioListar,{params})
+
+  }
+
   public searchClienteToSelect(search:string=''):Observable<any>{
     let params = new HttpParams();
 
@@ -76,15 +92,8 @@ export class VentaService {
 
     console.log(Settings.URL_BASE+this.httpUrls.urlPersonaListar)
 
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPersonaListar,{params}).pipe(
-      debounceTime(4000),
-      distinctUntilChanged(),
-      
-     
-      
-
-      
-    );
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPersonaListar,{params})
+    
 
   }
 
@@ -99,8 +108,9 @@ export class VentaService {
   }
 
 
-  public saveClientes(cliente:ClienteToSave):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente);
+  public saveFactura(factura:any):Observable<any>{
+    console.log(factura)
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlFacturaGuardar,factura);
   }
 
 
@@ -115,11 +125,22 @@ export class VentaService {
 
   public getTimbrado(): Observable<any>{
 
-     return this.http.get(Settings.URL_BASE+this.httpUrls.urlTimbradoValido);
+ 
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlTimbradoValido);
 
   }
 
+  public getFolio():Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFacturaFolio);
+  }
 
+  public getNumeracion():Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFacturaNumeracion);
+  }
+
+  public deleteVenta(id:string){
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  }
 
 
 }

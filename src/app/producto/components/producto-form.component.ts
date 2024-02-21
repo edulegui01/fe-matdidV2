@@ -33,7 +33,9 @@ export class ProductoFormComponent implements OnInit {
 
 
 
-  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog, public dialogRef: MatDialogRef<ProductoFormComponent>,
+  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router,
+     private dialogInstance: MatDialog, 
+     public dialogRef: MatDialogRef<ProductoFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any ) { 
 
     this.routerInstance = router;

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
 import { CompraFormComponent } from './components/compra-form.component';
 import { CompraComponent } from './components/compra.component';
+import { CompraListComponent } from './components/compra-list.component';
 
 
 
@@ -14,7 +15,8 @@ import { CompraComponent } from './components/compra.component';
 @NgModule({
   declarations: [
     CompraComponent,
-    CompraFormComponent
+    CompraFormComponent,
+    CompraListComponent
 
    
   ],

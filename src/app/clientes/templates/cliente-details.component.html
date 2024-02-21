@@ -1,0 +1,119 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required readonly="true">
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        NOMBRE ENCARGADO
+                    </mat-label>
+                    <input formControlName="nombreEncargado" matInput placeholder="NOMBRE ENCARGADO" required>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TELEFONO
+                    </mat-label>
+                    <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                    
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        CEDULA
+                    </mat-label>
+                    <input formControlName="cedula" matInput placeholder="CEDULA" required>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        RUC
+                    </mat-label>
+                    <input formControlName="ruc" matInput placeholder="RUC">
+                    
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        RAZON SOCIAL
+                    </mat-label>
+                    <input formControlName="razonSocial" matInput placeholder="RAZON SOCIAL">
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        SECTOR
+                    </mat-label>
+                    <input formControlName="sector" matInput placeholder="RAZON SOCIAL">
+                    
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        DIRECCIÓN
+                    </mat-label>
+                    <input formControlName="direccion" matInput placeholder="DIRECCIÓN" required>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        EMAIL
+                    </mat-label>
+                    <input formControlName="email" matInput placeholder="EMAIL" required>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+            
+           <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>LOCALIDAD</mat-label>
+                    <mat-select formControlName="localidad" id="gestionSelect">
+                        <mat-option>SELECCIONAR LOCALIDAD</mat-option>
+                        <mat-option *ngFor="let localidad of listadoLocalidad" [value]="localidad.id">
+                            {{localidad.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    
+                </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+       
+
+    </form>
+</div>

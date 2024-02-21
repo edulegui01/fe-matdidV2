@@ -21,9 +21,9 @@ import { CompraService } from '../services/compra.service';
   templateUrl: '../templates/compra-list.component.html',
   styleUrls: ['../styles/compra-list.component.scss']
 })
-export class FuncionarioListComponent  implements OnInit {
+export class CompraListComponent  implements OnInit {
   
-  dataSource!:FuncionarioData;
+  dataSource!:any;
   clienteToEdit!:any;
   routerInstant!:Router;
   paginatorRange = GlobalMessage.PAGINATOR_RANGE;
@@ -47,8 +47,8 @@ export class FuncionarioListComponent  implements OnInit {
     this.ChangePaginatorEspa();
     
     this.filterForm = this.fb.group({
-      name: [''],
-      cedula: ['']
+      numFolio: [''],
+      proveedor: ['']
     })
   }
 
@@ -120,6 +120,8 @@ export class FuncionarioListComponent  implements OnInit {
               });
   }
 
+
+
   OnClickEditCliente(element:any){
     //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
 
@@ -145,8 +147,8 @@ export class FuncionarioListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'cedula', 'direccion', 'estado', 'options'];
-  displayedFilters: string[] = ['cedula-filter', 'name-filter'];
+  displayedColumns: string[] = ['numFolio', 'proveedor', 'nombreFuncionario', 'montoTotal', 'options'];
+  displayedFilters: string[] = ['numFolio-filter', 'proveedor-filter'];
   
 }
 

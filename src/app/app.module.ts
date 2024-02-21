@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,12 @@ import { LocalidadModule } from './localidad/localidad.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CompraModule } from './compra/compra.module';
 import { VentaModule } from './ventas/venta.module';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+
+import localePy from '@angular/common/locales/es-PY';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+registerLocaleData(localePy);
 
 
 
@@ -45,7 +51,15 @@ import { VentaModule } from './ventas/venta.module';
     CompraModule,
     VentaModule
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_DATE_LOCALE,
+    useValue: 'es-PY'
+  },DatePipe,
+  {
+    provide: DateAdapter,
+    useClass: MomentDateAdapter,
+    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

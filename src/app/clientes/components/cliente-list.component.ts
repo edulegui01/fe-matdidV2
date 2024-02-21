@@ -14,6 +14,7 @@ import { PaginatorEs } from 'src/app/utils/paginatorEs';
 import { MatDialog } from '@angular/material/dialog';
 import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
+import { ClienteDetailsComponent } from './cliente-detalle.component';
 
 @Component({
   selector: 'app-cliente-list',
@@ -89,6 +90,25 @@ export class ClienteListComponent  implements OnInit {
     console.log(cedula);
     
     this.clienteService.getClientes('0','10',cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
+  }
+
+  onClickDetailsCliente(element:any){
+    this.dialogInstance.open(ClienteDetailsComponent, {
+      width: Settings.DIALOG_SMALL,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+         ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+         element:element
+      },
+
+    }).afterClosed().subscribe(res => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+
+      if (res) {
+        
+      }
+    });
   }
 
 

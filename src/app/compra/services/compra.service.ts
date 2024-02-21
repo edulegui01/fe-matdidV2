@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, debounceTime, distinctUntilChanged, map, observable, throwError } from 'rxjs';
+import { Observable, Subscribable, catchError, debounceTime, distinctUntilChanged, map, observable, throwError } from 'rxjs';
 import { Cliente } from 'src/app/class/cliente';
 import { ClienteData } from 'src/app/class/clienteData';
 import { ClienteToSave } from 'src/app/class/clienteToSave';
@@ -14,8 +14,8 @@ import {Settings} from 'src/app/class/settings';
 export class CompraService {
 
   httpUrls={
-    urlListar:'/persona/listar',
-    urlGuarda:'/persona/guardar',
+    urlListar:'/compra/listar',
+    urlGuarda:'/compra/guardar',
     urlBuscarId:'/persona/buscar/',
     urlModificar:'/persona/actualizar/',
     urlBuscarDocu:'/persona/buscar-docu',
@@ -23,7 +23,8 @@ export class CompraService {
     urlActualiazr:'/persona/actualizar/',
     urlEliminar:'/persona/borrar/',
     urlProductoListar:'/producto/listar_select',
-    urlPersonaListar:'/persona/listar_select'
+    urlPersonaListar:'/persona/listar_select',
+    urlFuncionarioListar:'/funcionario/listar_select'
   }
 
   editForm:boolean=false;
@@ -31,19 +32,19 @@ export class CompraService {
   constructor(private http: HttpClient) { }
 
 
-  public getClientes(page:any='0',size:any='10',cedulaFilter:string='',nombreFilter:string=''): Observable<ClienteData>{
+  public getCompras(page:any='0',size:any='10',numFolioFilter:string='',proveedorFilter:string=''): Observable<ClienteData>{
     
     let params = new HttpParams();
 
     params = params.append('page',String(page));
     params = params.append('size',String(size));
-    params = params.append('cedulaFilter',String(cedulaFilter));
-    params = params.append('nombreFilter',String(nombreFilter));
-    params = params.append('esCliente',Boolean(true));
+    params = params.append('numFolio',String(numFolioFilter));
+    params = params.append('nombrePersona',String(proveedorFilter));
+    //params = params.append('esCliente',Boolean(true));
 
 
-    return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
-      map((clienteData:ClienteData) => clienteData)
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
+      map((compraData:any) => compraData)
     )
 
   }
@@ -68,22 +69,25 @@ export class CompraService {
 
   }
 
-  public searchClienteToSelect(search:string=''):Observable<any>{
+  public searchProveedorToSelect(search:string=''):Observable<any>{
     let params = new HttpParams();
 
     params = params.append('search',String(search));
 
     console.log(Settings.URL_BASE+this.httpUrls.urlPersonaListar)
 
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPersonaListar,{params}).pipe(
-      debounceTime(4000),
-      distinctUntilChanged(),
-      
-     
-      
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPersonaListar,{params})
 
-      
-    );
+  }
+
+  public searchFuncionarioToSelect(search:string=''):Observable<any>{
+    let params = new HttpParams();
+
+    params = params.append('search',String(search));
+
+    console.log(Settings.URL_BASE+this.httpUrls.urlFuncionarioListar)
+
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFuncionarioListar,{params})
 
   }
 
@@ -98,8 +102,14 @@ export class CompraService {
   }
 
 
-  public saveClientes(cliente:ClienteToSave):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente);
+  public saveCompra(compra:any){
+    // this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,compra).subscribe(
+    //   value =>{
+    //     console.log(value);
+    //   }
+    // );
+
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,compra).subscribe();
   }
 
 
@@ -108,7 +118,7 @@ export class CompraService {
     return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
   }
 
-  public deleteCliente(id:string){
+  public deleteCompra(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
   }
 

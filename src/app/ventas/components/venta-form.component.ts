@@ -1,4 +1,4 @@
-import { Component,OnInit, } from '@angular/core';
+import { Component,ElementRef,OnInit, ViewChild, } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { ClienteToSave } from 'src/app/class/clienteToSave';
@@ -8,9 +8,10 @@ import { Settings } from 'src/app/class/settings';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
 import { registerCompraInit } from 'src/app/class/registerCompraInit';
-import { Observable, debounceTime, distinctUntilChanged, map, of, take, } from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, distinctUntilChanged, fromEvent, map, of, take, } from 'rxjs';
 import { Producto2 } from 'src/app/class/producto2';
 import { VentaService } from '../services/venta.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-venta-form',
@@ -25,18 +26,31 @@ export class VentaFormComponent implements OnInit {
   viewText = GlobalMessage.VIEW_LABELS;
   colsSize=2;
   listadoLocalidad!:any[];
-  clienteToSave!:ClienteToSave;
+  ventaToSave!:any;
   routerInstance:Router;
   clienteToUpdate:any;
-  snackbarInstance!: MatSnackBar;
+ 
   createDefaultMessage = 'EL REGISTRO';
   dataSource:any=registerCompraInit.arrayInit;
+  currentValues:any={};
   
   Products$!:Observable<Producto2[]>;
 
   Clientes$!:Observable<any[]>;
 
-  timbrado!:any;
+  timbrado:any=0;
+
+  numeracion$:BehaviorSubject<String> = new BehaviorSubject<String>('fasfsda')
+
+  folio:number=0;
+
+  numeracion!:string;
+
+  Products!:Producto2[];
+
+  Clientes!:any[];
+
+  Funcionarios!:any[];
 
 
   productoIdSeleccionado!:number;
@@ -44,6 +58,17 @@ export class VentaFormComponent implements OnInit {
 
   total:number=0;
   maxInputDescuento:number=0;
+
+
+  @ViewChild('searchInputFuncionario')
+  inputSearchFun?:ElementRef
+
+
+  @ViewChild('searchInputCliente')
+  inputSearchProve?:ElementRef
+
+  @ViewChild('searchInputProducto')
+  inputSearchProduc?:ElementRef
 
 
 
@@ -58,7 +83,8 @@ export class VentaFormComponent implements OnInit {
 
 
 
-  constructor(public ventaService:VentaService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public ventaService:VentaService, private formBuilder:FormBuilder, router: Router, 
+    private dialogInstance: MatDialog, private datePipe: DatePipe, private  snackbarInstance: MatSnackBar ) { 
 
     this.routerInstance = router;
 
@@ -71,28 +97,48 @@ export class VentaFormComponent implements OnInit {
         }
     }
 
+    this.ventaService.getTimbrado().subscribe(
+      (timbrado:any) =>{
+        this.entityForm.controls['timbrado'].setValue(timbrado[0].nroTimbrado);
+      }
+    );
 
-    this.buildForm(this.entity);
+    
+    
 
   }
 
   ngOnInit(): void {
-    this.ventaService.getTimbrado().subscribe(
-      (timbrado:any) =>{
-        this.timbrado = timbrado
+    this.buildForm(this.entity);
+    this.ventaService.getFolio().subscribe(
+      (folio:any) =>{
+        this.entityForm.controls['folio'].setValue(folio.folio);
+        
       }
     );
 
 
-    console.log(this.timbrado)
-    
+
+
     
   }
 
+  ngAfterViewInit(): void {
+    this.searchFuncionarioEvent();
+    this.searchClienteEvent();
+    this.searchProductoEvent();
+  }
+
+
   buildForm(entity: any) {
+    
+    console.log('se ejecuta primero');
+    
     this.entityForm = this.formBuilder.group({
         idCompra: [entity ? entity.idCompra : ''],
+        tipoFactura:[entity ? entity.tipoFactura:'contado'],
         fecha: [entity ? entity.fecha : ''],
+        fechaVencimiento: [entity ? entity.fechaVencimiento : ''],
         rucCedula: [entity ? entity.rucCedula : ''],
         folio: [entity ? entity.folio : ''],
         timbrado: [entity ? entity.timbrado :  this.timbrado?.nroTimbrado],
@@ -104,13 +150,60 @@ export class VentaFormComponent implements OnInit {
 
   createFormGroupProducts(producto:any):FormGroup{
     return this.formBuilder.group({
-      idProducto:[{value:producto.idProducto,disabled:true}],
+      idProducto:[producto.idProducto],
       producto:[producto.nombre],
       cantidad:[1],
       precio:[producto.precio],
       iva:[producto.iva],
       descuento:[0],
       subTotal:[producto.precio]
+    })
+  }
+
+  searchFuncionarioEvent(){
+    fromEvent<any>(this.inputSearchFun?.nativeElement,'keyup')
+    .pipe(
+      map(event => event.target.value),
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(filtro => {
+      if(filtro==='' || filtro.length < 3){
+        this.Funcionarios=[];
+        return;
+      }
+      this.searchFuncionario(filtro)
+    })
+  }
+
+
+  searchClienteEvent(){
+    fromEvent<any>(this.inputSearchProve?.nativeElement,'keyup')
+    .pipe(
+      map(event => event.target.value),
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(filtro => {
+      if(filtro==='' || filtro.length < 3){
+        this.Clientes=[];
+        return;
+      }
+      this.searchClientes(filtro)
+    })
+  }
+
+
+  searchProductoEvent(){
+    fromEvent<any>(this.inputSearchProduc?.nativeElement,'keyup')
+    .pipe(
+      map(event => event.target.value),
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe(filtro => {
+      if(filtro==='' || filtro.length < 3){
+        this.Products=[];
+        return;
+      }
+      this.searchProducts(filtro)
     })
   }
 
@@ -124,7 +217,7 @@ export class VentaFormComponent implements OnInit {
 
     this.getFormControls.push(productoToPush);
 
-    this.Products$ = of([]);
+    this.Products = [];
 
    this.updateTotal();
 
@@ -135,14 +228,6 @@ export class VentaFormComponent implements OnInit {
    
     
    
-  }
-
-  selectioChangeCliente(cliente:any, index:any){
-    let formItemRuc = this.entityForm.get('rucCedula')
-
-    const rucOrCedula = cliente.ruc ? cliente.ruc : cliente.cedula;
-
-    formItemRuc?.setValue(rucOrCedula);
   }
 
 
@@ -203,8 +288,32 @@ export class VentaFormComponent implements OnInit {
 
  
 
-  saveCliente(){
+  saveFactura(){
     
+    let listProducts = this.entityForm.controls['detalleProducts'].value;
+
+    let detalleFactura = listProducts.map((detalle:any) =>{
+       delete detalle.producto
+       delete detalle.iva
+       delete detalle.subTotal
+       return detalle;
+    });
+ 
+    
+    const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-dd');
+    const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-dd');
+
+    this.ventaToSave = {
+      idFuncionario:this.currentValues.idFuncionario,
+      idPersona:this.currentValues.idPersona,
+      tipoFactura:this.entityForm.controls['tipoFactura'].value,
+      fecha:fechaCompra,
+      fechaVencimiento:fechaCompraVencimiento,
+      montoTotal:this.total,
+      numFactura:parseInt(this.formatFolioToSend()),
+      nroTimbrado:this.entityForm.controls['timbrado'].value,
+      detalleFacturas:detalleFactura
+    }
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM
@@ -217,6 +326,10 @@ export class VentaFormComponent implements OnInit {
       return;
     }
 
+
+
+  
+
       this.dialogInstance.open(CustomDialogComponent, {
           width: Settings.DIALOG_MEDIUM,
           data: {
@@ -226,9 +339,7 @@ export class VentaFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-              
-
-              this.ventaService.saveClientes(this.clienteToSave).subscribe((result:any) => {
+                this.ventaService.saveFactura(this.ventaToSave).subscribe((result:any) => {
                 this.routerInstance.navigate(['../cliente/listar-cliente'])
               });
           }
@@ -284,12 +395,34 @@ export class VentaFormComponent implements OnInit {
 
   }
 
+  formatFolioToSend(){
+
+    let indexOfLastCero,folio;
+
+    indexOfLastCero = this.entityForm.controls['folio'].value.lastIndexOf("0");
+
+    folio = this.entityForm.controls['folio'].value.substr(indexOfLastCero);
+
+    return folio;
+    
+
+  }
+
   getErrorMessage(controlName: string) {
     const msg = this.entityForm.controls[controlName].hasError('required') ? 'EL CAMPO NO PUEDE ESTAR VACIO' : '';
     if (msg) {
         this.entityForm.controls[controlName].markAsTouched();
     }
     return msg;
+  }
+
+  buildTimbrado(){
+    this.ventaService.getTimbrado().subscribe(
+      (timbrado:any) =>{
+        console.log(timbrado[0].nroTimbrado)
+        this.timbrado = timbrado[0].nroTimbrado;
+      }
+    );
   }
 
   closeForm() {
@@ -308,18 +441,35 @@ export class VentaFormComponent implements OnInit {
     console.log({detalle:this.entityForm.controls['detalleProducts'].value})
   }
 
+  searchFuncionario(text:string){
+
+    //const target = e.target as HTMLInputElement;
+
+    this.ventaService.searchFuncionarioToSelect(text).pipe(
+    ).subscribe((funcionario:any) => this.Funcionarios = funcionario);
+
+  }
+
+  searchProveedores(text:string){
+
+    this.ventaService.searchClienteToSelect(text).pipe(
+      ).subscribe((cliente:any) => this.Clientes = cliente);
+
+  }
+
 
  
 
   
 
-  searchProducts(e:Event){
+  searchProducts(text:string){
     
-    const target = e.target as HTMLInputElement;
+
 
     
     
-    this.Products$ = this.ventaService.searchProductsToSelect(target.value);
+    this.ventaService.searchProductsToSelect(text).pipe(
+      ).subscribe((producto:any) => this.Products = producto);
 
 
 
@@ -327,13 +477,92 @@ export class VentaFormComponent implements OnInit {
 
   }
 
-  searchClientes(e:Event){
-
-    const target = e.target as HTMLInputElement;
-
-    this.Clientes$ = this.ventaService.searchClienteToSelect(target.value);
+  searchClientes(text:string){
+    this.ventaService.searchClienteToSelect(text).pipe(
+      ).subscribe((cliente:any) => this.Clientes = cliente);
 
   }
+
+
+  
+  selectionChangeFuncionario(funcionario:any,index:any){
+
+    this.currentValues = {...this.currentValues,idFuncionario:funcionario.idFuncionario}
+
+
+  }
+
+  selectioChangeCliente(cliente:any, index:any){
+    
+    let formItemRuc = this.entityForm.get('rucCedula')
+
+    const rucOrCedula = cliente.ruc ? cliente.ruc : cliente.cedula;
+
+    formItemRuc?.setValue(rucOrCedula);
+
+
+    this.currentValues = {...this.currentValues,idPersona:cliente.idPersona};
+  }
+
+
+
+
+  onFechaSelection(value:any=null):number{
+    let valueToSwitch:any;
+
+    
+    if(value){
+      console.log(value);
+      valueToSwitch = value;
+    }else{
+      console.log(value);
+      valueToSwitch = this.entityForm.controls['tipoFactura'].value;
+    }
+
+
+
+    switch (valueToSwitch){
+
+      case 'contado':
+        console.log(valueToSwitch) 
+        this.entityForm.controls['fechaVencimiento'].setValue(this.entityForm.controls['fecha'].value);
+        break;
+
+      case 'creditoTreinta':
+        console.log(valueToSwitch) 
+        this.sumFecha(new Date(this.entityForm.controls['fecha'].value),30);
+        
+        break;
+
+      case 'creditoSesenta':
+        console.log(valueToSwitch) 
+        this.sumFecha(new Date(this.entityForm.controls['fecha'].value),60);
+        break;
+      
+      case 'creditoNoventa':
+        console.log(valueToSwitch) 
+        this.sumFecha(new Date(this.entityForm.controls['fecha'].value),90);
+        break;
+      
+      case 'creditoCientoVeinte':
+        console.log(valueToSwitch)  
+        this.sumFecha(new Date(this.entityForm.controls['fecha'].value),120);
+        break;
+
+    }
+
+    return 1;
+  }
+
+
+  sumFecha(fecha:any,cantidad:number){
+    fecha.setDate(fecha.getDate() + cantidad);
+
+    this.entityForm.controls['fechaVencimiento'].setValue(fecha);
+  }
+
+
+
 
   saveCompra(){
 

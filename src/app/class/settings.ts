@@ -42,4 +42,7 @@
     static DIALOG_MEDIUM = '60vw';
     static DIALOG_LARGE = '90vw';
 
+
+    static PRIMERA_PARTE_FACTURA = '001-001-';
+
 }

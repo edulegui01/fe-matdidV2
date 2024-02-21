@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
 import { VentaFormComponent } from './components/venta-form.component';
 import { VentaComponent } from './components/venta.component';
+import { VentaListComponent } from './components/venta-list.component';
 
 
 
@@ -14,7 +15,8 @@ import { VentaComponent } from './components/venta.component';
 @NgModule({
   declarations: [
     VentaComponent,
-    VentaFormComponent
+    VentaFormComponent,
+    VentaListComponent
 
    
   ],

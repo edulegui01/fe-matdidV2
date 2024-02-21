@@ -128,5 +128,12 @@
         title: 'PAGINA NO ENCONTRADA',
         msg: 'LA PAGINA A LA CUAL DESEA ACCEDER NO EXISTE O NO ESTA DISPONIBLE EN ESTE MOMENTO',
     };
+
+    static TIPOS_FACTURA = [
+        {value:0,text:"CONTADO"},
+        {value:60,text:"CRÉDITO 60 DÍAS"},
+        {value:90,text:"CRÉDITO 90 DÍAS"},
+        {value:120,text:"CRÉDITO 120 DÍAS"},
+    ]
     
 }
