@@ -15,6 +15,7 @@ import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
 import { FuncionarioData } from 'src/app/class/funcionarioData';
 import { FuncionarioService } from '../services/funcionario.service';
+import { FuncionarioDetalleComponent } from './funcionario-detalle.component';
 
 @Component({
   selector: 'app-funcionario-list',
@@ -128,10 +129,29 @@ export class FuncionarioListComponent  implements OnInit {
     };
     this.funcionarioService.editForm=true;
     console.log(element);
-    this.routerInstance.navigate(['funcionario/editar-cliente'],extraParams);
+    this.routerInstance.navigate(['funcionario/editar-funcionario'],extraParams);
     
     
 
+  }
+
+  onClickDetailsFuncionario(element:any){
+    this.dialogInstance.open(FuncionarioDetalleComponent, {
+      width: Settings.DIALOG_MEDIUM,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+         ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+         element:element
+      },
+
+    }).afterClosed().subscribe(res => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+
+      if (res) {
+        
+      }
+    });
   }
 
   ChangePaginatorEspa(){

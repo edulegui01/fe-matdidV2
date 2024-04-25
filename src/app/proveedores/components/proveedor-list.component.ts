@@ -14,6 +14,7 @@ import { PaginatorEs } from 'src/app/utils/paginatorEs';
 import { MatDialog } from '@angular/material/dialog';
 import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
+import { ProveedorDetalleComponent } from './proveedor-detalle.component';
 
 @Component({
   selector: 'app-proveedor-list',
@@ -49,6 +50,9 @@ export class ProveedorListComponent  implements OnInit {
       name: [''],
       cedula: ['']
     })
+
+
+   
   }
 
   ngAfterViewInit() {
@@ -133,6 +137,28 @@ export class ProveedorListComponent  implements OnInit {
 
   }
 
+  onClickDetailsProveedor(element:any){
+    this.dialogInstance.open(ProveedorDetalleComponent, {
+      width: Settings.DIALOG_MEDIUM,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+         ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+         element:element
+      },
+
+    }).afterClosed().subscribe(res => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+
+      if (res) {
+        
+      }
+    });
+  }
+
+
+
+
   ChangePaginatorEspa(){
     this.paginator.itemsPerPageLabel = PaginatorEs.itemsPaginatorEs.itemsPerPage;
     this.paginator.firstPageLabel = PaginatorEs.itemsPaginatorEs.firstPageLabel;
@@ -144,7 +170,7 @@ export class ProveedorListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['nombre',  'cedula', 'ruc', 'direccion', 'options'];
+  displayedColumns: string[] = ['razonSocial',  'cedula', 'ruc', 'direccion', 'options'];
   displayedFilters: string[] = ['cedula-filter', 'name-filter'];
   
 }

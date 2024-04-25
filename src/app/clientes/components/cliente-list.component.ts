@@ -94,7 +94,7 @@ export class ClienteListComponent  implements OnInit {
 
   onClickDetailsCliente(element:any){
     this.dialogInstance.open(ClienteDetailsComponent, {
-      width: Settings.DIALOG_SMALL,
+      width: Settings.DIALOG_MEDIUM,
       data: {
           typeDialog: 'confirm',
           title: this.viewText.ATTENTION,

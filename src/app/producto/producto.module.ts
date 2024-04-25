@@ -9,6 +9,7 @@ import { ProductoListComponent } from './components/producto-list.component';
 import { ProductoComponent } from './components/producto.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductoListCardComponent } from './components/producto-list-card.component';
+import { ProductoDetalleComponent } from './components/producto-detalle.component';
 
 
 
@@ -21,7 +22,8 @@ import { ProductoListCardComponent } from './components/producto-list-card.compo
     ProductoFormComponent,
     ProductoListComponent,
     ProductoComponent,
-    ProductoListCardComponent
+    ProductoListCardComponent,
+    ProductoDetalleComponent
    
   ],
   imports: [

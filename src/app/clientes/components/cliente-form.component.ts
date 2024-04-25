@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientesService } from '../services/clientes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
@@ -22,7 +22,7 @@ export class ClienteFormComponent implements OnInit {
   viewText = GlobalMessage.VIEW_LABELS;
   colsSize=2;
   listadoLocalidad!:any[];
-  clienteToSave!:ClienteToSave;
+  clienteToSave!:Persona;
   routerInstance:Router;
   clienteToUpdate:any;
   snackbarInstance!: MatSnackBar;
@@ -32,7 +32,7 @@ export class ClienteFormComponent implements OnInit {
 
 
 
-  constructor(public clienteService:ClientesService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public clienteService:ClientesService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog, private _snackBar: MatSnackBar  ) { 
 
     this.routerInstance = router;
 
@@ -59,7 +59,6 @@ export class ClienteFormComponent implements OnInit {
   buildForm(entity: any) {
     this.entityForm = this.formBuilder.group({
         id: [entity ? entity.id : ''],
-        nombre: [entity ? entity.nombre : '', Validators.required],
         nombreEncargado: [entity ? entity.nombreEncargado : '', Validators.required],
         cedula: [entity ? entity.cedula : '', Validators.required],
         ruc: [entity ? entity.ruc : ''],
@@ -68,9 +67,17 @@ export class ClienteFormComponent implements OnInit {
         razonSocial:[entity ? entity.razonSocial : '', Validators.required],
         email: [entity ? entity.email : '', Validators.required],
         localidad: [entity ? entity.localidad.id : '', Validators.required],
-        sector: [entity ? entity.localidad.sector : '', Validators.required]
+        sector: [entity ? entity.sector : '', Validators.required]
 
     });
+  }
+
+  getErrorMessage(controlName: string) {
+    let msg=''
+    if (this.entityForm.controls[controlName].hasError('required')) { 
+      msg = 'EL CAMPO NO PUEDE ESTAR VACIO' ;
+    }
+    return msg;
   }
 
   saveCliente(){
@@ -83,7 +90,6 @@ export class ClienteFormComponent implements OnInit {
       nombreEncargado:this.entityForm.controls['nombreEncargado'].value,
       direccion:this.entityForm.controls['direccion'].value,
       email:this.entityForm.controls['email'].value,
-      nombre:this.entityForm.controls['nombre'].value,
       razonSocial:this.entityForm.controls['razonSocial'].value,
       ruc:this.entityForm.controls['ruc'].value,
       telefono:this.entityForm.controls['telefono'].value,
@@ -116,6 +122,10 @@ export class ClienteFormComponent implements OnInit {
               this.clienteService.saveClientes(this.clienteToSave).subscribe(result => {
                 this.routerInstance.navigate(['../cliente/listar-cliente'])
               });
+
+              this._snackBar.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+                duration:3000
+              })
           }
       });
 
@@ -131,11 +141,13 @@ export class ClienteFormComponent implements OnInit {
       localidad:{
         id:this.entityForm.controls['localidad'].value
       },
+      nombreEncargado:this.entityForm.controls['nombreEncargado'].value,
       direccion:this.entityForm.controls['direccion'].value,
       email:this.entityForm.controls['email'].value,
-      nombre:this.entityForm.controls['nombre'].value,
+      razonSocial:this.entityForm.controls['razonSocial'].value,
       ruc:this.entityForm.controls['ruc'].value,
-      telefono:this.entityForm.controls['telefono'].value
+      telefono:this.entityForm.controls['telefono'].value,
+      sector:this.entityForm.controls['sector'].value
     }
 
     if (this.entityForm.invalid) {
@@ -162,6 +174,10 @@ export class ClienteFormComponent implements OnInit {
               this.routerInstance.navigate(['../cliente/listar-cliente']);
               this.clienteService.editForm = false;
             });
+
+            this._snackBar.open(this.viewText.SUCCESS_UPDATE,'ACEPTAR',{
+              duration:3000
+            })
           }
       });
 
@@ -169,13 +185,7 @@ export class ClienteFormComponent implements OnInit {
 
   }
 
-  getErrorMessage(controlName: string) {
-    const msg = this.entityForm.controls[controlName].hasError('required') ? 'EL CAMPO NO PUEDE ESTAR VACIO' : '';
-    if (msg) {
-        this.entityForm.controls[controlName].markAsTouched();
-    }
-    return msg;
-  }
+
 
   closeForm() {
     this.routerInstance.navigate(['../cliente/listar-cliente']);

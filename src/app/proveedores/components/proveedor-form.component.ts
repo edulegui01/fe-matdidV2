@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProveedorService } from '../services/proveedor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
+
 
 @Component({
   selector: 'app-proveedor-form',
@@ -22,17 +23,16 @@ export class ProveedorFormComponent implements OnInit {
   viewText = GlobalMessage.VIEW_LABELS;
   colsSize=2;
   listadoLocalidad!:any[];
-  proveedorToSave!:ClienteToSave;
+  proveedorToSave!:Persona;
   routerInstance:Router;
   proveedorToUpdate:any;
-  snackbarInstance!: MatSnackBar;
   createDefaultMessage = 'EL REGISTRO';
 
 
 
 
 
-  constructor(public proveedorService:ProveedorService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public proveedorService:ProveedorService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog, private  snackbarInstance: MatSnackBar, private _snackBar: MatSnackBar ) { 
 
     this.routerInstance = router;
 
@@ -59,20 +59,20 @@ export class ProveedorFormComponent implements OnInit {
   buildForm(entity: any) {
     this.entityForm = this.formBuilder.group({
         id: [entity ? entity.id : ''],
-        nombre: [entity ? entity.nombre : '', Validators.required],
-        apellido: [entity ? entity.apellido : '', Validators.required],
-        cedula: [entity ? entity.cedula : '', Validators.required],
+        razonSocial: [entity ? entity.razonSocial : '', Validators.required],
         ruc: [entity ? entity.ruc : ''],
+        nombreEncargado: [entity ? entity.nombreEncargado : '', Validators.required],
+        cedula: [entity ? entity.cedula : ''],
         direccion: [entity ? entity.direccion : '', Validators.required],
         telefono: [entity ? entity.telefono : '', Validators.required],
         email: [entity ? entity.email : '', Validators.required],
         localidad: [entity ? entity.localidad.id : '', Validators.required],
-        sector: [entity ? entity.sector : '', Validators.required]
+        sector: [entity ? entity.sector : '', Validators.required],
 
     });
   }
 
-  saveCliente(){
+  saveProveedor(){
     this.proveedorToSave = {
       cedula:this.entityForm.controls['cedula'].value,
       esCliente:false,
@@ -82,12 +82,13 @@ export class ProveedorFormComponent implements OnInit {
       nombreEncargado:this.entityForm.controls['nombreEncargado'].value,
       direccion:this.entityForm.controls['direccion'].value,
       email:this.entityForm.controls['email'].value,
-      nombre:this.entityForm.controls['nombre'].value,
       ruc:this.entityForm.controls['ruc'].value,
       telefono:this.entityForm.controls['telefono'].value,
       razonSocial:this.entityForm.controls['razonSocial'].value,
-      sector:this.entityForm.controls['sector'].value
+      sector:this.entityForm.controls['sector'].value,
     }
+
+
 
 
     if (this.entityForm.invalid) {
@@ -112,9 +113,13 @@ export class ProveedorFormComponent implements OnInit {
           if (data) {
               
 
-              this.proveedorService.saveClientes(this.proveedorToSave).subscribe(result => {
+              this.proveedorService.saveProveedor(this.proveedorToSave).subscribe(result => {
                 this.routerInstance.navigate(['../proveedor/listar-proveedor'])
               });
+
+              this._snackBar.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+                duration:3000
+              })
           }
       });
 
@@ -133,7 +138,6 @@ export class ProveedorFormComponent implements OnInit {
       nombreEncargado:this.entityForm.controls['nombreEncargado'].value,
       direccion:this.entityForm.controls['direccion'].value,
       email:this.entityForm.controls['email'].value,
-      nombre:this.entityForm.controls['nombre'].value,
       ruc:this.entityForm.controls['ruc'].value,
       telefono:this.entityForm.controls['telefono'].value,
       razonSocial:this.entityForm.controls['razonSocial'].value,
@@ -161,7 +165,7 @@ export class ProveedorFormComponent implements OnInit {
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
             this.proveedorService.updateCliente(this.entity.idPersona,this.proveedorToUpdate).subscribe(result => {
-              this.routerInstance.navigate(['../cliente/listar-cliente']);
+              this.routerInstance.navigate(['../proveedor/listar-proveedor']);
               this.proveedorService.editForm = false;
             });
           }
@@ -172,15 +176,15 @@ export class ProveedorFormComponent implements OnInit {
   }
 
   getErrorMessage(controlName: string) {
-    const msg = this.entityForm.controls[controlName].hasError('required') ? 'EL CAMPO NO PUEDE ESTAR VACIO' : '';
-    if (msg) {
-        this.entityForm.controls[controlName].markAsTouched();
+    let msg=''
+    if (this.entityForm.controls[controlName].hasError('required')) { 
+      msg = 'EL CAMPO NO PUEDE ESTAR VACIO' ;
     }
     return msg;
   }
 
   closeForm() {
-    this.routerInstance.navigate(['../cliente/listar-cliente']);
+    this.routerInstance.navigate(['../proveedor/listar-proveedor']);
     this.proveedorService.editForm = false;
   }
 

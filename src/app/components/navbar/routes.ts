@@ -200,5 +200,28 @@ export const MENU_URLS = {
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },
+    INVENTARIO: {
+        URL_BASE: 'inventario',
+        ROOT: {
+            URL: 'listar-inventario',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR_INVENTARIO: {
+            URL: 'listar-inventario',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO_MOVIMIENTO: {
+            URL: 'nuevo-movimiento',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        LISTAR_MOVIMIENTO: {
+            URL: 'listar-movimiento',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-venta',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
     
 };

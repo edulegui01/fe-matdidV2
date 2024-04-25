@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
@@ -68,10 +68,10 @@ export class FuncionarioFormComponent implements OnInit {
         direccion: [entity ? entity.direccion : '', Validators.required],
         telefono: [entity ? entity.telefono : '', Validators.required],
         localidad: [entity ? entity.localidad.id : '', Validators.required],
-        activo: [entity ? entity.localidad.activo : '', Validators.required],
-        fechaNac: [entity ? entity.localidad.fechaNac : '', Validators.required],
-        email: [entity ? entity.localidad.email : '', Validators.required],
-        rol: [entity ? entity.localidad.rol : '', Validators.required],
+        activo: [entity ? entity.activo : '', Validators.required],
+        fechaNac: [entity ? entity.fechaNac : '', Validators.required],
+        email: [entity ? entity.email : '', Validators.required],
+        rol: [entity ? entity.rol : '', Validators.required],
 
     });
   }
@@ -135,7 +135,6 @@ export class FuncionarioFormComponent implements OnInit {
       },
       apellido:this.entityForm.controls['apellido'].value,
       direccion:this.entityForm.controls['direccion'].value,
-      fechaAlta:this.entityForm.controls['fechaAlta'].value,
       nombre:this.entityForm.controls['nombre'].value,
       fechaNac:this.entityForm.controls['fechaNac'].value,
       telefono:this.entityForm.controls['telefono'].value,
@@ -164,7 +163,7 @@ export class FuncionarioFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-            this.funcionarioService.updateFuncionario(this.entity.idPersona,this.funcionarioToUpdate).subscribe(result => {
+            this.funcionarioService.updateFuncionario(this.entity.idFuncionario,this.funcionarioToUpdate).subscribe(result => {
               this.routerInstance.navigate(['../funcionario/listar-funcionario']);
               this.funcionarioService.editForm = false;
             });
@@ -176,12 +175,13 @@ export class FuncionarioFormComponent implements OnInit {
   }
 
   getErrorMessage(controlName: string) {
-    const msg = this.entityForm.controls[controlName].hasError('required') ? 'EL CAMPO NO PUEDE ESTAR VACIO' : '';
-    if (msg) {
-        this.entityForm.controls[controlName].markAsTouched();
+    let msg=''
+    if (this.entityForm.controls[controlName].hasError('required')) { 
+      msg = 'EL CAMPO NO PUEDE ESTAR VACIO' ;
     }
     return msg;
   }
+
 
   closeForm() {
     this.routerInstance.navigate(['../funcionario/listar-funcionario']);

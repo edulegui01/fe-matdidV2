@@ -8,11 +8,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        NOMBRE
+                        RAZÓN SOCIAL
                     </mat-label>
-                    <input formControlName="nombre" matInput placeholder="NOMBRE" required>
+                    <input formControlName="razonSocial" matInput placeholder="RAZÓN SOCIAL" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('nombre') }}
+                        {{ getErrorMessage('razonSocial') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -21,11 +21,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        APELLIDO
+                        RUC
                     </mat-label>
-                    <input formControlName="apellido" matInput placeholder="APELLIDO" required>
+                    <input formControlName="ruc" matInput placeholder="RUC" >
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('apellido') }}
+                        {{ getErrorMessage('ruc') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -34,11 +34,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        TELEFONO
+                        NOMBRE DEL ENCARGADO
                     </mat-label>
-                    <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                    <input formControlName="nombreEncargado" matInput placeholder="NOMBRE DEL ENCARGADO" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('telefono') }}
+                        {{ getErrorMessage('nombreEncargado') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -46,9 +46,9 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        CEDULA
+                        CÉDULA
                     </mat-label>
-                    <input formControlName="cedula" matInput placeholder="CEDULA" required>
+                    <input formControlName="cedula" matInput placeholder="CEDULA">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('cedula') }}
                     </mat-error>
@@ -58,27 +58,27 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        RUC
-                    </mat-label>
-                    <input formControlName="ruc" matInput placeholder="RUC">
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('ruc') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
                         DIRECCIÓN
                     </mat-label>
-                    <input formControlName="direccion" matInput placeholder="DIRECCIÓN" required>
+                    <input formControlName="direccion" matInput placeholder="DIRECCIÓN">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('direccion') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TELÉFONO
+                    </mat-label>
+                    <input formControlName="telefono" matInput placeholder="TELÉFONO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
@@ -98,17 +98,33 @@
                     <mat-select formControlName="localidad" id="gestionSelect">
                         <mat-option>SELECCIONAR LOCALIDAD</mat-option>
                         <mat-option *ngFor="let localidad of listadoLocalidad" [value]="localidad.id">
-                            {{localidad.descripcion_distrito}}
+                            {{localidad.nombre}}
                         </mat-option>
                     </mat-select>
                     <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('localidad') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>SECTOR</mat-label>
+                    <mat-select formControlName="sector">
+                        <mat-option>SELECCIONAR SECTOR</mat-option>
+                        <mat-option  value="publico">
+                            PÚBLICO
+                        </mat-option>
+                        <mat-option  value="privado">
+                            PRIVADO
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('sector') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
         </mat-grid-list>
 
         <div class="buttons-container">
-            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveCliente()">
+            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProveedor()">
                 {{ viewText.REGISTER }}
                 <mat-icon>save</mat-icon>
             </button>

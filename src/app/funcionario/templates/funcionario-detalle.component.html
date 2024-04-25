@@ -1,0 +1,129 @@
+<div class="titulo-detalle-container">
+    <div class="titulo-detalle">DATOS DE {{data.element.nombre}} {{data.element.apellido}}</div>
+</div>
+
+
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1" >
+                <mat-form-field >
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required readonly>
+                    
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        APELLIDO
+                    </mat-label>
+                    <input formControlName="apellido" matInput placeholder="APELLIDO" required readonly>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        CEDULA
+                    </mat-label>
+                    <input formControlName="cedula" matInput placeholder="CEDULA" required readonly>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA NACIMIENTO</mat-label>
+                       <input matInput formControlName="fechaNac" [matDatepicker]="picker" placeholder="FECHA DE NACIMIENTO" readonly>
+                       
+                       <mat-datepicker #picker></mat-datepicker>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        DIRECCION
+                    </mat-label>
+                    <input formControlName="direccion" matInput placeholder="DIRECCION" readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        EMAIL
+                    </mat-label>
+                    <input formControlName="email" matInput placeholder="EMAIL" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TELEFONO
+                    </mat-label>
+                    <input formControlName="telefono" matInput placeholder="TELEFONO" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        ROL
+                    </mat-label>
+                    <input formControlName="rol" matInput placeholder="ROL" required readonly>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        LOCALIDAD
+                    </mat-label>
+                    <input formControlName="localidad" matInput placeholder="LOCALIDAD" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        ESTADO
+                    </mat-label>
+                    <input formControlName="estado" value="{{this.data.element.estado ? 'ACTIVO': 'INACTIVO'}}" matInput placeholder="LOCALIDAD" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <div class="buttons-container">
+           
+            <button type="button" mat-raised-button (click)="closeForm()">
+                CERRAR
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+       
+
+    </form>
+</div>

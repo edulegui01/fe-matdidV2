@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscribable, catchError, debounceTime, distinctUntilChanged, map, observable, throwError } from 'rxjs';
 import { Cliente } from 'src/app/class/cliente';
 import { ClienteData } from 'src/app/class/clienteData';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { Producto2 } from 'src/app/class/producto2';
 import {Settings} from 'src/app/class/settings';
 
@@ -114,7 +114,7 @@ export class CompraService {
 
 
 
-  public updateCliente(id:string,cliente:ClienteToSave){
+  public updateCliente(id:string,cliente:Persona){
     return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
   }
 

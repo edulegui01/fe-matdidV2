@@ -10,7 +10,7 @@ export class subMenu{
         {nombre:'COMPRAS',menus:[],icono:'shopping_cart', url:MENU_URLS.COMPRA.URL_BASE},
         {nombre:'VENTAS',menus:[],icono:'point_of_sale',url:MENU_URLS.VENTA.URL_BASE},
         {nombre:'CAJA',menus:[],icono:'monetization_on'},
-        {nombre:'INVENTARIO',menus:[],icono:'assignment',}
+        {nombre:'INVENTARIO',menus:[],icono:'assignment',url:MENU_URLS.INVENTARIO.URL_BASE}
     ]
 
     static menuListAdministracion:Array<any>=[

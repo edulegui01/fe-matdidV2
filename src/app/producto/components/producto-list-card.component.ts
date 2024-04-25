@@ -10,6 +10,7 @@ import { ProductoService } from "../services/producto.service";
 import { PaginatorEs } from "src/app/utils/paginatorEs";
 import { ProductoFormComponent } from "./producto-form.component";
 import { Settings } from "src/app/class/settings";
+import { ProductoDetalleComponent } from "./producto-detalle.component";
 
 
 
@@ -87,7 +88,7 @@ import { Settings } from "src/app/class/settings";
       });
     }
 
-    OnClickEditCliente(element:any){
+    OnClickDetailCliente(element:any){
       //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
       // element = {...element,readOndly:true}
       // const extraParams: NavigationExtras = {
@@ -98,7 +99,7 @@ import { Settings } from "src/app/class/settings";
       // this.routerInstance.navigate(['producto/detalle-producto'],extraParams);
 
 
-      this.dialogInstance.open(ProductoFormComponent, {
+      this.dialogInstance.open(ProductoDetalleComponent, {
         width: Settings.DIALOG_SMALL,
         data: {
             typeDialog: 'confirm',
@@ -125,6 +126,28 @@ import { Settings } from "src/app/class/settings";
       
       
   
+    }
+
+
+    onClickEditProducto(element:any){
+      //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
+  
+      const extraParams: NavigationExtras = {
+         state: element,
+      };
+      this.productoService.editForm=true;
+      this.routerInstance.navigate(['producto/editar-producto'],extraParams);
+      
+      
+  
+    }
+
+    doFilter(){
+    
+      let nombre = this.filterForm.value.nombre;
+  
+      
+      this.productoService.getProductos('0','8',nombre).subscribe((funcionarioData:any) => this.dataSource = funcionarioData);
     }
 
 

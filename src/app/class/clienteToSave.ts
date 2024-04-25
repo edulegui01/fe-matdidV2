@@ -1,4 +1,4 @@
-export interface ClienteToSave {
+export interface Persona {
     cedula:any;
     esCliente:boolean;
     localidad:{
@@ -6,7 +6,6 @@ export interface ClienteToSave {
     };
     direccion:any;
     email:any;
-    nombre:any;
     ruc:any;
     telefono:any;
     nombreEncargado:any,

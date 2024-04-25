@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ClientesService } from '../services/clientes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
@@ -22,7 +22,7 @@ export class ClienteDetailsComponent implements OnInit {
   viewText = GlobalMessage.VIEW_LABELS;
   colsSize=2;
   listadoLocalidad!:any[];
-  clienteToSave!:ClienteToSave;
+  clienteToSave!:Persona;
   routerInstance:Router;
   clienteToUpdate:any;
   snackbarInstance!: MatSnackBar;
@@ -49,7 +49,7 @@ export class ClienteDetailsComponent implements OnInit {
 
     this.clienteService.getLocalidades().subscribe(localidad => this.listadoLocalidad = localidad);
 
-    this.buildForm(this.entity);
+    this.buildForm(this.data.element);
 
   }
 
@@ -69,8 +69,8 @@ export class ClienteDetailsComponent implements OnInit {
         telefono: [entity ? entity.telefono : '', Validators.required],
         razonSocial:[entity ? entity.razonSocial : '', Validators.required],
         email: [entity ? entity.email : '', Validators.required],
-        localidad: [entity ? entity.localidad.id : '', Validators.required],
-        sector: [entity ? entity.localidad.sector : '', Validators.required]
+        localidad: [entity ? entity.localidad.nombre : '', Validators.required],
+        sector: [entity ? entity.sector : '', Validators.required]
 
     });
   }
@@ -79,8 +79,7 @@ export class ClienteDetailsComponent implements OnInit {
 
 
   closeForm() {
-    this.routerInstance.navigate(['../cliente/listar-cliente']);
-    this.clienteService.editForm = false;
+    this.dialogRef.close();
   }
 
 

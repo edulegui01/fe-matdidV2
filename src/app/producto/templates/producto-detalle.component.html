@@ -1,0 +1,146 @@
+<div class="titulo-detalle-container">
+    <div class="titulo-detalle">{{data.element.nombre}} {{data.element.apellido}}</div>
+</div>
+
+
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+            
+            <mat-grid-tile [colspan]="2" [rowspan]="3" >
+                <img style="width: 10rem; height: 10rem;" src="{{data.element.image}}" alt="">
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1" >
+                <mat-form-field >
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required readonly>
+                    
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        DESCRIPCION
+                    </mat-label>
+                    <input formControlName="descripcion" matInput placeholder="DESCRIPCION" required readonly>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        AUTOR
+                    </mat-label>
+                    <input formControlName="autor" matInput placeholder="AUTOR" required readonly>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>EDITORIAL</mat-label>
+                       <input matInput formControlName="editorial" placeholder="EDITORIAL" readonly>
+                       
+                       
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        ISBN
+                    </mat-label>
+                    <input formControlName="isbn" matInput placeholder="ISBN" readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        MATERIA
+                    </mat-label>
+                    <input formControlName="materia" matInput placeholder="MATERIA" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        GRADO/CURSO
+                    </mat-label>
+                    <input formControlName="gradoCurso" matInput placeholder="GRADO/CURSO" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        COSTO
+                    </mat-label>
+                    <input formControlName="costo" matInput placeholder="COSTO" required readonly>
+                   
+                </mat-form-field>
+            </mat-grid-tile>
+
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        PRECIO
+                    </mat-label>
+                    <input formControlName="precio" matInput placeholder="PRECIO" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        IVA
+                    </mat-label>
+                    <input formControlName="iva" matInput placeholder="IVA" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        CANTIDAD
+                    </mat-label>
+                    <input formControlName="cantidad" matInput placeholder="CANTIDAD" required readonly>
+                  
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        
+
+        <div class="buttons-container">
+           
+            <button type="button" mat-raised-button (click)="closeForm()">
+                CERRAR
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+       
+
+    </form>
+</div>

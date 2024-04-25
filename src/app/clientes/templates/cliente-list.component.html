@@ -55,10 +55,10 @@
        <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
         <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                NOMBRE
+                RAZÓN SOCIAL
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.nombre}}
+                {{element.razonSocial}}
             </mat-cell>
         </ng-container>
 

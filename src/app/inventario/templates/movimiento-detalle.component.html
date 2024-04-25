@@ -1,0 +1,116 @@
+<div class="titulo-detalle-container">
+    <div class="titulo-detalle">DETALLE DEL MOVIMIENTO {{data.element.apellido}}</div>
+</div>
+
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="12" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+          
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA</mat-label>
+                    <input formControlName="fecha" matInput placeholder="FECHA"  readonly="true">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('fecha') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                  <mat-label>TIPO DE MOVIMIENTO</mat-label>  
+                  <input formControlName="esIngreso" matInput  readonly="true">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('esIngreso') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <mat-form-field>
+                <mat-label>FUNCIONARIO</mat-label>  
+                <input formControlName="funcionario" matInput placeholder="NOMBRE"  readonly="true">
+                  <mat-error *ngIf="entityForm.invalid">
+                      {{ getErrorMessage('funcionario') }}
+                  </mat-error>
+              </mat-form-field>
+          </mat-grid-tile> 
+
+          <mat-grid-tile [colspan]="4" [rowspan]="2">
+            <div class="motivo">
+                <mat-form-field>
+                    <mat-label>
+                        MOTIVO
+                    </mat-label>
+                    <textarea formControlName="motivo" matInput placeholder="" readonly="true"></textarea>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('motivo') }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+            
+            
+        </mat-grid-tile>
+
+
+
+        </mat-grid-list>
+
+        
+        
+          
+
+    </form>
+
+
+      <form class="list-table-container">
+        <table class="table">
+            <thead>
+              <tr class="text-uppercase text-center">
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody [formGroup]="entityForm">
+              <ng-container formArrayName="detalleProducts" *ngFor="let group of getFormControls.controls; let i=index">
+                <tr [formGroupName]="i">
+                  <td>
+                    <input type="text" class="form-control form-control-sm" formControlName="producto" readonly [disabled]="true">
+    
+                  </td>
+                  <td>
+                    <input type="number" class="form-control form-control-sm" name="cantidad" formControlName="cantidad" placeholder="Ingrese la cantidad" readonly [disabled]="true">
+                   
+                  </td>
+                 
+                </tr>
+              </ng-container>
+              
+            </tbody>
+
+           
+          </table>
+
+      </form>
+
+      <div class="buttons-container">
+           
+        <button type="button" mat-raised-button (click)="closeForm()">
+            CERRAR
+            <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+
+      
+
+    
+
+    
+
+
+   
+   
+</div>

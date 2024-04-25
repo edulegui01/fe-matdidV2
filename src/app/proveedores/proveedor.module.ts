@@ -7,6 +7,7 @@ import { NavigationModule } from '../components/navigation.module';
 import { ProveedorFormComponent } from './components/proveedor-form.component';
 import { ProveedorListComponent } from './components/proveedor-list.component';
 import { ProveedorComponent } from './components/proveedor.component';
+import { ProveedorDetalleComponent } from './components/proveedor-detalle.component';
 
 
 
@@ -17,7 +18,8 @@ import { ProveedorComponent } from './components/proveedor.component';
   declarations: [
     ProveedorFormComponent,
     ProveedorListComponent,
-    ProveedorComponent,
+    ProveedorDetalleComponent,
+    ProveedorComponent
    
   ],
   imports: [

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
@@ -26,17 +26,15 @@ export class ProductoFormComponent implements OnInit {
   productoToSave!:any;
   routerInstance:Router;
   productoToUpdate:any;
-  snackbarInstance!: MatSnackBar;
   createDefaultMessage = 'EL REGISTRO';
+  fileName = '';
+  formData = new FormData();
 
 
 
 
 
-  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router,
-     private dialogInstance: MatDialog, 
-     public dialogRef: MatDialogRef<ProductoFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any ) { 
+  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router,  private  snackbarInstance: MatSnackBar,  private dialogInstance: MatDialog) { 
 
     this.routerInstance = router;
 
@@ -46,13 +44,10 @@ export class ProductoFormComponent implements OnInit {
 
         if (this.params) {
             this.entity = this.params;
+            this.fileName = this.entity.image ? this.getImageName() : '';
             this.readOnlyDetalle = this.params.readOndly;
         }
 
-        if (this.data){
-          console.log(data)
-
-        }
 
     }
 
@@ -69,7 +64,7 @@ export class ProductoFormComponent implements OnInit {
 
   buildForm(entity: any) {
     this.entityForm = this.formBuilder.group({
-        id: [entity ? entity.id : ''],
+        idProducto: [entity ? entity.idProducto : ''],
         nombre: [entity ? entity.nombre : '', Validators.required],
         descripcion: [entity ? entity.descripcion : '', Validators.required],
         autor: [entity ? entity.autor : '', Validators.required],
@@ -80,6 +75,7 @@ export class ProductoFormComponent implements OnInit {
         costo: [entity ? entity.costo : '', Validators.required],
         precio: [entity ? entity.precio : '', Validators.required],
         iva: [entity ? entity.iva : '', Validators.required],
+       
         
         
         
@@ -90,9 +86,19 @@ export class ProductoFormComponent implements OnInit {
 
   }
 
+  getImageName(){
+    
+    
+    
+    let imageName = this.entity.image.slice(this.entity.image.indexOf("=")+1);
+
+    return imageName;
+
+  }
+
   saveProducto(){
     this.productoToSave = {
-      idProducto:this.entityForm.controls['id'].value,
+      idProducto:this.entityForm.controls['idProducto'].value,
       nombre:this.entityForm.controls['nombre'].value,
       descripcion:this.entityForm.controls['descripcion'].value,
       autor:this.entityForm.controls['autor'].value,
@@ -102,7 +108,7 @@ export class ProductoFormComponent implements OnInit {
       gradoCurso:this.entityForm.controls['gradoCurso'].value,
       costo:this.entityForm.controls['costo'].value,
       precio:this.entityForm.controls['precio'].value,
-      iva:this.entityForm.controls['iva'].value
+      iva:this.entityForm.controls['iva'].value,
     }
 
 
@@ -117,22 +123,48 @@ export class ProductoFormComponent implements OnInit {
       return;
     }
 
-      this.dialogInstance.open(CustomDialogComponent, {
-          width: Settings.DIALOG_MEDIUM,
-          data: {
-              typeDialog: 'confirm',
-              title: this.viewText.ATTENTION,
-              message: `${this.viewText.CONFIRM_CREATE} <b>${this.createDefaultMessage}</b>?.`,
-          },
-      }).afterClosed().pipe().subscribe(data => {
-          if (data) {
-              
+    if(!this.fileName){
+      this.snackbarInstance.open(this.viewText.SELECT_IMAGE
+        , 'OK'
+        , {
+            duration: Settings.SHORT_TIME
+            , panelClass: Settings.FAILED_MESSAGE_CLASS
+        }
+    );
+        return;
+    } 
 
-              this.productoService.saveProducto(this.productoToSave).subscribe(result => {
-                this.routerInstance.navigate(['../producto/listar-producto'])
-              });
+    this.dialogInstance.open(CustomDialogComponent, {
+      width: Settings.DIALOG_MEDIUM,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_CREATE} <b>${this.createDefaultMessage}</b>?.`,
+      },
+  }).afterClosed().pipe().subscribe(data => {
+      if (data) {
+        this.productoService.saveProducto(this.productoToSave).subscribe(result => {
+      
+          if(result){
+            this.formData.append('idProducto',result.idProducto)
+    
+            this.productoService.uploadImage(this.formData).subscribe();
+
+            this.routerInstance.navigate(['../producto/listar-producto'])
+    
           }
-      });
+    
+        })
+          
+
+          this.snackbarInstance.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+            duration:3000
+          })
+      }
+      }
+  );
+
+ 
 
    
 
@@ -141,13 +173,19 @@ export class ProductoFormComponent implements OnInit {
 
   updateProducto(){
     this.productoToUpdate = {
+      idProducto:this.entityForm.controls['idProducto'].value,
       nombre:this.entityForm.controls['nombre'].value,
-      precioCosto:this.entityForm.controls['precioCosto'].value,
-      precioVenta:this.entityForm.controls['precioVenta'].value,
+      descripcion:this.entityForm.controls['descripcion'].value,
+      autor:this.entityForm.controls['autor'].value,
+      editorial:this.entityForm.controls['editorial'].value,
+      isbn:this.entityForm.controls['isbn'].value,
+      materia:this.entityForm.controls['materia'].value,
+      gradoCurso:this.entityForm.controls['gradoCurso'].value,
+      costo:this.entityForm.controls['costo'].value,
+      precio:this.entityForm.controls['precio'].value,
       iva:this.entityForm.controls['iva'].value,
-      cantidadMinima:this.entityForm.controls['cantidadMinima'].value,
-      cantidad:this.entityForm.controls['cantidad'].value
     }
+
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM
@@ -160,21 +198,50 @@ export class ProductoFormComponent implements OnInit {
       return;
     }
 
-      this.dialogInstance.open(CustomDialogComponent, {
-          width: Settings.DIALOG_MEDIUM,
-          data: {
-              typeDialog: 'confirm',
-              title: this.viewText.ATTENTION,
-              message: `${this.viewText.CONFIRM_EDIT} <b>${this.createDefaultMessage}</b>?.`,
-          },
-      }).afterClosed().pipe().subscribe(data => {
-          if (data) {
-            this.productoService.updateProducto(this.entity.idProducto,this.productoToUpdate).subscribe(result => {
-              this.routerInstance.navigate(['../producto/listar-producto']);
-              this.productoService.editForm = false;
-            });
+    if(!this.fileName){
+      this.snackbarInstance.open(this.viewText.SELECT_IMAGE
+        , 'OK'
+        , {
+            duration: Settings.SHORT_TIME
+            , panelClass: Settings.FAILED_MESSAGE_CLASS
+        }
+    );
+        return;
+    } 
+
+    this.dialogInstance.open(CustomDialogComponent, {
+      width: Settings.DIALOG_MEDIUM,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_CREATE} <b>${this.createDefaultMessage}</b>?.`,
+      },
+  }).afterClosed().pipe().subscribe(data => {
+      if (data) {
+        this.productoService.updateProducto(this.entity.idProducto,this.productoToUpdate).subscribe(result => {
+      
+          if(result && this.formData.get('image')){
+            this.formData.append('idProducto',this.entity.idProducto)
+    
+            this.productoService.uploadImage(this.formData).subscribe();
+
+            
+    
           }
-      });
+    
+        })
+          
+          this.routerInstance.navigate(['../producto/listar-producto']);
+          this.productoService.editForm = false;
+          this.snackbarInstance.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+            duration:3000
+          })
+
+          
+      }
+      }
+  );
+
 
     
 
@@ -197,6 +264,19 @@ export class ProductoFormComponent implements OnInit {
 
   onResize() {
     this.colsSize = window.innerWidth <= 400 ? 1 : 2;
+  }
+
+  onFileSelected(event:any) {
+
+    const file:File = event.target.files[0];
+
+    if (file) {
+
+      this.fileName = file.name;
+      this.formData.append("image", file);
+
+        
+    }
   }
 
 }

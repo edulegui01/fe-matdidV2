@@ -23,6 +23,7 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import localePy from '@angular/common/locales/es-PY';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { InventarioModule } from './inventario/inventario.module';
 registerLocaleData(localePy);
 
 
@@ -49,7 +50,8 @@ registerLocaleData(localePy);
     FuncionarioModule,
     LocalidadModule,
     CompraModule,
-    VentaModule
+    VentaModule,
+    InventarioModule
   ],
   providers: [{
     provide: MAT_DATE_LOCALE,

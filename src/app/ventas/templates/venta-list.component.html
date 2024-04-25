@@ -1,6 +1,15 @@
-<div class="list-page">
 
+
+
+
+
+
+<div class="list-page">
     <div class="list-container mat-elevation-z4">
+
+        <ng-container *ngIf="!dataSource">
+            no hay datos
+        </ng-container>
 
         <!-- <ng-container>
             
@@ -66,10 +75,10 @@
 
         <ng-container matColumnDef="proveedor">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                PROVEEDOR
+                CLIENTE
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.nombrePersona}}
+                {{element.cliente}}
             </mat-cell>
         </ng-container>
 

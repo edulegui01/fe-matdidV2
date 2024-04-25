@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { Cliente } from 'src/app/class/cliente';
 import { ClienteData } from 'src/app/class/clienteData';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import {Settings} from 'src/app/class/settings';
 
 
@@ -56,13 +56,13 @@ export class ClientesService {
   }
 
 
-  public saveClientes(cliente:ClienteToSave):Observable<any>{
+  public saveClientes(cliente:Persona):Observable<any>{
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente);
   }
 
 
 
-  public updateCliente(id:string,cliente:ClienteToSave){
+  public updateCliente(id:string,cliente:Persona){
     return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
   }
 

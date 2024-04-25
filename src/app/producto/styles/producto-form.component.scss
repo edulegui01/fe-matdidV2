@@ -6,8 +6,9 @@
     padding: 2% 0 3% 0%;
     margin-bottom: 1%;
   }
+
   
-  .mat-form-field {
+  mat-form-field {
     width: auto;
     min-width: 70%;
     max-width: 80%;
@@ -53,3 +54,18 @@
   .displayNone{
     display: none;
   }
+
+
+input[type="file"]{
+  width: auto;
+  min-width: 70%;
+  max-width: 80%;
+  height: auto;
+
+  min-height: 55%;
+  max-height: 80%;
+}
+
+.file-input {
+  display: none;
+}

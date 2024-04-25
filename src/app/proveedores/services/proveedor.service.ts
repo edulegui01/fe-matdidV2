@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { Cliente } from 'src/app/class/cliente';
 import { ClienteData } from 'src/app/class/clienteData';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import {Settings} from 'src/app/class/settings';
 
 
@@ -18,7 +18,7 @@ export class ProveedorService {
     urlBuscarId:'/persona/buscar/',
     urlModificar:'/persona/actualizar/',
     urlBuscarDocu:'/persona/buscar-docu',
-    urlLocalidadListar:'/localidad/listar',
+    urlLocalidadListar:'/localidad_select/listar',
     urlActualiazr:'/persona/actualizar/',
     urlEliminar:'/persona/borrar/'
   }
@@ -56,13 +56,13 @@ export class ProveedorService {
   }
 
 
-  public saveClientes(cliente:ClienteToSave):Observable<any>{
+  public saveProveedor(cliente:Persona):Observable<any>{
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente);
   }
 
 
 
-  public updateCliente(id:string,cliente:ClienteToSave){
+  public updateCliente(id:string,cliente:Persona){
     return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
   }
 

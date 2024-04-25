@@ -20,7 +20,8 @@ export class ProductoService {
     urlBuscarDocu:'/producto/buscar-docu',
     urlLocalidadListar:'/localidad/listar',
     urlActualiazr:'/producto/actualizar/',
-    urlEliminar:'/producto/borrar/'
+    urlEliminar:'/producto/borrar/',
+    urlImage:'/producto/imagen',
   }
 
   editForm:boolean=false;
@@ -29,7 +30,7 @@ export class ProductoService {
   constructor(private http: HttpClient) { }
 
 
-  public getProductos(page:any='0',size:any='10',nombre:string=''): Observable<any>{
+  public getProductos(page:any='0',size:any='8',nombre:string=''): Observable<any>{
     
     let params = new HttpParams();
 
@@ -56,6 +57,11 @@ export class ProductoService {
 
   public deleteProducto(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  }
+
+  public uploadImage(imageData:FormData){
+
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlImage,imageData)
   }
 
   

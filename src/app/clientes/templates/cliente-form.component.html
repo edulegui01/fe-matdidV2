@@ -3,20 +3,17 @@
     <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
         <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
 
-        
-
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        NOMBRE
+                        RAZON SOCIAL
                     </mat-label>
-                    <input formControlName="nombre" matInput placeholder="NOMBRE" required>
+                    <input formControlName="razonSocial" matInput placeholder="RAZON SOCIAL">
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('nombre') }}
+                        {{ getErrorMessage('razonSocial') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
-        
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
@@ -67,30 +64,24 @@
                 </mat-form-field>
             </mat-grid-tile>
             
+            
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>
-                        RAZON SOCIAL
-                    </mat-label>
-                    <input formControlName="razonSocial" matInput placeholder="RAZON SOCIAL">
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('razonSocial') }}
-                    </mat-error>
+                    <mat-label>SECTOR</mat-label>
+                    <mat-select formControlName="sector">
+                        <mat-option>SELECCIONAR SECTOR</mat-option>
+                        <mat-option  value="publico">
+                            PÚBLICO
+                        </mat-option>
+                        <mat-option  value="privado">
+                            PRIVADO
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('sector') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        SECTOR
-                    </mat-label>
-                    <input formControlName="sector" matInput placeholder="RAZON SOCIAL">
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('sector') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
-
+            
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>

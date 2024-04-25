@@ -1,0 +1,17 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-inventario" (click)="inventarioService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      INVENTARIO
+    </a>
+    <a mat-tab-link routerLink="listar-movimiento" (click)="inventarioService.editForm=false" routerLinkActive routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+        LISTAR MOVIMIENTOS
+    </a>
+    <a mat-tab-link routerLink="nuevo-movimiento" (click)="inventarioService.editForm=false" routerLinkActive routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+        REGISTRAR MOVIMIENTO
+    </a>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

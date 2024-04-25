@@ -7,6 +7,7 @@ import { NavigationModule } from '../components/navigation.module';
 import { FuncionarioComponent } from './components/funcionario.component';
 import { FuncionarioListComponent } from './components/funcionario-list.component';
 import { FuncionarioFormComponent } from './components/funcionario-form.component';
+import {  FuncionarioDetalleComponent } from './components/funcionario-detalle.component';
 
 
 
@@ -17,6 +18,7 @@ import { FuncionarioFormComponent } from './components/funcionario-form.componen
   declarations: [
     FuncionarioComponent,
     FuncionarioListComponent,
+    FuncionarioDetalleComponent,
     FuncionarioFormComponent,
    
   ],

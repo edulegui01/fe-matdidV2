@@ -52,13 +52,13 @@
 
         
 
-       <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
-        <ng-container matColumnDef="nombre">
+       <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="razonSocial"   matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="razonSocial">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                NOMBRE
+                RAZÓN SOCIAL
             </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                {{element.nombre}}
+            <mat-cell *matCellDef="let element" matTooltip="">
+                {{element.razonSocial}}
             </mat-cell>
         </ng-container>
 
@@ -131,6 +131,13 @@
                                 delete
                             </mat-icon>
                             ELIMINAR
+                        </button>
+
+                        <button mat-menu-item (click)="onClickDetailsProveedor(element)">
+                            <mat-icon class="mat-18">
+                                navigate_next
+                            </mat-icon>
+                            DETALLE
                         </button>
                     </mat-menu>
                 </mat-cell>

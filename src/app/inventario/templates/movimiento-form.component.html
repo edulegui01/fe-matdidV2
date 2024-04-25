@@ -1,0 +1,141 @@
+
+
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="12" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+          
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA</mat-label>
+                       <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="FECHA" readonly="true">
+                       <mat-datepicker-toggle matIconSuffix [for]="picker" disabled="none" ></mat-datepicker-toggle>
+                       <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('fecha') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                  <mat-label>TIPO DE MOVIMIENTO</mat-label>  
+                  <mat-select formControlName="esIngreso">
+                      <mat-option  value=true>INGRESO</mat-option>
+                      <mat-option  value=false>SALIDA</mat-option>
+                  </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('esIngreso') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <mat-form-field>
+                <mat-label>FUNCIONARIO</mat-label>  
+                <input formControlName="funcionario" matInput placeholder="NOMBRE"  readonly="true">
+                  <mat-error *ngIf="entityForm.invalid">
+                      {{ getErrorMessage('funcionario') }}
+                  </mat-error>
+              </mat-form-field>
+          </mat-grid-tile> 
+
+          <mat-grid-tile [colspan]="4" [rowspan]="2">
+            <div class="motivo">
+                <mat-form-field>
+                    <mat-label>
+                        MOTIVO
+                    </mat-label>
+                    <textarea formControlName="motivo" matInput placeholder=""></textarea>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('motivo') }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+            
+            
+        </mat-grid-tile>
+
+
+
+        </mat-grid-list>
+
+        
+        
+          
+
+    </form>
+
+    <form style="width: 500px;">
+        <mat-form-field>
+            <mat-label>
+              BUSCAR EL PRODUCTO
+            </mat-label>
+            <input #searchInputProducto  matInput type="text"  [matAutocomplete]="auto1" />
+            <mat-autocomplete #auto1="matAutocomplete">
+              <mat-option *ngFor="let producto of Products; let i=index"  (onSelectionChange)="selectioChange(producto,i)">
+                {{producto.nombre}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+      </form>
+
+
+      <form class="list-table-container">
+        <table class="table">
+            <thead>
+              <tr class="text-uppercase text-center">
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody [formGroup]="entityForm">
+              <ng-container formArrayName="detalleProducts" *ngFor="let group of getFormControls.controls; let i=index">
+                <tr [formGroupName]="i">
+                  <td>
+                    <input type="text" class="form-control form-control-sm" formControlName="producto" readonly [disabled]="true">
+    
+                  </td>
+                  <td>
+                    <input type="number" class="form-control form-control-sm" name="cantidad" formControlName="cantidad" placeholder="Ingrese la cantidad">
+                   
+                  </td>
+                  <td>
+                    <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon" (click)="removeEmployee(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                 </td>
+                </tr>
+              </ng-container>
+              
+            </tbody>
+
+           
+          </table>
+
+      </form>
+
+      <div class="buttons-container">
+        <button id="register"   mat-raised-button color="primary" type="button" (click)="saveMovimiento()">
+            CREAR
+            <mat-icon>save</mat-icon>
+        </button>
+       
+        <button type="button" mat-raised-button>
+            {{ viewText.CANCEL }}
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+      
+
+    
+
+    
+
+
+   
+   
+</div>

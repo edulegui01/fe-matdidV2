@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
-import { ClienteToSave } from 'src/app/class/clienteToSave';
+import { Persona } from 'src/app/class/clienteToSave';
 import { FuncionarioData } from 'src/app/class/funcionarioData';
 import {Settings} from 'src/app/class/settings';
 
@@ -47,13 +47,13 @@ export class FuncionarioService {
   }
 
 
-  public saveFuncionario(cliente:ClienteToSave):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente);
+  public saveFuncionario(funcionario:any):Observable<any>{
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,funcionario);
   }
 
 
 
-  public updateFuncionario(id:string,cliente:ClienteToSave){
+  public updateFuncionario(id:string,cliente:Persona){
     return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
   }
 
