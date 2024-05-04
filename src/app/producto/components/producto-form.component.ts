@@ -148,9 +148,11 @@ export class ProductoFormComponent implements OnInit {
           if(result){
             this.formData.append('idProducto',result.idProducto)
     
-            this.productoService.uploadImage(this.formData).subscribe();
+            this.productoService.uploadImage(this.formData).subscribe( result => {
+              this.routerInstance.navigate(['../producto/listar-producto']);
+            });
 
-            this.routerInstance.navigate(['../producto/listar-producto'])
+            
     
           }
     

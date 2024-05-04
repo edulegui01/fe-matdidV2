@@ -235,7 +235,7 @@ export class MovimientoFormComponent implements OnInit {
     const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-dd');*/
 
     this.movimientoToSave = {
-      idFuncionario:4,
+      idFuncionario:1,
       esIngreso:this.entityForm.controls['esIngreso'].value === "true" ? true : false,
       fecha:this.entityForm.controls['fecha'].value,
       motivo:this.entityForm.controls['motivo'].value,
