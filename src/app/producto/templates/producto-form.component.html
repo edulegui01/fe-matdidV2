@@ -128,19 +128,20 @@
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" translate="no">
                 <input type="file" class="file-input" accept="image/png,image/jpeg"
                     (change)="onFileSelected($event)" #fileUpload>
 
+                
                 <div class="file-upload">
 
-                {{fileName || viewText.SELECT_IMAGE}}
+                    {{fileName || viewText.SELECT_IMAGE}}
 
-                <button mat-mini-fab color="primary" class="upload-btn"
-                (click)="fileUpload.click()">
-                <mat-icon>attach_file</mat-icon>
-    </button>
-</div>
+                    <button mat-mini-fab color="primary" class="upload-btn"
+                        (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
 
 
 

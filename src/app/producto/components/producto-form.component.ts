@@ -221,21 +221,28 @@ export class ProductoFormComponent implements OnInit {
         this.productoService.updateProducto(this.entity.idProducto,this.productoToUpdate).subscribe(result => {
       
           if(result && this.formData.get('image')){
-            this.formData.append('idProducto',this.entity.idProducto)
+            
     
-            this.productoService.uploadImage(this.formData).subscribe();
+            
+            
 
             
     
           }
     
         })
-          
+
+        this.formData.append('idProducto',this.entity.idProducto)
+        this.productoService.uploadImage(this.formData).subscribe(result => {
+          console.log(result);
           this.routerInstance.navigate(['../producto/listar-producto']);
-          this.productoService.editForm = false;
-          this.snackbarInstance.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
-            duration:3000
-          })
+        });
+          
+          
+        this.productoService.editForm = false;
+        this.snackbarInstance.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+          duration:3000
+        })
 
           
       }
@@ -267,6 +274,7 @@ export class ProductoFormComponent implements OnInit {
   }
 
   onFileSelected(event:any) {
+    
 
     const file:File = event.target.files[0];
 
@@ -274,6 +282,7 @@ export class ProductoFormComponent implements OnInit {
 
       this.fileName = file.name;
       this.formData.append("image", file);
+
 
         
     }

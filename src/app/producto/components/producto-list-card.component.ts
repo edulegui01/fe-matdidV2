@@ -38,15 +38,17 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
     deleteDefaultMessage = 'EL REGISTRO';
     paginatorRef!: MatPaginator;
     @ViewChild(MatPaginator) paginatorf!: MatPaginator;
+    urlBase = Settings.URL_BASE+'/producto/imagen?searchImagen='
 
 
     constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
+      this.initDataSource();
     }
 
     
 
     ngOnInit(): void {
-      this.initDataSource();
+      
       this.ChangePaginatorEspa();
       
       this.filterForm = this.fb.group({
@@ -63,7 +65,10 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
   
   
     initDataSource(){
-      this.productoService.getProductos().subscribe( (productoData:any) => this.dataSource = productoData)
+      this.productoService.getProductos().subscribe( (productoData:any) => {
+        this.dataSource = productoData
+        console.log(productoData);
+      })
     }
 
 
