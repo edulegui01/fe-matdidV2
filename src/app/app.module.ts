@@ -24,6 +24,7 @@ import localePy from '@angular/common/locales/es-PY';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { InventarioModule } from './inventario/inventario.module';
+import { JwtInterceptorService } from './login/services/jwt-interceptor.service';
 registerLocaleData(localePy);
 
 
@@ -61,7 +62,8 @@ registerLocaleData(localePy);
     provide: DateAdapter,
     useClass: MomentDateAdapter,
     deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
-  },],
+  },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

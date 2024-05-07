@@ -8,6 +8,8 @@ import { FuncionarioComponent } from './components/funcionario.component';
 import { FuncionarioListComponent } from './components/funcionario-list.component';
 import { FuncionarioFormComponent } from './components/funcionario-form.component';
 import {  FuncionarioDetalleComponent } from './components/funcionario-detalle.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptorService } from '../login/services/jwt-interceptor.service';
 
 
 
@@ -29,6 +31,9 @@ import {  FuncionarioDetalleComponent } from './components/funcionario-detalle.c
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+  ],
+  providers:[
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true}
   ]
 })
 export class FuncionarioModule { }

@@ -22,7 +22,7 @@ export class LoginService {
 
     console.log(body)
     const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/json')
+      headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization','')
     };
 
     return this.http.post(this.loginURL, body, options).pipe(

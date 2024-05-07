@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { Persona } from 'src/app/class/clienteToSave';
@@ -34,9 +34,14 @@ export class FuncionarioService {
     params = params.append('cedulaFilter',String(cedulaFilter));
     params = params.append('nombreFilter',String(nombreFilter));
 
+    const options = {
+      headers: this.createHeader(),
+      params: params
+    }
 
-    return this.http.get<FuncionarioData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
-      map((funcionarioData:FuncionarioData) => funcionarioData)
+
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
+      map((funcionarioData:any) => funcionarioData)
     )
 
   }
@@ -59,6 +64,16 @@ export class FuncionarioService {
 
   public deleteFuncionario(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  }
+
+  createHeader(){
+    return new HttpHeaders({
+        'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          
+      })
+    
   }
 
 
