@@ -172,6 +172,7 @@ setGestionActual(gestion: any) {
   */
   clearSession() {
     localStorage.clear();
+    sessionStorage.clear();
     this.session = <SessionInterface>{};
   }
 

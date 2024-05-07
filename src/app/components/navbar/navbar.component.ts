@@ -25,6 +25,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   // true si se pulson un boton del menu
   menuCliked = true;
 
+  userLogeadoNombre = localStorage.getItem("nombreFuncionario");
+  
+  userLogeadoApellido = localStorage.getItem("apellidoFuncionario");
+
   constructor(
       changeDetectorRef: ChangeDetectorRef,
       media: MediaMatcher,

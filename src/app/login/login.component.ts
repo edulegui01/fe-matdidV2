@@ -52,13 +52,12 @@ export class LoginComponent {
       }
 
       const userData = {
-          alias: this.loginForm.controls['username'].value.toUpperCase(),
-          clave: this.loginForm.controls['password'].value,
+          username: this.loginForm.controls['username'].value,
+          password: this.loginForm.controls['password'].value,
       };
 
-      this.loginService.login(userData.alias, userData.clave).subscribe(result => {
-          this.globalService.setSession(result);
-          this.snackBar.open('BIENVENIDO/A ' + result.alias, 'OK',
+      this.loginService.login(userData.username, userData.password).subscribe(result => {
+          this.snackBar.open('BIENVENIDO/A ' + result.nombreFuncionario, 'OK',
               { duration: Settings.LONG_TIME, panelClass: Settings.LOGIN_SUCCES_MESSAGE_CLASS });
           this.router.navigate(['']); // redirect al home
       });
