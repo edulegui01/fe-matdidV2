@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subscribable, catchError, debounceTime, distinctUntilChanged, map, observable, throwError } from 'rxjs';
 import { Cliente } from 'src/app/class/cliente';
@@ -32,6 +32,10 @@ export class CompraService {
   constructor(private http: HttpClient) { }
 
 
+  options = {
+    headers: this.createHeader()
+  }
+
   public getCompras(page:any='0',size:any='10',numFolioFilter:string='',proveedorFilter:string=''): Observable<ClienteData>{
     
     let params = new HttpParams();
@@ -43,7 +47,7 @@ export class CompraService {
     //params = params.append('esCliente',Boolean(true));
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{...this.options,params:params}).pipe(
       map((compraData:any) => compraData)
     )
 
@@ -55,9 +59,7 @@ export class CompraService {
 
     params = params.append('search',String(search));
 
-    console.log(Settings.URL_BASE+this.httpUrls.urlProductoListar)
-
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlProductoListar,{params}).pipe(
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlProductoListar,{...this.options,params:params}).pipe(
       debounceTime(4000),
       distinctUntilChanged(),
       
@@ -76,7 +78,7 @@ export class CompraService {
 
     console.log(Settings.URL_BASE+this.httpUrls.urlPersonaListar)
 
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPersonaListar,{params})
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPersonaListar,{...this.options,params:params})
 
   }
 
@@ -87,18 +89,13 @@ export class CompraService {
 
     console.log(Settings.URL_BASE+this.httpUrls.urlFuncionarioListar)
 
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFuncionarioListar,{params})
-
-  }
-
-  public searchClienteById(id:string):Observable<any>{
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlBuscarId+id);
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlFuncionarioListar,{...this.options,params:params})
 
   }
 
 
   public getLocalidades(): Observable<any>{
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlLocalidadListar)
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlLocalidadListar,this.options)
   }
 
 
@@ -109,17 +106,27 @@ export class CompraService {
     //   }
     // );
 
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,compra).subscribe();
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,compra,this.options).subscribe();
   }
 
 
 
   public updateCliente(id:string,cliente:Persona){
-    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente,this.options);
   }
 
   public deleteCompra(id:string){
-    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id,this.options)
+  }
+
+  createHeader(){
+    return new HttpHeaders({
+        'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          
+      })
+    
   }
 
 

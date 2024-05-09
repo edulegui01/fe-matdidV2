@@ -117,11 +117,13 @@ export class MovimientoFormComponent implements OnInit {
 
 
   buildForm(entity: any) {
+    const nombreCompletoFuncionario = localStorage.getItem('nombreFuncionario') + ' '+ localStorage.getItem('apellidoFuncionario')  
+    
     this.entityForm = this.formBuilder.group({
         idMovimiento: [entity ? entity.idMovimiento : ''],
         esIngreso:[entity ? entity.esIngreso:''],
         fecha: [entity ? entity.fecha : new Date()],
-        funcionario: [entity ? entity.funcionario : 'MARK KENNEDY'],
+        funcionario: [nombreCompletoFuncionario],
         motivo: [entity ? entity.motivo : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])
     });
@@ -235,7 +237,7 @@ export class MovimientoFormComponent implements OnInit {
     const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-dd');*/
 
     this.movimientoToSave = {
-      idFuncionario:1,
+      idFuncionario:localStorage.getItem('idFuncionario'),
       esIngreso:this.entityForm.controls['esIngreso'].value === "true" ? true : false,
       fecha:this.entityForm.controls['fecha'].value,
       motivo:this.entityForm.controls['motivo'].value,

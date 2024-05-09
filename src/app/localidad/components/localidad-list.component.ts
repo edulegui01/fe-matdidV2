@@ -93,7 +93,7 @@ export class LocalidadListComponent  implements OnInit {
   }
 
 
-  OnClickDeleteProducto(element:any){
+  OnClickDeleteLocalidad(element:any){
     
     this.dialogInstance.open(CustomDialogComponent, {
                   width: Settings.DIALOG_MEDIUM,
@@ -112,7 +112,7 @@ export class LocalidadListComponent  implements OnInit {
                     this.paginatorf.pageIndex = 0;
 
 
-                      this.localidadService.deleteProducto(element.idProducto).subscribe(resp => {
+                      this.localidadService.deleteLocalidad(element.id).subscribe(resp => {
                         this.paginatorf.pageIndex = 0;
                         this.localidadService.getLocalidades().subscribe( (localidadData:any) => this.dataSource = localidadData)
                       });

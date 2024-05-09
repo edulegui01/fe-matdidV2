@@ -23,6 +23,11 @@ export class InventarioService {
 
   constructor(private http: HttpClient) { }
 
+  options = {
+    headers: this.createHeader(),
+
+  }
+
 
   public getProducto(page:any='0',size:any='10',nombre:string=''): Observable<any>{
     
@@ -32,15 +37,11 @@ export class InventarioService {
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
 
-    const options = {
-      headers: this.createHeader(),
-      params: params
-    }
 
     
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarProducto,options).pipe(
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarProducto,{...this.options,params:params}).pipe(
       map((productoData:any) => productoData)
     )
 
@@ -52,7 +53,7 @@ export class InventarioService {
 
     params = params.append('search',String(search));
 
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlProductoListar,{params}).pipe(
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlProductoListar,{...this.options,params:params}).pipe(
       debounceTime(4000),
       distinctUntilChanged(),
       
@@ -65,7 +66,7 @@ export class InventarioService {
   }
 
   public saveMovimiento(movimiento:any):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuardarMovimiento,movimiento);
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuardarMovimiento,movimiento,this.options);
   }
 
   public getMovimiento(page:any='0',size:any='10',motivo:string=''):Observable<any>{
@@ -82,7 +83,7 @@ export class InventarioService {
       params: params
     }
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarMovimiento,options).pipe(
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarMovimiento,{...this.options,params:params}).pipe(
       map((movimientoData:any) => movimientoData)
     )
 

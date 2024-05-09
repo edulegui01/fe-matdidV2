@@ -24,6 +24,11 @@ export class FuncionarioService {
 
   constructor(private http: HttpClient) { }
 
+  options = {
+    headers: this.createHeader(),
+
+  }
+
 
   public getFuncionario(page:any='0',size:any='10',cedulaFilter:string='',nombreFilter:string=''): Observable<FuncionarioData>{
     
@@ -34,13 +39,10 @@ export class FuncionarioService {
     params = params.append('cedulaFilter',String(cedulaFilter));
     params = params.append('nombreFilter',String(nombreFilter));
 
-    const options = {
-      headers: this.createHeader(),
-      params: params
-    }
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
+
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{...this.options,params:params}).pipe(
       map((funcionarioData:any) => funcionarioData)
     )
 
@@ -48,22 +50,22 @@ export class FuncionarioService {
 
 
   public getLocalidades(): Observable<any>{
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlLocalidadListar)
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlLocalidadListar,this.options)
   }
 
 
   public saveFuncionario(funcionario:any):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,funcionario);
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,funcionario,this.options);
   }
 
 
 
   public updateFuncionario(id:string,cliente:Persona){
-    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente,this.options);
   }
 
   public deleteFuncionario(id:string){
-    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id,this.options)
   }
 
   createHeader(){

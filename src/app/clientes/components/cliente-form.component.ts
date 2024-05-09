@@ -58,7 +58,7 @@ export class ClienteFormComponent implements OnInit {
 
   buildForm(entity: any) {
     this.entityForm = this.formBuilder.group({
-        id: [entity ? entity.id : ''],
+        id: [entity ? entity.idPersona : ''],
         nombreEncargado: [entity ? entity.nombreEncargado : '', Validators.required],
         cedula: [entity ? entity.cedula : '', Validators.required],
         ruc: [entity ? entity.ruc : ''],

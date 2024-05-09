@@ -29,6 +29,10 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
+  options = {
+    headers: this.createHeader(),
+
+  }
 
   public getProductos(page:any='0',size:any='8',nombre:string=''): Observable<any>{
     
@@ -38,30 +42,27 @@ export class ProductoService {
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
 
-    const options = {
-      headers: this.createHeader(),
-      params: params
-    }
+
     
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{...this.options,params:params}).pipe(
       map((productoData:any) => productoData)
     )
 
   }
 
   public saveProducto(producto:Producto):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,producto);
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,producto,this.options);
   }
 
 
   public updateProducto(id:string,producto:any){
-    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,producto);
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,producto,this.options);
   }
 
   public deleteProducto(id:string){
-    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id,this.options)
   }
 
   public uploadImage(imageData:FormData){

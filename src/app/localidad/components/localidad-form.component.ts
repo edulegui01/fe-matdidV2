@@ -104,14 +104,9 @@ export class LocalidadFormComponent implements OnInit {
   }
 
 
-  updateProducto(){
+  updateLocalidad(){
     this.localidad = {
       nombre:this.entityForm.controls['nombre'].value,
-      precioCosto:this.entityForm.controls['precioCosto'].value,
-      precioVenta:this.entityForm.controls['precioVenta'].value,
-      iva:this.entityForm.controls['iva'].value,
-      cantidadMinima:this.entityForm.controls['cantidadMinima'].value,
-      cantidad:this.entityForm.controls['cantidad'].value
     }
 
     if (this.entityForm.invalid) {
@@ -134,8 +129,8 @@ export class LocalidadFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-            this.localidad.updateProducto(this.entity.idProducto,this.localidad).subscribe((result:any) => {
-              this.routerInstance.navigate(['../producto/listar-producto']);
+            this.localidadService.updateLocalidad(this.entity.id,this.localidad).subscribe((result:any) => {
+              this.routerInstance.navigate(['../localidad/listar-localidad'])
               this.localidad.editForm = false;
             });
           }

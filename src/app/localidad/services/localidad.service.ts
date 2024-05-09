@@ -26,7 +26,9 @@ export class LocalidadService {
 
   constructor(private http: HttpClient) { }
 
-
+  options = {
+    headers: this.createHeader(),
+  }
   public getLocalidades(page:any='0',size:any='10',nombre:string=''): Observable<any>{
     
     let params = new HttpParams();
@@ -35,33 +37,28 @@ export class LocalidadService {
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
 
-    const options = {
-      headers: this.createHeader(),
-      params: params
-    }
+    
     
 
 
-    return this.http.get<ProductoData>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
+    return this.http.get<ProductoData>(Settings.URL_BASE+this.httpUrls.urlListar,{...this.options,params:params}).pipe(
       map((productoData:ProductoData) => productoData)
     )
 
   }
 
   public saveLocalidad(localidad:any):Observable<any>{
-    const options = {
-      headers: this.createHeader()
-    }
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,localidad,options);
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,localidad,this.options);
   }
 
 
-  public updateProducto(id:string,producto:any){
-    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,producto);
+  public updateLocalidad(id:string,localidad:any){
+
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,localidad,this.options);
   }
 
-  public deleteProducto(id:string){
-    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  public deleteLocalidad(id:string){
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id,this.options)
   }
 
   createHeader(){

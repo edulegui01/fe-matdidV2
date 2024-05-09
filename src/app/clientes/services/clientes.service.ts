@@ -27,6 +27,10 @@ export class ClientesService {
 
   constructor(private http: HttpClient) { }
 
+  options = {
+    headers: this.createHeader()
+  }
+
 
   public getClientes(page:any='0',size:any='10',cedulaFilter:string='',nombreFilter:string=''): Observable<ClienteData>{
     
@@ -38,13 +42,10 @@ export class ClientesService {
     params = params.append('nombreFilter',String(nombreFilter));
     params = params.append('esCliente',Boolean(true));
 
-    const options = {
-      headers: this.createHeader(),
-      params: params
-    }
 
 
-    return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
+
+    return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,{...this.options,params:params}).pipe(
       map((clienteData:ClienteData) => clienteData)
     )
 
@@ -57,22 +58,22 @@ export class ClientesService {
 
 
   public getLocalidades(): Observable<any>{
-    return this.http.get(Settings.URL_BASE+this.httpUrls.urlLocalidadListar)
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlLocalidadListar,this.options)
   }
 
 
   public saveClientes(cliente:Persona):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente);
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,cliente,this.options);
   }
 
 
 
   public updateCliente(id:string,cliente:Persona){
-    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente);
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,cliente,this.options);
   }
 
   public deleteCliente(id:string){
-    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id,this.options)
   }
 
   createHeader(){
