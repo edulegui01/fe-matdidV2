@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { Cliente } from 'src/app/class/cliente';
@@ -38,8 +38,13 @@ export class ClientesService {
     params = params.append('nombreFilter',String(nombreFilter));
     params = params.append('esCliente',Boolean(true));
 
+    const options = {
+      headers: this.createHeader(),
+      params: params
+    }
 
-    return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
+
+    return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
       map((clienteData:ClienteData) => clienteData)
     )
 
@@ -68,6 +73,16 @@ export class ClientesService {
 
   public deleteCliente(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  }
+
+  createHeader(){
+    return new HttpHeaders({
+        'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          
+      })
+    
   }
 
 

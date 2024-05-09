@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { Producto } from 'src/app/class/producto';
@@ -34,17 +34,25 @@ export class LocalidadService {
     params = params.append('page',String(page));
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
+
+    const options = {
+      headers: this.createHeader(),
+      params: params
+    }
     
 
 
-    return this.http.get<ProductoData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
+    return this.http.get<ProductoData>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
       map((productoData:ProductoData) => productoData)
     )
 
   }
 
   public saveLocalidad(localidad:any):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,localidad);
+    const options = {
+      headers: this.createHeader()
+    }
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,localidad,options);
   }
 
 
@@ -54,6 +62,16 @@ export class LocalidadService {
 
   public deleteProducto(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
+  }
+
+  createHeader(){
+    return new HttpHeaders({
+        'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          
+      })
+    
   }
 
   

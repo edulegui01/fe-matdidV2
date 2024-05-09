@@ -8,6 +8,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 import { menu } from 'src/app/class/menu-items';
 
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -35,6 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
       private router: Router,
       private globalService: GlobalService,
       // private userService: UserService,
+
   ) {
       this.mobileQuery = media.matchMedia('(max-width: 600px)');
       this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -44,6 +46,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
       this.username = this.globalService.getUser();
       this.menuList = menu.menuList;
+      
   }
 
   ngAfterViewInit() {

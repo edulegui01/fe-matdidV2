@@ -34,6 +34,7 @@ export class LocalidadListComponent  implements OnInit {
   deleteDefaultMessage = 'EL REGISTRO';
   paginatorRef!: MatPaginator;
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
+  smallRowSize=true;
   
   
   

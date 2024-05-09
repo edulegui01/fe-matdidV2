@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, debounceTime, distinctUntilChanged, map, observable, throwError } from 'rxjs';
 import { Producto } from 'src/app/class/producto';
@@ -32,12 +32,15 @@ export class InventarioService {
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
 
-    
+    const options = {
+      headers: this.createHeader(),
+      params: params
+    }
 
     
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarProducto,{params}).pipe(
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarProducto,options).pipe(
       map((productoData:any) => productoData)
     )
 
@@ -73,10 +76,26 @@ export class InventarioService {
     params = params.append('size',String(size));
     params = params.append('motivo',String(motivo));
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarMovimiento,{params}).pipe(
+
+    const options = {
+      headers: this.createHeader(),
+      params: params
+    }
+
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarMovimiento,options).pipe(
       map((movimientoData:any) => movimientoData)
     )
 
+  }
+
+  createHeader(){
+    return new HttpHeaders({
+        'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          
+      })
+    
   }
 
 

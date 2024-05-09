@@ -23,7 +23,7 @@
         </ng-container> -->
 
 
-        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
+        <!-- <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
             <mat-grid-tile [colspan]="2">
                 <div [formGroup]="filterForm" class="input-box">
                     <mat-form-field appearance="outline" class="input-box">
@@ -38,7 +38,7 @@
 
            
             
-        </mat-grid-list>
+        </mat-grid-list> -->
 
         
 
@@ -70,7 +70,7 @@
                         OPCIONES
                     </span>
 
-                    <button  matTooltip="OPCIONES DE TABLA"
+                    <button  matTooltip="OPCIONES DE TABLA" 
                         class="config-table-btn-large" mat-flat-button>
                         OPCIONES
                     </button>
@@ -107,7 +107,7 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
         <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 28px;  min-height: 28px !important;"></mat-row>
         </mat-table>
 
          <mat-paginator

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { routes as navbarRoutes } from './components/navbar/navbar.routing';
+import { authGuard } from './utils/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {
     path: '',
     component: NavbarComponent,
-    children: navbarRoutes
+    children: navbarRoutes,
+    canActivate:[authGuard]
   },
 ];
 

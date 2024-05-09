@@ -8,6 +8,8 @@ import { ClienteComponent } from './components/cliente.component';
 import { ClienteListComponent } from './components/cliente-list.component';
 import { ClienteFormComponent } from './components/cliente-form.component';
 import { ClienteDetailsComponent } from './components/cliente-detalle.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptorService } from '../login/services/jwt-interceptor.service';
 
 
 
@@ -28,6 +30,9 @@ import { ClienteDetailsComponent } from './components/cliente-detalle.component'
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+  ],
+  providers:[
+    
   ]
 })
 export class ClienteModule { }

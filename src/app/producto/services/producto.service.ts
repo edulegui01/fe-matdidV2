@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { ClienteData } from 'src/app/class/clienteData';
@@ -37,10 +37,15 @@ export class ProductoService {
     params = params.append('page',String(page));
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
+
+    const options = {
+      headers: this.createHeader(),
+      params: params
+    }
     
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,options).pipe(
       map((productoData:any) => productoData)
     )
 
@@ -62,6 +67,16 @@ export class ProductoService {
   public uploadImage(imageData:FormData){
 
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlImage,imageData)
+  }
+
+  createHeader(){
+    return new HttpHeaders({
+        'Content-Type': 'application/json;charset=utf-8',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+          
+      })
+    
   }
 
   

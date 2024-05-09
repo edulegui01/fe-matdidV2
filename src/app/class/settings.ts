@@ -24,7 +24,7 @@
 
 
     // 3 segundos
-    static SHORT_TIME = 3000;
+    static SHORT_TIME = 2000;
 
     // 5 segundos
     static MEDIUM_TIME = 5000;

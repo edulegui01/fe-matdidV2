@@ -16,47 +16,56 @@ import { VentaComponent } from 'src/app/ventas/components/venta.component';
 import { routes as routerVenta } from 'src/app/ventas/venta.routing'
 import { InventarioComponent } from 'src/app/inventario/components/inventario.component';
 import { routes as routerInventario} from 'src/app/inventario/inventario.routing'
+import { authGuard } from 'src/app/utils/guards/auth.guard';
 
 export const routes: Routes = [
     {
         path: MENU_URLS.CLIENTE.URL_BASE,
         component: ClienteComponent,
-        children: routeCliente
+        children: routeCliente,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.PROVEEDOR.URL_BASE,
         component: ProveedorComponent,
-        children: routeProveedor
+        children: routeProveedor,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.PRODUCTO.URL_BASE,
         component: ProductoComponent,
-        children: routeProducto
+        children: routeProducto,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.FUNCIONARIO.URL_BASE,
         component: FuncionarioComponent,
-        children: routerFuncionario
+        children: routerFuncionario,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.LOCALIDAD.URL_BASE,
         component: LocalidadComponent,
-        children: routerLocalidad
+        children: routerLocalidad,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.COMPRA.URL_BASE,
         component: CompraComponent,
-        children: routerCompra
+        children: routerCompra,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.VENTA.URL_BASE,
         component: VentaComponent,
-        children: routerVenta
+        children: routerVenta,
+        canActivate:[authGuard]
     },
     {
         path: MENU_URLS.INVENTARIO.URL_BASE,
         component: InventarioComponent,
-        children: routerInventario
+        children: routerInventario,
+        canActivate:[authGuard]
     },
    
 
