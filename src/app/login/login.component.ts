@@ -57,7 +57,7 @@ export class LoginComponent {
       };
 
       this.loginService.login(userData.username, userData.password).subscribe(result => {
-          this.snackBar.open('BIENVENIDO/A ' + result.nombreFuncionario, 'OK',
+        this.snackBar.open('BIENVENIDO/A ' + result.nombreFuncionario, 'OK',
               { duration: Settings.SHORT_TIME, panelClass: Settings.LOGIN_SUCCES_MESSAGE_CLASS });
           this.router.navigate(['']); // redirect al home
       });

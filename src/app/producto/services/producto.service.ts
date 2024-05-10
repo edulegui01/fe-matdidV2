@@ -34,7 +34,7 @@ export class ProductoService {
 
   }
 
-  public getProductos(page:any='0',size:any='8',nombre:string=''): Observable<any>{
+  public getProductos(page:any='0',size:any='12',nombre:string=''): Observable<any>{
     
     let params = new HttpParams();
 

@@ -85,7 +85,7 @@ export class LocalidadListComponent  implements OnInit {
 
   doFilter(){
     
-   
+    console.log(this.filterForm.value.nombre)
     let nombre = this.filterForm.value.nombre;
 
     

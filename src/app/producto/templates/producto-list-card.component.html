@@ -2,48 +2,43 @@
 
     <div class="list-container mat-elevation-z4">
 
-
-        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR EL NOMBRE DEL PRODUCTO
-                        </mat-label>
-                        <input formControlName="nombre" matInput placeholder="INGRESE EL NOMBRE" (keydown.enter)="doFilter()">
-                    </mat-form-field>
+        <div class="d-flex flex-row">
+            <div class="p-1 input-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <input formControlName="name" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por nombre y apellido">
                 </div>
-
-            </mat-grid-tile>
-
+            </div>
+            <div class="p-1 input-filters">
+                <div class="form-group" [formGroup]="filterForm">
+                    <input formControlName="cedula" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por cedula">
+                </div>
+            </div>
+        </div>
+        <div  class="" style="padding: 10px 24px 0px 24px ;">
            
-            
-        </mat-grid-list>
+           <div class="row list-table-container">
+                <div class="col-sm-2 product-item" *ngFor="let card of dataSource.content">
+                    <div class="card">
+                        <div class="producto-transition">
+                            <img class="card-img-top" src="{{ urlBase+card.image}}" alt="">
+                            <a href="*" class="product-image-link"></a>
+                        </div>
+                        <div class="card-body pb-0">
+                            <h6 class="mat-card-title">
+                                {{card.nombre}}
+                            </h6>
+                            <p class="card-text product-author">
+                                {{card.autor}}
+                            </p>
+                            <p class="product-price">
+                                <span class="currency-symbol">₲</span>
+                                <span class="price-amount pb-0">{{card.precio}}</span>
+                            </p>
+                        </div>
 
-        <div  class="list-table-container">
-           <div class="container responsive-grid" style="padding: 24px;  display: grid;
-           grid-template-columns: repeat(4,1fr);
-           gap: 24px;">
-                <mat-card *ngFor="let card of dataSource.content">
-                    <mat-card-header>
-                        <mat-card-title>
-                            {{card.nombre}}
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        
-                        <img style="width: 10rem; height: 10rem;" src="{{ urlBase+card.image}}" alt="">
-                        <p>{{card.descripcion}}</p>
-                       <p><b>AUTOR: </b>{{card.autor}}</p>
-                        <p><b>EDITORIAL: </b>{{card.editorial}}</p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button  mat-stroked-button color="primary" (click)="OnClickDetailCliente(card)">DETALLES</button>
-                        <button  mat-stroked-button color="primary" (click)="onClickEditProducto(card)">EDITAR</button>
-                    </mat-card-actions>
-                </mat-card>
-
-           </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
 

@@ -149,8 +149,8 @@ export class LocalidadFormComponent implements OnInit {
   }
 
   closeForm() {
-    this.routerInstance.navigate(['../producto/listar-producto']);
-    this.localidad.editForm = false;
+    this.routerInstance.navigate(['../localidad/listar-localidad']);
+    this.localidadService.editForm = false;
   }
 
 

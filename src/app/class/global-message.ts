@@ -39,6 +39,7 @@
 
     static PAGINATOR_RANGE = [10, 25, 50];
     static PAGINATOR_RANGE1 = [10, 25, 50];
+    static PAGINATOR_RANGE_PRODUCTS = [12, 24, 36];
     
 
     static VIEW_LABELS = {

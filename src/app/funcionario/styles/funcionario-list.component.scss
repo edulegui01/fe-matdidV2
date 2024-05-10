@@ -11,7 +11,7 @@
     position: relative;
     min-height: 200px;
     max-height: 1000px;
-    height: 72vh; //~72% tomando como referencia el alto de la pantalla
+    height: 70vh; //~72% tomando como referencia el alto de la pantalla
     overflow: auto;
   }
 
@@ -89,6 +89,10 @@
   
   .options-column {
     display: block;
+  }
+
+  .input-filters{
+    width: 25rem;
   }
   
   @media (max-width: 800px) {
