@@ -94,40 +94,11 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
     }
 
     OnClickDetailCliente(element:any){
-      //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
-      // element = {...element,readOndly:true}
-      // const extraParams: NavigationExtras = {
-      //    state: element,
-         
-      // };
-      // this.productoService.detalleForm=true;
-      // this.routerInstance.navigate(['producto/detalle-producto'],extraParams);
-
-
-      this.dialogInstance.open(ProductoDetalleComponent, {
-        width: Settings.DIALOG_SMALL,
-        data: {
-            typeDialog: 'confirm',
-            title: this.viewText.ATTENTION,
-            message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
-           ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
-           element:element
-        },
-
-    }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
-
-        if (accept) {
-          
-          
-          this.paginatorf.pageIndex = 0;
-
-
-            // this.localidadService.deleteProducto(element.idProducto).subscribe(resp => {
-            //   this.paginatorf.pageIndex = 0;
-            //   this.localidadService.getLocalidades().subscribe( (localidadData:any) => this.dataSource = localidadData)
-            // });
-        }
-    });
+      const extraParams: NavigationExtras = {
+        state: element,
+     };
+     this.productoService.detalleForm=true;
+     this.routerInstance.navigate(['producto/detalle-producto'],extraParams);
       
       
   

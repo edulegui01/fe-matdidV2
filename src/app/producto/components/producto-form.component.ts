@@ -223,7 +223,10 @@ export class ProductoFormComponent implements OnInit {
         this.productoService.updateProducto(this.entity.idProducto,this.productoToUpdate).subscribe(result => {
       
           if(result && this.formData.get('image')){
-            
+            this.formData.append('idProducto',this.entity.idProducto)
+            this.productoService.uploadImage(this.formData).subscribe(result => {
+              
+            });
     
             
             
@@ -233,12 +236,8 @@ export class ProductoFormComponent implements OnInit {
           }
     
         })
-
-        this.formData.append('idProducto',this.entity.idProducto)
-        this.productoService.uploadImage(this.formData).subscribe(result => {
-          console.log(result);
-          this.routerInstance.navigate(['../producto/listar-producto']);
-        });
+        this.routerInstance.navigate(['../producto/listar-producto']);
+       
           
           
         this.productoService.editForm = false;

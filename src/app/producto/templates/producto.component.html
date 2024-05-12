@@ -4,15 +4,16 @@
       LISTAR PRODUCTO
     </a>
 
-    <a mat-tab-link routerLink="nuevo-producto" *ngIf="!productoService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+    <a mat-tab-link routerLink="nuevo-producto" (click)="productoService.detalleForm=false" *ngIf="!productoService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
       REGISTRAR PRODUCTO
     </a>
 
     <a mat-tab-link routerLink="editar-producto" *ngIf="productoService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
       MODIFICAR PRODUCTO
     </a>
+
     <a mat-tab-link routerLink="detalle-producto" *ngIf="productoService.detalleForm" routerLinkActive #rl4="routerLinkActive" [active]="rl4.isActive">
-      DETALLE PRODUCTO
+      DETALLE DEL PRODUCTO
     </a>
 
 

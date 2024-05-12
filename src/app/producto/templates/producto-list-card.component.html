@@ -21,9 +21,17 @@
                     <div class="card">
                         <div class="producto-transition">
                             <img class="card-img-top" src="{{ urlBase+card.image}}" alt="">
-                            <a href="*" class="product-image-link"></a>
+                            <a  class="product-image-link" (click)="OnClickDetailCliente(card)"></a>
                         </div>
                         <div class="card-body pb-0">
+                            <button mat-icon-button  class="buttom-edit" (click)="onClickEditProducto(card)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+
+                            <button mat-icon-button  class="buttom-delete" (click)="onClickEditProducto(card)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            
                             <h6 class="mat-card-title">
                                 {{card.nombre}}
                             </h6>

@@ -28,14 +28,15 @@ export class ProductoDetalleComponent implements OnInit {
   clienteToUpdate:any;
   snackbarInstance!: MatSnackBar;
   createDefaultMessage = 'EL REGISTRO';
+  urlBase = Settings.URL_BASE+'/producto/imagen?searchImagen='
+
+  
 
 
 
 
 
-  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog,
-    public dialogRef: MatDialogRef<ProductoDetalleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any )  { 
+  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog )  { 
 
     this.routerInstance = router;
 
@@ -45,12 +46,13 @@ export class ProductoDetalleComponent implements OnInit {
 
         if (this.params) {
             this.entity = this.params;
+
         }
     }
 
     
 
-    this.buildForm(this.data.element);
+    this.buildForm(this.entity);
 
   }
 
@@ -82,9 +84,7 @@ export class ProductoDetalleComponent implements OnInit {
 
 
 
-  closeForm() {
-    this.dialogRef.close();
-  }
+
 
 
 

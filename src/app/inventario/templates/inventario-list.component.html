@@ -2,43 +2,10 @@
 
     <div class="list-container mat-elevation-z4">
 
-        <!-- <ng-container>
-            
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="cedula" matInput placeholder="BUSCAR POR ID">
-                    </mat-form-field>
-                </div>
-            
-        </ng-container>
 
-        <ng-container matColumnDef="name-filter">
-            <mat-header-cell *matHeaderCellDef>
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
-                    </mat-form-field>
-                </div>
-            </mat-header-cell>
-        </ng-container> -->
-
-
-        <mat-grid-list   cols="6" rowHeight="50px" gutterSize="0px" [style.backgroundColor]="'white'">
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR NOMBRE
-                        </mat-label>
-                        <input formControlName="nombre" matInput placeholder="INGRESE EL NOMBRE" (keydown.enter)="doFilter()">
-                    </mat-form-field>
-                </div>
-
-            </mat-grid-tile>
-
-           
-            
-        </mat-grid-list>
+        <div class="form-group p-2 w-25" [formGroup]="filterForm">
+            <input formControlName="nombre" (keydown.enter)="doFilter()" type="email" class="form-control" id="exampleInputEmail1" placeholder="Buscar por nombre">
+        </div>
 
         
 
