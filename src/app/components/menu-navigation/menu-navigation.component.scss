@@ -37,8 +37,9 @@
   }
   
   // estilos para el panel lateral
-  .menu-items mat-expansion-panel .mat-expansion-panel-content .mat-expansion-panel-body {
+  .menu-items mat-expansion-panel mat-expansion-panel-content mat-expansion-panel-body {
     padding: 0% !important;
+    border: none;
   }
   
   .mat-list-base .mat-list-item .mat-list-item-content {
@@ -118,4 +119,7 @@
   
   .no-child {
     height: 48px !important;
+  }
+  mat-expansion-panel-body{
+    padding: 0% !important;
   }

@@ -25,6 +25,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { InventarioModule } from './inventario/inventario.module';
 import { JwtInterceptorService } from './login/services/jwt-interceptor.service';
+import { CicloModule } from './ciclo/ciclo.module';
 registerLocaleData(localePy);
 
 
@@ -52,7 +53,8 @@ registerLocaleData(localePy);
     LocalidadModule,
     CompraModule,
     VentaModule,
-    InventarioModule
+    InventarioModule,
+    CicloModule
   ],
   providers: [{
     provide: MAT_DATE_LOCALE,

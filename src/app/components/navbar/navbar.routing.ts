@@ -17,6 +17,8 @@ import { routes as routerVenta } from 'src/app/ventas/venta.routing'
 import { InventarioComponent } from 'src/app/inventario/components/inventario.component';
 import { routes as routerInventario} from 'src/app/inventario/inventario.routing'
 import { authGuard } from 'src/app/utils/guards/auth.guard';
+import { CicloComponent } from 'src/app/ciclo/components/ciclo.component';
+import { routes as routerCiclo } from 'src/app/ciclo/ciclo.routing';
 
 export const routes: Routes = [
     {
@@ -67,6 +69,13 @@ export const routes: Routes = [
         children: routerInventario,
         canActivate:[authGuard]
     },
+    {
+        path: MENU_URLS.CICLO.URL_BASE,
+        component: CicloComponent,
+        children: routerCiclo,
+        canActivate:[authGuard]
+    },
+    
    
 
 ];

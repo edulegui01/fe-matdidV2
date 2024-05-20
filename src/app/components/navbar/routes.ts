@@ -223,5 +223,28 @@ export const MENU_URLS = {
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },
+    CICLO: {
+        URL_BASE: 'ciclo',
+        ROOT: {
+            URL: 'listar-ciclo',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-ciclo',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-ciclo',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-ciclo',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-ciclo',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
     
 };

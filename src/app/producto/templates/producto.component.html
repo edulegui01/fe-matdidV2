@@ -1,6 +1,6 @@
 <nav mat-tab-nav-bar updateActiveLink>
 
-    <a mat-tab-link routerLink="listar-producto" (click)="productoService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+    <a mat-tab-link routerLink="listar-producto" (click)="linkActivateChange()" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
       LISTAR PRODUCTO
     </a>
 

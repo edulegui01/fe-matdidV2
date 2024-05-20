@@ -1,19 +1,68 @@
 <div class="list-page">
 
     <div class="list-container mat-elevation-z4">
-
+        
         <div class="d-flex flex-row">
+            <div class="p-1 select-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <select (change)="doFilter()" formControlName="idCategoria"  matNativeControl id="tipoCliente"  #selectionAtipePersona class="form-select" aria-label="Default select example">
+                        <option value='' >Todas las categorias</option>
+                        <option [value]="categoria.idCategoria" *ngFor="let categoria of categoriaList">{{categoria.nombre}}</option>
+            
+                    </select>
+                </div>
+            </div>
+
+            <div class="p-1 select-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <select (change)="doFilter()" formControlName="idCiclo" matNativeControl id="tipoCliente" class="form-select" aria-label="Default select example">
+                        <option value='' >Todos los ciclos</option>
+                        <option [value]="ciclo.idCiclo" *ngFor="let ciclo of cicloList">{{ciclo.nombre}}</option>
+                        
+            
+                    </select>
+                </div>
+            </div>
+
+            <div class="p-1 select-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <select (change)="doFilter()" formControlName="idMateria" matNativeControl id="tipoCliente" #selectionAtipePersona class="form-select" aria-label="Default select example">
+                        <option value='' >Todas las materias</option>
+                        <option [value]="materia.idMateria" *ngFor="let materia of materiaList">{{materia.nombre}}</option>
+                        
+            
+                    </select>
+                </div>
+            </div>
+
+            <div class="p-1 select-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <select (change)="doFilter()" formControlName="idEditorial" matNativeControl id="tipoCliente" #selectionAtipePersona class="form-select" aria-label="Default select example">
+                        <option value='' >Todas las editoriales</option>
+                        <option [value]="editorial.idEditorial" *ngFor="let editorial of editorialList">{{editorial.nombre}}</option>
+            
+                    </select>
+                </div>
+            </div>
+
             <div class="p-1 input-filters">
                 <div class="form-group " [formGroup]="filterForm">
-                    <input formControlName="name" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por nombre y apellido">
+                    <input formControlName="nombre" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por título">
                 </div>
             </div>
-            <div class="p-1 input-filters">
-                <div class="form-group" [formGroup]="filterForm">
-                    <input formControlName="cedula" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por cedula">
-                </div>
-            </div>
+
+            
         </div>
+
+
+
+        <!-- <div class="d-flex flex-row">
+            <div class="p-1 input-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <input formControlName="name" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por título">
+                </div>
+            </div>
+        </div> -->
         <div  class="" style="padding: 10px 24px 0px 24px ;">
            
            <div class="row list-table-container">
@@ -28,7 +77,7 @@
                                 <mat-icon>edit</mat-icon>
                             </button>
 
-                            <button mat-icon-button  class="buttom-delete" (click)="onClickEditProducto(card)">
+                            <button mat-icon-button  class="buttom-delete" (click)="OnClickDeleteProducto(card)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                             
@@ -40,7 +89,7 @@
                             </p>
                             <p class="product-price">
                                 <span class="currency-symbol">₲</span>
-                                <span class="price-amount pb-0">{{card.precio}}</span>
+                                <span class="price-amount pb-0"> {{card.precio}}</span>
                             </p>
                         </div>
 

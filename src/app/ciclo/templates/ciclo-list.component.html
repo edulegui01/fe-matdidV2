@@ -1,0 +1,88 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+        <div class="form-group p-2 w-25" [formGroup]="filterForm">
+            <input formControlName="nombre" (keydown.enter)="doFilter()" type="email" class="form-control" id="exampleInputEmail1" placeholder="Buscar por ciclo">
+        </div>
+        
+
+       <mat-table [dataSource]="dataSource.content"  class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc" fxLayout="row">
+        <ng-container matColumnDef="nombre" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                CICLO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.nombre}}
+            </mat-cell>
+        </ng-container>
+
+        
+
+        
+        
+
+        <!--filters-->
+       
+
+        
+
+        <div *ngIf="true">
+            <ng-container matColumnDef="options">
+                <mat-header-cell *matHeaderCellDef fxFlex="15%">
+
+                    <span class="options-column">
+                        OPCIONES
+                    </span>
+
+                    <button  matTooltip="OPCIONES DE TABLA" 
+                        class="config-table-btn-large" mat-flat-button>
+                        OPCIONES
+                    </button>
+
+                    
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex="15%">
+
+                    <button mat-icon-button [matMenuTriggerFor]="actions">
+                        <mat-icon aria-label="actions">
+                            more_horiz
+                        </mat-icon>
+                    </button>
+
+                    <mat-menu #actions>
+                        <button mat-menu-item (click)="OnClickEditCiclo(element)">
+                            <mat-icon class="mat-18">edit</mat-icon>
+                            EDITAR
+                        </button>
+
+                        <mat-divider></mat-divider>
+
+                        <button mat-menu-item (click)="OnClickDeleteCiclo(element)">
+                            <mat-icon class="mat-18">
+                                delete
+                            </mat-icon>
+                            ELIMINAR
+                        </button>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
+        </div>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+        <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 28px;  min-height: 28px !important;"></mat-row>
+        </mat-table>
+
+         <mat-paginator
+          [pageSizeOptions]="paginatorRange"
+          [length]="dataSource.totalElements"
+          [pageSize]="dataSource.pageable.pageSize"
+          (page)="pageEvent = $event; onPaginateChange($event)"
+          showFirstLastButtons #pagi>
+        </mat-paginator> 
+
+    </div>
+</div>
+

@@ -16,5 +16,10 @@ export class ProductoComponent implements OnInit {
    
   }
 
+  linkActivateChange(){
+    this.productoService.editForm = false;
+    this.productoService.detalleForm =false;
+  }
+
 
 }

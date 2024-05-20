@@ -1,7 +1,7 @@
 <mat-accordion class="menu-items" multi='true'>
     
 
-    <div *ngFor="let menu of menuList">
+    <div *ngFor="let menu of menuList" >
 
         <!-- Profundidad 1 menu-solid-->
         <div class="" *ngIf="menu.menus.length === 0">
@@ -13,10 +13,10 @@
 
         <!-- Profundidad 2 -->
         <div *ngIf="menu.menus.length > 0">
-            <mat-expansion-panel [expanded]="openCascade">
+            <mat-expansion-panel [expanded]="openCascade"> 
                 <mat-expansion-panel-header>
                     <mat-panel-title class="menu-link">
-                        <mat-icon [ngStyle]="{'padding-left' : getSize()}" style="font-size: 1.4rem;">
+                        <mat-icon  style="font-size: 1.4rem;">
                             {{ menu.icono ? menu.icono : 'adjust' }}
                         </mat-icon>
                         <span class="expansion-text">
@@ -27,13 +27,13 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <div *ngFor="let submenu of menu.menus">
+                <div *ngFor="let submenu of menu.menus"  >
 
                     <!-- Si no tiene hijos es un menu final -->
-                    <a mat-list-item #link (click)="!preview ? goRoute(submenu, link) : null" class="route-link"
+                    <a mat-list-item #link (click)="!preview ? goRoute(submenu, link) : null" 
                         *ngIf="submenu.menus.length === 0">
-                        <mat-icon [ngStyle]="{'padding-left' : getSize()}">
-                            {{ submenu.icono ? submenu.icono : 'adjust' }}
+                        <mat-icon>
+                            {{ submenu.icono ? submenu.icono : '' }}
                         </mat-icon>
                         <span>{{ submenu.nombre }} </span>
                     </a>

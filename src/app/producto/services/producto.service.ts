@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, observable, throwError } from 'rxjs';
+import { Observable, catchError, first, map, observable, throwError } from 'rxjs';
 import { ClienteData } from 'src/app/class/clienteData';
 import { Producto } from 'src/app/class/producto';
 import { ProductoData } from 'src/app/class/productoData';
@@ -22,6 +22,11 @@ export class ProductoService {
     urlActualiazr:'/producto/actualizar/',
     urlEliminar:'/producto/borrar/',
     urlImage:'/producto/imagen',
+    urlCicloListar:'/ciclo_select/listar',
+    urlListado: '/producto/listado',
+    urlCategoriaListar:'/categoria_select/listar',
+    urlMateriaListar:'/materia_select/listar',
+    urlEditorialListar:'/editorial_select/listar'
   }
 
   editForm:boolean=false;
@@ -34,20 +39,32 @@ export class ProductoService {
 
   }
 
-  public getProductos(page:any='0',size:any='12',nombre:string=''): Observable<any>{
+  public getProductos(page:any='0',size:any='12',nombre:string='',idCiclo:string='',
+  idCategoria:string='', idMateria:string='', idEditorial:string=''): Observable<any>{
     
     let params = new HttpParams();
 
     params = params.append('page',String(page));
     params = params.append('size',String(size));
     params = params.append('nombre',String(nombre));
+    params = params.append('idCiclo',String(idCiclo));
+    params = params.append('idCategoria',String(idCategoria));
+    params = params.append('idMateria',String(idMateria));
+    params = params.append('idEditorial',String(idEditorial));
 
 
     
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{...this.options,params:params}).pipe(
-      map((productoData:any) => productoData)
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListado,{...this.options,params:params}).pipe(
+      map((res) => {
+        res.content.map((item:any) => {
+          item.precio = new Intl.NumberFormat("es-PY").format(item.precio)
+          item.costo = new Intl.NumberFormat("es-PY").format(item.costo)
+        })
+
+        return res;
+      })
     )
 
   }
@@ -56,6 +73,21 @@ export class ProductoService {
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,producto,this.options);
   }
 
+  public listarSelectCiclo():Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlCicloListar,this.options);
+  }
+
+  public listarSelectCategoria():Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlCategoriaListar,this.options);
+  }
+
+  public listarSelectMateria():Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlMateriaListar,this.options);
+  }
+
+  public listarSelectEditorial():Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlEditorialListar,this.options);
+  }
 
   public updateProducto(id:string,producto:any){
     return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,producto,this.options);

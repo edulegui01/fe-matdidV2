@@ -224,13 +224,21 @@
 
 .buttom-edit{
   position:absolute;
-  top: 72%;
-  left: 70%;
+  top: 70%;
+  left: 72%;
 }
 
 .buttom-delete{
   position:absolute;
   top: 84%;
-  left: 70%;
+  left: 72%;
   color: red;
+}
+
+.input-filters{
+  width: 25rem;
+}
+
+.select-filters{
+  width: 15rem;
 }

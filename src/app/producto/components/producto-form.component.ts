@@ -111,6 +111,8 @@ export class ProductoFormComponent implements OnInit {
       iva:this.entityForm.controls['iva'].value,
     }
 
+    console.log(this.productoService)
+
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM
@@ -183,10 +185,11 @@ export class ProductoFormComponent implements OnInit {
       isbn:this.entityForm.controls['isbn'].value,
       materia:this.entityForm.controls['materia'].value,
       gradoCurso:this.entityForm.controls['gradoCurso'].value,
-      costo:this.entityForm.controls['costo'].value,
-      precio:this.entityForm.controls['precio'].value,
+      costo:this.convertirStringAnumerico(this.entityForm.controls['costo'].value),
+      precio:this.convertirStringAnumerico(this.entityForm.controls['precio'].value),
       iva:this.entityForm.controls['iva'].value,
     }
+
 
 
     if (this.entityForm.invalid) {
@@ -225,7 +228,7 @@ export class ProductoFormComponent implements OnInit {
           if(result && this.formData.get('image')){
             this.formData.append('idProducto',this.entity.idProducto)
             this.productoService.uploadImage(this.formData).subscribe(result => {
-              
+              this.routerInstance.navigate(['../producto/listar-producto']);
             });
     
             
@@ -233,10 +236,12 @@ export class ProductoFormComponent implements OnInit {
 
             
     
-          }
+          }else[
+            this.routerInstance.navigate(['../producto/listar-producto'])
+          ]
     
         })
-        this.routerInstance.navigate(['../producto/listar-producto']);
+        
        
           
           
@@ -261,6 +266,12 @@ export class ProductoFormComponent implements OnInit {
         this.entityForm.controls[controlName].markAsTouched();
     }
     return msg;
+  }
+
+  convertirStringAnumerico(numeroFormateado:string){
+
+    return parseInt(numeroFormateado.replace('.',''))
+
   }
 
   closeForm() {
@@ -288,6 +299,23 @@ export class ProductoFormComponent implements OnInit {
         
     }
   }
+
+  validateFormat(event:any) {
+    let key;
+    if (event.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      key = event.keyCode;
+      key = String.fromCharCode(key);
+    }
+    const regex = /[0-9]|\./;
+     if (!regex.test(key)) {
+      event.returnValue = false;
+       if (event.preventDefault) {
+        event.preventDefault();
+       }
+     }
+    }
 
 }
 

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { Persona } from 'src/app/class/clienteToSave';
@@ -15,7 +15,7 @@ import { ProductoService } from '../services/producto.service';
   templateUrl: '../templates/producto-detalle.component.html',
   styleUrls: ['../styles/producto-detalle.component.scss']
 })
-export class ProductoDetalleComponent implements OnInit {
+export class ProductoDetalleComponent implements OnInit, OnDestroy {
 
   entityForm!:FormGroup;
   entity:any=null;
@@ -54,6 +54,9 @@ export class ProductoDetalleComponent implements OnInit {
 
     this.buildForm(this.entity);
 
+  }
+  ngOnDestroy(): void {
+    this.productoService.detalleForm = false;
   }
 
   ngOnInit(): void {

@@ -4,6 +4,13 @@ import { MENU_URLS } from "../components/navbar/routes"
 
 export class subMenu{
 
+    static subMenuProducto:Array<any>=[
+        {nombre:'LIBROS',menus:[],icono:'', url:MENU_URLS.PRODUCTO.URL_BASE},
+        {nombre:'MATERIA',menus:[],icono:'',url:MENU_URLS.PROVEEDOR.URL_BASE},
+        {nombre:'CICLO',menus:[],icono:'',url:MENU_URLS.CICLO.URL_BASE},
+        {nombre:'CATEGORIA',menus:[],icono:'',url:MENU_URLS.FUNCIONARIO.URL_BASE},
+        {nombre:'EDITORIAL',menus:[],icono:'',url:MENU_URLS.FUNCIONARIO.URL_BASE},
+    ]
 
     static menuListAcciones:Array<any>=[
        
@@ -17,9 +24,12 @@ export class subMenu{
         {nombre:'CLIENTES',menus:[],icono:'groups',url:MENU_URLS.CLIENTE.URL_BASE},
         {nombre:'PROVEEDORES',menus:[],icono:'local_shipping',url:MENU_URLS.PROVEEDOR.URL_BASE},
         {nombre:'FUNCIONARIOS',menus:[],icono:'contacts',url:MENU_URLS.FUNCIONARIO.URL_BASE},
-        {nombre:'PRODUCTOS',menus:[],icono:'inventory', url:MENU_URLS.PRODUCTO.URL_BASE},
+        {nombre:'LIBROS',menus:this.subMenuProducto,icono:'inventory',},
         {nombre:'LOCALIDADES',menus:[],icono:'location_on', url:MENU_URLS.LOCALIDAD.URL_BASE},
     ]
+
+
+
 
    
 

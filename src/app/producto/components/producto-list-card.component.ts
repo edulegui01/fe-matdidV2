@@ -11,6 +11,7 @@ import { PaginatorEs } from "src/app/utils/paginatorEs";
 import { ProductoFormComponent } from "./producto-form.component";
 import { Settings } from "src/app/class/settings";
 import { ProductoDetalleComponent } from "./producto-detalle.component";
+import { CustomDialogComponent } from "src/app/components/custom-dialog/components/custom-dialog.component";
 
 
 
@@ -39,6 +40,10 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
     paginatorRef!: MatPaginator;
     @ViewChild(MatPaginator) paginatorf!: MatPaginator;
     urlBase = Settings.URL_BASE+'/producto/imagen?searchImagen='
+    cicloList!:any
+    categoriaList!:any
+    materiaList!:any
+    editorialList!:any
 
 
     constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
@@ -53,6 +58,10 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
       
       this.filterForm = this.fb.group({
         nombre: [''],
+        idCiclo:[''],
+        idCategoria:[''],
+        idMateria:[''],
+        idEditorial:['']
         
       })
     }
@@ -69,6 +78,11 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
         this.dataSource = productoData
         console.log(productoData);
       })
+
+      this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
+      this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
+      this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
+      this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
     }
 
 
@@ -98,6 +112,7 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
         state: element,
      };
      this.productoService.detalleForm=true;
+     this.productoService
      this.routerInstance.navigate(['producto/detalle-producto'],extraParams);
       
       
@@ -118,12 +133,43 @@ import { ProductoDetalleComponent } from "./producto-detalle.component";
   
     }
 
+    OnClickDeleteProducto(element:any){
+    
+      this.dialogInstance.open(CustomDialogComponent, {
+                    width: Settings.DIALOG_MEDIUM,
+                    data: {
+                        typeDialog: 'confirm',
+                        title: this.viewText.ATTENTION,
+                        message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+                       ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+                    },
+        
+                }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+        
+                    if (accept) {
+                      console.log(this.paginatorRef)
+                      
+                      this.paginatorf.pageIndex = 0;
+  
+  
+                        this.productoService.deleteProducto(element.idProducto).subscribe(resp => {
+                          this.paginatorf.pageIndex = 0;
+                          this.productoService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
+                        });
+                    }
+                });
+    }
+
     doFilter(){
     
       let nombre = this.filterForm.value.nombre;
-  
+      let idCiclo = this.filterForm.value.idCiclo;
+      let idCategoria = this.filterForm.value.idCategoria;
+      let idMateria = this.filterForm.value.idMateria;
+      let idEditorial = this.filterForm.value.idEditorial;
       
-      this.productoService.getProductos('0','12',nombre).subscribe((funcionarioData:any) => this.dataSource = funcionarioData);
+      this.productoService.getProductos('0','12',nombre,idCiclo,idCategoria,idMateria,idEditorial).subscribe((
+        productoData:any) => this.dataSource = productoData);
     }
 
 

@@ -23,42 +23,29 @@
         </ng-container> -->
 
 
-        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR NOMBRE Y APELLIDO
-                        </mat-label>
-                        <input formControlName="name" matInput placeholder="INGRESE EL NOMBRE Y APELLIDO" (keydown.enter)="doFilter()">
-                    </mat-form-field>
+        <div class="d-flex flex-row">
+            <div class="p-2 input-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <input formControlName="name" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por nombre y apellido">
                 </div>
-
-            </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR RUC O CÉDULA
-                        </mat-label>
-                        <input formControlName="cedula" matInput placeholder="INGRESE EL RUC O CÉDULA" (keydown.enter)="doFilter()">
-                    </mat-form-field>
+            </div>
+            <div class="p-2 input-filters">
+                <div class="form-group" [formGroup]="filterForm">
+                    <input formControlName="cedula" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por cedula o ruc">
                 </div>
+            </div>
+        </div>
 
-            </mat-grid-tile>
-            
-        </mat-grid-list>
 
         
 
        <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
         <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                RAZÓN SOCIAL
+                NOMBRE
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.razonSocial}}
+                {{element.empresa ? element.empresa : element.nombre + " " +element.apellido}}
             </mat-cell>
         </ng-container>
 
@@ -66,28 +53,28 @@
 
         <ng-container matColumnDef="cedula">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                CÉDULA
+                RUC/CÉDULA
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 {{element.cedula}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="ruc">
+        <ng-container matColumnDef="telefono">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                RUC
+                TELEFONO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.ruc}}
+                {{element.telefono}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="direccion">
+        <ng-container matColumnDef="localidad">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                DIRECCION
+                LOCALIDAD
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.direccion}}
+                {{element.localidad.nombre}}
             </mat-cell>
         </ng-container>
 

@@ -112,6 +112,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
       debounceTime(500),
       distinctUntilChanged()
     ).subscribe(filtro => {
+      
       if(filtro==='' || filtro.length < 3){
         this.Funcionarios=[];
         return;

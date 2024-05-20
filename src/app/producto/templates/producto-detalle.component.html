@@ -23,7 +23,7 @@
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>EDITORIAL:</b> </span>
-                    <span>{{entity.autor}}</span>
+                    <span>{{entity.editorial}}</span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>ISBN:</b> </span>
@@ -38,16 +38,14 @@
                     <span>{{entity.gradoCurso}}</span>
                 </li>
                 <li class="list-group-item">
-                    <span style="margin-right: 0.5rem;"><b>GRADO/CURSO:</b> </span>
-                    <span>{{entity.gradoCurso}}</span>
-                </li>
-                <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>PRECIO COSTO:</b> </span>
-                    <span>{{entity.costo}}</span>
+                    <span class="currency-symbol">₲</span>
+                    <span> {{entity.costo}}</span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>PRECIO VENTA:</b> </span>
-                    <span>{{entity.precio}}</span>
+                    <span class="currency-symbol">₲</span>
+                    <span> {{entity.precio}}</span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>IVA:</b> </span>
@@ -56,12 +54,12 @@
               </ul>
         </div>
     </div>
-    <div class="container mt-3 pb-3">
+    <div class="container mt-5 pb-5">
         <div class="text-center">
             <h4>DESCRIPCIÓN DEL PRODUCTO</h4>
         </div>
         <div class="container">
-            <p class="w-50 m-auto parrafo-descripcion border p-1">{{entity.descripcion}}</p>
+            <p class="w-50 m-auto parrafo-descripcion border p-2"><em>{{entity.descripcion}}</em></p>
         </div>
     </div>
 </div>

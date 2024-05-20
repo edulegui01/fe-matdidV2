@@ -18,17 +18,7 @@
             </mat-grid-tile>
         
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        DESCRIPCION
-                    </mat-label>
-                    <input formControlName="descripcion" matInput placeholder="DESCRIPCION" required >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('descripcion') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
+
         
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -95,9 +85,9 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        COSTO
+                        PRECIO COSTO
                     </mat-label>
-                    <input formControlName="costo" matInput placeholder="COSTO" required required >
+                    <input formControlName="costo" matInput placeholder="COSTO" required required (keypress)="validateFormat($event)">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('costo') }}
                     </mat-error>
@@ -107,7 +97,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        PRECIO
+                        PRECIO VENTA
                     </mat-label>
                     <input formControlName="precio" matInput placeholder="PRECIO" required required >
                     <mat-error *ngIf="entityForm.invalid">
@@ -124,6 +114,18 @@
                     <input formControlName="iva" matInput placeholder="IVA" required required >
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('iva') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+                <mat-form-field>
+                    <mat-label>
+                        DESCRIPCION
+                    </mat-label>
+                    <textarea formControlName="descripcion" matInput placeholder="DESCRIPCION" required ></textarea>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('descripcion') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
