@@ -138,5 +138,7 @@
         {value:90,text:"CRÉDITO 90 DÍAS"},
         {value:120,text:"CRÉDITO 120 DÍAS"},
     ]
+
+    static administrador = "ADMIN"
     
 }

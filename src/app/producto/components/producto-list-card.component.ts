@@ -44,6 +44,8 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
     categoriaList!:any
     materiaList!:any
     editorialList!:any
+    esAdmin:string = GlobalMessage.administrador;
+    rol:string|null = localStorage.getItem('role');
 
 
     constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {

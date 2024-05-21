@@ -35,13 +35,14 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>
-                        EDITORIAL
-                    </mat-label>
-                    <input formControlName="editorial" matInput placeholder="EDITORIAL" required >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('editorial') }}
-                    </mat-error>
+                    <mat-label>EDITORIAL</mat-label>
+                    <mat-select formControlName="editorial" id="gestionSelect">
+                        <mat-option>SELECCIONAR EDITORIAL</mat-option>
+                        <mat-option *ngFor="let editorial of editorialList" [value]="editorial.idEditorial">
+                            {{editorial.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('editorial') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
@@ -59,25 +60,40 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>
-                        MATERIA
-                    </mat-label>
-                    <input formControlName="materia" matInput placeholder="MATERIA" required >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('materia') }}
-                    </mat-error>
+                    <mat-label>MATERIA</mat-label>
+                    <mat-select formControlName="materia" id="gestionSelect">
+                        <mat-option>SELECCIONAR MATERIA</mat-option>
+                        <mat-option *ngFor="let materia of materiaList" [value]="materia.idMateria">
+                            {{materia.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('materia') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>
-                        GRADO/CURSO
-                    </mat-label>
-                    <input formControlName="gradoCurso" matInput placeholder="GRADO/CURSO" required required >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('gradoCurso') }}
-                    </mat-error>
+                    <mat-label>CICLO</mat-label>
+                    <mat-select formControlName="ciclo" id="gestionSelect">
+                        <mat-option>SELECCIONAR CICLO</mat-option>
+                        <mat-option *ngFor="let ciclo of categoriaList" [value]="ciclo.idCiclo">
+                            {{ciclo.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('ciclo') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>CATEGORIA</mat-label>
+                    <mat-select formControlName="categoria" id="gestionSelect">
+                        <mat-option>SELECCIONAR CATEGORIA</mat-option>
+                        <mat-option *ngFor="let categoria of categoriaList" [value]="categoria.idCategoria">
+                            {{categoria.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('categoria') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 

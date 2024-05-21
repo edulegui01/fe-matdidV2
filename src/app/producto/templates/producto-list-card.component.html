@@ -72,12 +72,12 @@
                             <img class="card-img-top" src="{{ urlBase+card.image}}" alt="">
                             <a  class="product-image-link" (click)="OnClickDetailCliente(card)"></a>
                         </div>
-                        <div class="card-body pb-0">
-                            <button mat-icon-button  class="buttom-edit" (click)="onClickEditProducto(card)">
+                        <div  class="card-body pb-0">
+                            <button *ngIf="rol == esAdmin" mat-icon-button  class="buttom-edit" (click)="onClickEditProducto(card)">
                                 <mat-icon>edit</mat-icon>
                             </button>
 
-                            <button mat-icon-button  class="buttom-delete" (click)="OnClickDeleteProducto(card)">
+                            <button *ngIf="rol == esAdmin" mat-icon-button  class="buttom-delete" (click)="OnClickDeleteProducto(card)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                             

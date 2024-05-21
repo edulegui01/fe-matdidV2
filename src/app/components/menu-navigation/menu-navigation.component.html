@@ -6,7 +6,7 @@
         <!-- Profundidad 1 menu-solid-->
         <div class="" *ngIf="menu.menus.length === 0">
             <a mat-list-item #link (click)="!preview ? goRoute(menu, link) : null" class="menu-link no-child route-link ">
-                <mat-icon>{{ menu.icono ? menu.icono : 'adjust' }}</mat-icon>
+                <mat-icon>{{ menu.icono ? menu.icono : '' }}</mat-icon>
                 <span>{{ menu.nombre }} </span>
             </a>
         </div>
@@ -17,7 +17,7 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title class="menu-link">
                         <mat-icon  style="font-size: 1.4rem;">
-                            {{ menu.icono ? menu.icono : 'adjust' }}
+                            {{ menu.icono ? menu.icono : '' }}
                         </mat-icon>
                         <span class="expansion-text">
                             {{ menu.nombre }}

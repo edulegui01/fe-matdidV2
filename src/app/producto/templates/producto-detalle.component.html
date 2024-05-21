@@ -23,7 +23,7 @@
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>EDITORIAL:</b> </span>
-                    <span>{{entity.editorial}}</span>
+                    <span>{{entity.editorial?.nombre}}</span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>ISBN:</b> </span>
@@ -31,11 +31,11 @@
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>MATERIA:</b> </span>
-                    <span>{{entity.materia}}</span>
+                    <span>{{entity.materia?.nombre}}</span>
                 </li>
                 <li class="list-group-item">
-                    <span style="margin-right: 0.5rem;"><b>GRADO/CURSO:</b> </span>
-                    <span>{{entity.gradoCurso}}</span>
+                    <span style="margin-right: 0.5rem;"><b>CATEGORÍA:</b> </span>
+                    <span>{{entity.categoria?.nombre}}</span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>PRECIO COSTO:</b> </span>

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, catchError, first, map, observable, throwError } from 'rxjs';
 import { ClienteData } from 'src/app/class/clienteData';
 import { Producto } from 'src/app/class/producto';
@@ -32,7 +33,7 @@ export class ProductoService {
   editForm:boolean=false;
   detalleForm:boolean=false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   options = {
     headers: this.createHeader(),
@@ -100,6 +101,19 @@ export class ProductoService {
   public uploadImage(imageData:FormData){
 
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlImage,imageData)
+  }
+
+  isAdmin(){
+
+    let authVerify = localStorage.getItem('role') == 'ADMIN' ? true : false;
+
+    if(!authVerify){
+      this.router.navigate(['/producto/listar-producto']);
+    }
+
+    return authVerify;
+    
+
   }
 
   createHeader(){

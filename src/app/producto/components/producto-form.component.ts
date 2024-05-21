@@ -29,6 +29,10 @@ export class ProductoFormComponent implements OnInit {
   createDefaultMessage = 'EL REGISTRO';
   fileName = '';
   formData = new FormData();
+  cicloList!:any
+  categoriaList!:any
+  materiaList!:any
+  editorialList!:any
 
 
 
@@ -58,7 +62,10 @@ export class ProductoFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
+    this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
+    this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
+    this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
     
   }
 
@@ -68,13 +75,14 @@ export class ProductoFormComponent implements OnInit {
         nombre: [entity ? entity.nombre : '', Validators.required],
         descripcion: [entity ? entity.descripcion : '', Validators.required],
         autor: [entity ? entity.autor : '', Validators.required],
-        editorial: [entity ? entity.editorial : ''],
+        editorial: [entity ? entity.editorial?.idEditorial : '', Validators.required],
         isbn: [entity ? entity.isbn : '', Validators.required],
-        materia: [entity ? entity.materia : '', Validators.required],
-        gradoCurso: [entity ? entity.gradoCurso : '', Validators.required],
+        materia: [entity ? entity.materia?.idMateria : '', Validators.required],
+        ciclo: [entity ? entity.ciclo?.idCiclo : '', Validators.required],
         costo: [entity ? entity.costo : '', Validators.required],
         precio: [entity ? entity.precio : '', Validators.required],
         iva: [entity ? entity.iva : '', Validators.required],
+        categoria: [entity ? entity.categoria?.idCategoria : '', Validators.required],
        
         
         

@@ -66,22 +66,7 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
 
   buildForm(entity: any) {
     console.log(entity)
-    this.entityForm = this.formBuilder.group({
-        id: [entity ? entity.id : ''],
-        nombre: [entity ? entity.nombre : '', Validators.required],
-        descripcion: [entity ? entity.descripcion : '', Validators.required],
-        autor: [entity ? entity.autor : '', Validators.required],
-        editorial: [entity ? entity.editorial : '', Validators.required],
-        isbn: [entity ? entity.isbn : '', Validators.required],
-        materia: [entity ? entity.materia : '', Validators.required],
-        gradoCurso: [entity ? entity.gradoCurso : '', Validators.required],
-        costo: [entity ? entity.costo : '', Validators.required],
-        precio: [entity ? entity.precio : '', Validators.required],
-        iva: [entity ? entity.iva : '', Validators.required],
-        cantidad: [entity ? entity.stockActual : '', Validators.required],
-        
-
-    });
+    
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../services/producto.service';
+import { GlobalMessage } from 'src/app/class/global-message';
 
 @Component({
   selector: 'app-producto',
@@ -11,6 +12,8 @@ export class ProductoComponent implements OnInit {
 
   
   constructor(public productoService:ProductoService) { }
+  esAdmin:string|null = localStorage.getItem('role');
+  admin = GlobalMessage.administrador;
 
   ngOnInit(): void {
    
