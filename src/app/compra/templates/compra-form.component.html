@@ -117,6 +117,22 @@
               </mat-form-field>
             </mat-grid-tile>
 
+            <ng-container *ngIf="entityForm.controls['tipoFactura'].value == 'contado'">
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                  <mat-label>TIPO DE PAGO</mat-label>  
+                  <mat-select formControlName="tipoPago">
+                      <mat-option *ngFor="let tipoPago of tiposDePago; let i=index" [value]="tipoPago">
+                        {{tipoPago}}
+                      </mat-option>
+                  </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('rucCedula') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            </ng-container>
+
 
         </mat-grid-list>
 

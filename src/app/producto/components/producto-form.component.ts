@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { Persona } from 'src/app/class/clienteToSave';
@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
 import { ProductoService } from '../services/producto.service';
 import { Producto } from 'src/app/class/producto';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-producto-form',
@@ -38,7 +39,9 @@ export class ProductoFormComponent implements OnInit {
 
 
 
-  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router,  private  snackbarInstance: MatSnackBar,  private dialogInstance: MatDialog) { 
+  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, 
+    router: Router,  private  snackbarInstance: MatSnackBar,  private dialogInstance: MatDialog,
+    private currencyPipe:CurrencyPipe) { 
 
     this.routerInstance = router;
 
@@ -66,6 +69,19 @@ export class ProductoFormComponent implements OnInit {
     this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
     this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
     this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
+
+    this.entityForm.valueChanges.subscribe( form =>{
+      if(form.precio){
+        this.entityForm.patchValue({
+          precio: this.currencyPipe.transform(form.precio.replace(/\D/g,'').replace(/^0+/,''),'','','1.0-1','es-PY')
+        },{emitEvent:false})
+      }
+      if(form.costo){
+        this.entityForm.patchValue({
+          costo: this.currencyPipe.transform(form.costo.replace(/\D/g,'').replace(/^0+/,''),'','','1.0-1','es-PY')
+        },{emitEvent:false})
+      }
+    });
     
   }
 

@@ -68,6 +68,8 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['producto', 'cantidad', 'precio', 'iva', 'descuento', 'subTotal'];
 
+  tiposDePago:any[] = ['EFECTIVO','TRANSFERENCIA','DEPÓSITO','GIROS'];
+
 
   
 
@@ -173,6 +175,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
         rucCedula: [entity ? rucCedula : ''],
         folio: [entity ? entity.numFolio : ''],
         timbrado: [entity ? entity.timbrado : ''],
+        tipoPago: [entity ? entity.tipoPago : ''],
         razonSocial: [entity ? entity.nombrePersona : ''],
         funcionario: [entity ? `${entity.nombreFuncionario + ' '+ entity.apellidoFuncionario}` : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])

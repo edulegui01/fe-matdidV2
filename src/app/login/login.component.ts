@@ -46,20 +46,23 @@ export class LoginComponent {
    */
   dologin() {
 
-      if (!this.loginForm.valid) {
-          this.snackBar.open(this.viewText.INVALID_FORM, 'OK',
-              { duration: Settings.SHORT_TIME, panelClass: Settings.FAILED_MESSAGE_CLASS });
-      }
-
       const userData = {
           username: this.loginForm.controls['username'].value,
           password: this.loginForm.controls['password'].value,
       };
 
       this.loginService.login(userData.username, userData.password).subscribe(result => {
-        this.snackBar.open('BIENVENIDO/A ' + result.nombreFuncionario, 'OK',
+            this.snackBar.open('BIENVENIDO/A ' + result.nombreFuncionario, 'OK',
               { duration: Settings.SHORT_TIME, panelClass: Settings.LOGIN_SUCCES_MESSAGE_CLASS });
           this.router.navigate(['']); // redirect al home
+        },(err) =>{
+            if(err.status == 403){
+            this.snackBar.open('DATOS INCORRECTOS ', 'OK',
+            { duration: Settings.SHORT_TIME, panelClass: Settings.LOGIN_SUCCES_MESSAGE_CLASS });
+        }
+        
+        
+        
       });
 
   }

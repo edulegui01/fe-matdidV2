@@ -72,6 +72,8 @@ export class MovimientoFormComponent implements OnInit {
   @ViewChild('searchInputProducto')
   inputSearchProduc?:ElementRef
 
+  listadoMotivo!:any[];
+
 
 
 
@@ -106,6 +108,7 @@ export class MovimientoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm(this.entity);
+    this.inventarioService.getMotivos().subscribe(motivos => this.listadoMotivo = motivos);
 
 
     
@@ -121,10 +124,10 @@ export class MovimientoFormComponent implements OnInit {
     
     this.entityForm = this.formBuilder.group({
         idMovimiento: [entity ? entity.idMovimiento : ''],
-        esIngreso:[entity ? entity.esIngreso:''],
+        idMotivo:[entity ? entity.motivo.idMotivo:''],
         fecha: [entity ? entity.fecha : new Date()],
         funcionario: [nombreCompletoFuncionario],
-        motivo: [entity ? entity.motivo : ''],
+        comentario: [entity ? entity.comentario : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])
     });
   }
@@ -238,11 +241,13 @@ export class MovimientoFormComponent implements OnInit {
 
     this.movimientoToSave = {
       idFuncionario:localStorage.getItem('idFuncionario'),
-      esIngreso:this.entityForm.controls['esIngreso'].value === "true" ? true : false,
+      idMotivo:this.entityForm.controls['idMotivo'].value,
       fecha:this.entityForm.controls['fecha'].value,
-      motivo:this.entityForm.controls['motivo'].value,
+      comentario:this.entityForm.controls['comentario'].value,
       detalleMovimientos:detalleMovimiento
     }
+
+    console.log(this.movimientoToSave)
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM
@@ -269,9 +274,17 @@ export class MovimientoFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-                this.inventarioService.saveMovimiento(this.movimientoToSave).subscribe((result:any) => {
-                this.routerInstance.navigate(['../inventario/listar-inventario'])
-              });
+                this.inventarioService.saveMovimiento(this.movimientoToSave).subscribe({
+                  next: (result:any) => {
+                  
+                    this.routerInstance.navigate(['../inventario/listar-inventario'])
+                  },
+                  error: (err) => {
+                    this.snackbarInstance.open(err.error.message,'ACEPTAR',{
+                      duration:4000
+                    })
+                  }
+                });
           }
       });
 

@@ -15,7 +15,8 @@ export class InventarioService {
     urlListarProducto:'/producto/listar',
     urlProductoListar:'/producto/listar_select',
     urlGuardarMovimiento:'/movimiento/guardar',
-    urlListarMovimiento:'/movimiento/listar'
+    urlListarMovimiento:'/movimiento/listado',
+    urlListarMotivos:'/motivo_select/listar'
     
   }
 
@@ -69,13 +70,14 @@ export class InventarioService {
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuardarMovimiento,movimiento,this.options);
   }
 
-  public getMovimiento(page:any='0',size:any='10',motivo:string=''):Observable<any>{
+  public getMovimiento(page:any='0',size:any='10',nombreFuncionario:string='',idMotivo:string=''):Observable<any>{
 
     let params = new HttpParams();
 
     params = params.append('page',String(page));
     params = params.append('size',String(size));
-    params = params.append('motivo',String(motivo));
+    params = params.append('nombreFuncionario',String(nombreFuncionario));
+    params = params.append('idMotivo',String(idMotivo));
 
 
     const options = {
@@ -87,6 +89,10 @@ export class InventarioService {
       map((movimientoData:any) => movimientoData)
     )
 
+  }
+
+  public getMotivos(): Observable<any>{
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlListarMotivos,this.options)
   }
 
   createHeader(){

@@ -36,6 +36,7 @@ export class MovimientoListComponent  implements OnInit {
   deleteDefaultMessage = 'EL REGISTRO';
   paginatorRef!: MatPaginator;
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
+  listadoMotivo!:any[];
   
   
   
@@ -47,9 +48,11 @@ export class MovimientoListComponent  implements OnInit {
   ngOnInit(): void {
     this.initDataSource();
     this.ChangePaginatorEspa();
+    this.inventarioService.getMotivos().subscribe(motivos => this.listadoMotivo = motivos);
     
     this.filterForm = this.fb.group({
       nombre: [''],
+      idMotivo:['']
       
     })
   }
@@ -90,9 +93,10 @@ export class MovimientoListComponent  implements OnInit {
     
    
     let nombre = this.filterForm.value.nombre;
+    let idMotivo = this.filterForm.value.idMotivo;
 
     
-    this.inventarioService.getProducto('0','10',nombre).subscribe((inventarioData:any) => this.dataSource = inventarioData);
+    this.inventarioService.getMovimiento('0','10',nombre,idMotivo).subscribe((inventarioData:any) => this.dataSource = inventarioData);
   }
 
   onClickDetailsMovimiento(element:any){
@@ -126,7 +130,7 @@ export class MovimientoListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['fecha','funcionario','tipo-movimiento','motivo','options'];
+  displayedColumns: string[] = ['fecha','funcionario','motivo','comentario','options'];
   displayedFilters: string[] = ['nombre-filter'];
   
 }

@@ -1,84 +1,130 @@
 <div class="form-container">
 
-    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
-        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
 
-        
+    <ng-container *ngIf="!params">
+        <div class="form-group p-2 w-25" >
+            <label for="tipoCliente" class="form-label">TIPO DE CLIENTE</label>
+            <select matNativeControl id="tipoCliente" #selectionAtipePersona class="form-select form-select-sm" aria-label="Default select example">
+                <option value=false >EMPRESA</option>
+                <option value=true>PERSONA</option>
+    
+              </select>
+        </div>
+    </ng-container>
+   
+
+
+    <ng-container *ngIf="!esPersona">
+        <form #formTemplate="ngForm" [formGroup]="entityFormEmpresa" class="form mat-elevation-z2">
+           
+            
+            <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>
+                            NOMBRE DE LA EMPRESA
+                        </mat-label>
+                        <input formControlName="nombreEmpresa" matInput placeholder="NOMBRE DE LA EMPRESA" class="text-uppercase">
+                        <mat-error *ngIf="entityFormEmpresa.invalid">
+                            {{ getErrorMessageEmpresa('nombreEmpresa') }}
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            
+            
+            
+            
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>
+                            RAZON SOCIAL
+                        </mat-label>
+                        <input formControlName="razonSocial" matInput placeholder="RAZON SOCIAL" class="text-uppercase">
+                        <mat-error *ngIf="entityFormEmpresa.invalid">
+                            {{ getErrorMessageEmpresa('razonSocial') }}
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            
+
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>
+                            NOMBRE ENCARGADO
+                        </mat-label>
+                        <input formControlName="nombreEncargado" matInput placeholder="NOMBRE ENCARGADO" required class="text-uppercase">
+                        <mat-error *ngIf="entityFormEmpresa.invalid">
+                            {{ getErrorMessageEmpresa('nombreEncargado') }}
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        RAZÓN SOCIAL
+                        TELEFONO
                     </mat-label>
-                    <input formControlName="razonSocial" matInput placeholder="RAZÓN SOCIAL" required>
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('razonSocial') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
-        
-
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        RUC
-                    </mat-label>
-                    <input formControlName="ruc" matInput placeholder="RUC" >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('ruc') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
-        
-
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        NOMBRE DEL ENCARGADO
-                    </mat-label>
-                    <input formControlName="nombreEncargado" matInput placeholder="NOMBRE DEL ENCARGADO" required>
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('nombreEncargado') }}
+                    <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                    <mat-error *ngIf="entityFormEmpresa.invalid">
+                        {{ getErrorMessageEmpresa('telefono') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        CÉDULA
-                    </mat-label>
-                    <input formControlName="cedula" matInput placeholder="CEDULA">
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('cedula') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
 
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>
+                            RUC
+                        </mat-label>
+                        <input formControlName="ruc" type="text" matInput placeholder="RUC" >
+                        <mat-error *ngIf="entityFormEmpresa.invalid">
+                            {{ getErrorMessageEmpresa('ruc') }}
+                        </mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field>
+                        <mat-label>SECTOR</mat-label>
+                        <mat-select formControlName="sector">
+                            <mat-option>SELECCIONAR SECTOR</mat-option>
+                            <mat-option  value="publico">
+                                PÚBLICO
+                            </mat-option>
+                            <mat-option  value="privado">
+                                PRIVADO
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="entityFormEmpresa.invalid">{{ getErrorMessageEmpresa('sector') }}</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+            
+            
+
+            
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
                         DIRECCIÓN
                     </mat-label>
-                    <input formControlName="direccion" matInput placeholder="DIRECCIÓN">
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('direccion') }}
+                    <input formControlName="direccion" matInput placeholder="DIRECCIÓN" required class="text-uppercase">
+                    <mat-error *ngIf="entityFormEmpresa.invalid">
+                        {{ getErrorMessageEmpresa('direccion') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
-
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        TELÉFONO
-                    </mat-label>
-                    <input formControlName="telefono" matInput placeholder="TELÉFONO" required>
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('telefono') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
@@ -86,8 +132,8 @@
                         EMAIL
                     </mat-label>
                     <input formControlName="email" matInput placeholder="EMAIL" required>
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('email') }}
+                    <mat-error *ngIf="entityFormEmpresa.invalid">
+                        {{ getErrorMessageEmpresa('email') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -101,42 +147,152 @@
                             {{localidad.nombre}}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('localidad') }}</mat-error>
+                    <mat-error *ngIf="entityFormEmpresa.invalid">{{ getErrorMessageEmpresa('localidad') }}</mat-error>
+                </mat-form-field>
+                </mat-grid-tile>
+
+            </mat-grid-list>
+
+
+
+
+
+
+    <div class="buttons-container">
+        <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProveedorEmpresa()">
+            {{ viewText.REGISTER }}
+            <mat-icon>save</mat-icon>
+        </button>
+        <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateProveedorEmpresa()">
+            {{ viewText.UPDATE }}
+            <mat-icon>update</mat-icon>
+        </button>
+        <button type="button" mat-raised-button (click)="closeForm()">
+            {{ viewText.CANCEL }}
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+</form>
+    </ng-container>
+
+
+    <ng-container *ngIf="esPersona">
+        <form #formTemplate="ngForm" [formGroup]="entityFormPersona" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        NOMBRES
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" class="text-uppercase">
+                    <mat-error *ngIf="entityFormPersona.invalid">
+                        {{ getErrorMessagePersona('nombre') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+        
+        
+        
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        APELLIDOS
+                    </mat-label>
+                    <input formControlName="apellido" matInput placeholder="APELLIDO" class="text-uppercase">
+                    <mat-error *ngIf="entityFormPersona.invalid">
+                        {{ getErrorMessagePersona('apellido') }}
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>SECTOR</mat-label>
-                    <mat-select formControlName="sector">
-                        <mat-option>SELECCIONAR SECTOR</mat-option>
-                        <mat-option  value="publico">
-                            PÚBLICO
-                        </mat-option>
-                        <mat-option  value="privado">
-                            PRIVADO
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('sector') }}</mat-error>
+                    <mat-label>
+                        CEDULA
+                    </mat-label>
+                    <input formControlName="cedula" matInput placeholder="CEDULA" required>
+                    <mat-error *ngIf="entityFormPersona.invalid">
+                        {{ getErrorMessagePersona('cedula') }}
+                    </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
-        </mat-grid-list>
 
-        <div class="buttons-container">
-            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProveedor()">
-                {{ viewText.REGISTER }}
-                <mat-icon>save</mat-icon>
-            </button>
-            <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateCliente()">
-                {{ viewText.UPDATE }}
-                <mat-icon>update</mat-icon>
-            </button>
-            <button type="button" mat-raised-button (click)="closeForm()">
-                {{ viewText.CANCEL }}
-                <mat-icon>clear</mat-icon>
-            </button>
-        </div>
 
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field>
+                <mat-label>
+                    TELEFONO
+                </mat-label>
+                <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                <mat-error *ngIf="entityFormPersona.invalid">
+                    {{ getErrorMessagePersona('telefono') }}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
+
+        
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field>
+                <mat-label>
+                    DIRECCIÓN
+                </mat-label>
+                <input formControlName="direccion" matInput placeholder="DIRECCIÓN" required class="text-uppercase">
+                <mat-error *ngIf="entityFormPersona.invalid">
+                    {{ getErrorMessagePersona('direccion') }}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
+
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field>
+                <mat-label>
+                    EMAIL
+                </mat-label>
+                <input formControlName="email" matInput placeholder="EMAIL" required>
+                <mat-error *ngIf="entityFormPersona.invalid">
+                    {{ getErrorMessagePersona('email') }}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
+        
+       <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field>
+                <mat-label>LOCALIDAD</mat-label>
+                <mat-select formControlName="localidad" id="gestionSelect">
+                    <mat-option>SELECCIONAR LOCALIDAD</mat-option>
+                    <mat-option *ngFor="let localidad of listadoLocalidad" [value]="localidad.id">
+                        {{localidad.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="entityFormPersona.invalid">{{ getErrorMessagePersona('localidad') }}</mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <div class="buttons-container">
+        <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProveedorPersona()">
+            {{ viewText.REGISTER }}
+            <mat-icon>save</mat-icon>
+        </button>
+        <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateProveedorPersona()">
+            {{ viewText.UPDATE }}
+            <mat-icon>update</mat-icon>
+        </button>
+        <button type="button" mat-raised-button (click)="closeForm()">
+            {{ viewText.CANCEL }}
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
     </form>
+    </ng-container>
+
+
 </div>

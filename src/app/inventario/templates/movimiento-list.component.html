@@ -2,44 +2,22 @@
 
     <div class="list-container mat-elevation-z4">
 
-        <!-- <ng-container>
-            
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="cedula" matInput placeholder="BUSCAR POR ID">
-                    </mat-form-field>
+        <div class="d-flex flex-row">
+            <div class="p-1 input-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <input formControlName="nombre" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por funcionario">
                 </div>
+            </div>
+            <div class="p-1 select-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <select (change)="doFilter()" formControlName="idMotivo" matNativeControl id="tipoCliente" #selectionAtipePersona class="form-select" aria-label="Default select example">
+                        <option value='' >Todos los Motivos</option>
+                        <option [value]="motivo.idMotivo" *ngFor="let motivo of listadoMotivo">{{motivo.nombre}}</option>
             
-        </ng-container>
-
-        <ng-container matColumnDef="name-filter">
-            <mat-header-cell *matHeaderCellDef>
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
-                    </mat-form-field>
+                    </select>
                 </div>
-            </mat-header-cell>
-        </ng-container> -->
-
-
-        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR EL NOMBRE DE LA CIUDAD
-                        </mat-label>
-                        <input formControlName="nombre-filter" matInput placeholder="INGRESE EL NOMBRE" (keydown.enter)="doFilter()">
-                    </mat-form-field>
-                </div>
-
-            </mat-grid-tile>
-
-           
-            
-        </mat-grid-list>
-
+            </div>
+        </div>
         
 
        <mat-table [dataSource]="dataSource.content"  class="list-table-container" matSort matSortActive="fecha"   matSortDisableClear matSortDirection="asc" fxLayout="row">
@@ -61,23 +39,21 @@
             </mat-cell>
         </ng-container>
 
-
-
-        <ng-container matColumnDef="tipo-movimiento" >
-            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                TIPO DE MOVIMIENTO
-            </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                {{element.esIngreso ? "INGRESO": "SALIDA"}}
-            </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="motivo" >
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
                 MOTIVO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.motivo}}
+                {{element.motivo.nombre}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="comentario" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                COMENTARIO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.comentario}}
             </mat-cell>
         </ng-container>
 

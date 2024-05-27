@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,6 +34,7 @@ import { ProductoDetalleComponent } from './components/producto-detalle.componen
     ReactiveFormsModule,
     NavigationModule,
     
-  ]
+  ],
+  providers:[CurrencyPipe]
 })
 export class ProductoModule { }

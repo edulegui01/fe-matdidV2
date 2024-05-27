@@ -55,12 +55,10 @@ export class ClienteFormComponent implements OnInit {
     console.log("render")
 
     if(this.entity?.nombre){
-      console.log("entra en persona")
       this.esPersona = true;
       this.buildFormPersona(this.entity);
       
     }else{
-      console.log("entra en empresa")
       this.buildFormEmpresa(this.entity);
     }
     

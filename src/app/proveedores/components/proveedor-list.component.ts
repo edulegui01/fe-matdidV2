@@ -170,7 +170,7 @@ export class ProveedorListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['razonSocial',  'cedula', 'ruc', 'direccion', 'options'];
+  displayedColumns: string[] = ['nombre', 'cedula', 'telefono','localidad', 'options'];
   displayedFilters: string[] = ['cedula-filter', 'name-filter'];
   
 }

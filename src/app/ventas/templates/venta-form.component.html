@@ -106,9 +106,9 @@
             <mat-grid-tile [colspan]="4" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        FUNCIONARIO
+                        VENDEDOR
                     </mat-label>
-                    <input #searchInputFuncionario formControlName="funcionario" matInput placeholder="FUNCIONARIO" required [matAutocomplete]="auto3" >
+                    <input #searchInputFuncionario formControlName="funcionario" matInput placeholder="VENDEDOR" required [matAutocomplete]="auto3" >
                     <mat-autocomplete #auto3="matAutocomplete">
                       <mat-option *ngFor="let funcionario of Funcionarios; let i=index" [value]="funcionario.nombre +' '+ funcionario.apellido"  (onSelectionChange)="selectionChangeFuncionario(funcionario,i)">
                         {{funcionario.nombre}} {{funcionario.apellido}}

@@ -19,13 +19,15 @@
 
             <mat-grid-tile [colspan]="4" [rowspan]="1">
                 <mat-form-field>
-                  <mat-label>TIPO DE MOVIMIENTO</mat-label>  
-                  <mat-select formControlName="esIngreso">
-                      <mat-option  value=true>INGRESO</mat-option>
-                      <mat-option  value=false>SALIDA</mat-option>
+                  <mat-label>MOTIVO</mat-label>  
+                  <mat-select formControlName="idMotivo">
+                    <mat-option>SELECCIONAR MOTIVO</mat-option>
+                    <mat-option *ngFor="let motivo of listadoMotivo" [value]="motivo.idMotivo">
+                        {{motivo.nombre}}
+                    </mat-option>
                   </mat-select>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('esIngreso') }}
+                        {{ getErrorMessage('idMotivo') }} 
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -44,11 +46,11 @@
             <div class="motivo">
                 <mat-form-field>
                     <mat-label>
-                        MOTIVO
+                        COMENTARIO
                     </mat-label>
-                    <textarea formControlName="motivo" matInput placeholder=""></textarea>
+                    <textarea formControlName="comentario" matInput placeholder=""></textarea>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('motivo') }}
+                        {{ getErrorMessage('comentario') }}
                     </mat-error>
                 </mat-form-field>
             </div>

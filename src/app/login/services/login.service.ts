@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Settings } from 'src/app/class/settings';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   login(userName: string, userPassword: string): Observable<any> {
@@ -22,7 +24,6 @@ export class LoginService {
       password: userPassword,
     };
 
-    console.log(body)
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
@@ -34,9 +35,12 @@ export class LoginService {
         localStorage.setItem("nombreFuncionario",userData.nombreFuncionario)
         localStorage.setItem("apellidoFuncionario",userData.apellidoFuncionario)
         localStorage.setItem("role",userData.role)
-      })
+      }),
+      
+      
     );
   }
+
 
 
   isAuth(){

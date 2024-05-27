@@ -12,6 +12,7 @@ import { ProductoFormComponent } from "./producto-form.component";
 import { Settings } from "src/app/class/settings";
 import { ProductoDetalleComponent } from "./producto-detalle.component";
 import { CustomDialogComponent } from "src/app/components/custom-dialog/components/custom-dialog.component";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -48,7 +49,8 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
     rol:string|null = localStorage.getItem('role');
 
 
-    constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
+    constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, 
+      private routerInstance: Router, private dialogInstance: MatDialog,  private  snackbarInstance: MatSnackBar) {
       this.initDataSource();
     }
 
@@ -154,9 +156,16 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
                       this.paginatorf.pageIndex = 0;
   
   
-                        this.productoService.deleteProducto(element.idProducto).subscribe(resp => {
-                          this.paginatorf.pageIndex = 0;
-                          this.productoService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
+                        this.productoService.deleteProducto(element.idProducto).subscribe({
+                          next: (resp) => {
+                            this.paginatorf.pageIndex = 0;
+                            this.productoService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
+                          },
+                          error:(err) => {
+                            this.snackbarInstance.open(err.error.message,'ACEPTAR',{
+                              duration:4000
+                            })
+                          }
                         });
                     }
                 });

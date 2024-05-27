@@ -103,7 +103,7 @@
                     <mat-label>
                         PRECIO COSTO
                     </mat-label>
-                    <input formControlName="costo" matInput placeholder="COSTO" required required (keypress)="validateFormat($event)">
+                    <input formControlName="costo" matInput placeholder="COSTO" required required>
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('costo') }}
                     </mat-error>
