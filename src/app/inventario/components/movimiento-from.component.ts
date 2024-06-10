@@ -10,7 +10,7 @@ import { CustomDialogComponent } from 'src/app/components/custom-dialog/componen
 import { registerCompraInit } from 'src/app/class/registerCompraInit';
 import { BehaviorSubject, Observable, debounceTime, distinctUntilChanged, fromEvent, map, of, take, } from 'rxjs';
 import { Producto2 } from 'src/app/class/producto2';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { InventarioService } from '../services/inventario.service';
 
 @Component({
@@ -88,7 +88,7 @@ export class MovimientoFormComponent implements OnInit {
 
 
   constructor(public inventarioService:InventarioService, private formBuilder:FormBuilder, router: Router, 
-    private dialogInstance: MatDialog, private datePipe: DatePipe, private  snackbarInstance: MatSnackBar ) { 
+    private dialogInstance: MatDialog, private datePipe: DatePipe, private  snackbarInstance: MatSnackBar, private currencyPipe:CurrencyPipe ) { 
 
     this.routerInstance = router;
 
@@ -136,7 +136,7 @@ export class MovimientoFormComponent implements OnInit {
     return this.formBuilder.group({
       idProducto:[producto.idProducto],
       producto:[producto.nombre],
-      cantidad:[1],
+      cantidad:[''],
     })
   }
 

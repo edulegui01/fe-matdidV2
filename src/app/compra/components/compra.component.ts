@@ -17,5 +17,10 @@ export class CompraComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  linkActivateChange(){
+    this.compraService.editForm = false;
+    this.compraService.detalleForm =false;
+  }
+
 
 }

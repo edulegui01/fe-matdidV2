@@ -7,6 +7,8 @@ import { NavigationModule } from '../components/navigation.module';
 import { CompraFormComponent } from './components/compra-form.component';
 import { CompraComponent } from './components/compra.component';
 import { CompraListComponent } from './components/compra-list.component';
+import { CompraDetalleComponent } from './components/compra-detalle.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 
@@ -16,7 +18,8 @@ import { CompraListComponent } from './components/compra-list.component';
   declarations: [
     CompraComponent,
     CompraFormComponent,
-    CompraListComponent
+    CompraListComponent,
+    CompraDetalleComponent
 
    
   ],
@@ -27,6 +30,8 @@ import { CompraListComponent } from './components/compra-list.component';
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ]
 })
 export class CompraModule { }

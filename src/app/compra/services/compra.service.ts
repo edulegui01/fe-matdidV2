@@ -21,13 +21,14 @@ export class CompraService {
     urlBuscarDocu:'/persona/buscar-docu',
     urlLocalidadListar:'/localidad_select/listar',
     urlActualiazr:'/persona/actualizar/',
-    urlEliminar:'/persona/borrar/',
+    urlEliminar:'/compra/borrar/',
     urlProductoListar:'/producto/listar_select',
     urlPersonaListar:'/persona/listar_select',
     urlFuncionarioListar:'/funcionario/listar_select'
   }
 
   editForm:boolean=false;
+  detalleForm:boolean=false;
 
   constructor(private http: HttpClient) { }
 
@@ -106,7 +107,7 @@ export class CompraService {
     //   }
     // );
 
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,compra,this.options).subscribe();
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,compra,this.options);
   }
 
 

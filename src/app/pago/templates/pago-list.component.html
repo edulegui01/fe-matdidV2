@@ -1,0 +1,111 @@
+<div class="list-page">
+
+    <div class="titulo-detalle-container d-flex justify-content-between">
+        <div class="titulo-detalle">LISTA DE PAGOS</div>
+        <div (click)="closeList()" style="color: white; font-size: 20px; background-color: transparent; width: 25px; height: 25px; cursor: default;">X</div>
+    </div>
+
+    <div class="list-container mat-elevation-z4">
+
+        
+
+       <mat-table [dataSource]="dataSource" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="nroDocumento">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                NRO DOCUMENTO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.idPago}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                FECHA
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{formatFechaToList(element.fecha)}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tipoPago">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                TIPO DE PAGO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.tipoPago}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                MONTO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{formatearNumero(element.monto)}}
+            </mat-cell>
+        </ng-container>
+
+        <!--filters-->
+       
+
+        
+
+        <div *ngIf="true">
+            <ng-container matColumnDef="options">
+                <mat-header-cell *matHeaderCellDef fxFlex="15%">
+
+                    <span class="options-column">
+                        OPCIONES
+                    </span>
+
+                    <button  matTooltip="OPCIONES DE TABLA"
+                        class="config-table-btn-large" mat-flat-button>
+                        OPCIONES
+                    </button>
+
+                    
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element" fxFlex="15%">
+
+                    <button mat-icon-button [matMenuTriggerFor]="actions">
+                        <mat-icon aria-label="actions">
+                            more_horiz
+                        </mat-icon>
+                    </button>
+
+                    <mat-menu #actions>
+                        <button mat-menu-item (click)="OnClickAnularPago(element)">
+                            <mat-icon class="mat-18">remove_circle_outline</mat-icon>
+                            ANULAR
+                        </button>
+
+                        <mat-divider></mat-divider>
+
+                       
+
+                     
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
+        </div>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+        <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+        <div class="buttons-container">
+       
+            <button type="button" mat-raised-button (click)="closeList()">
+                CERRAR
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </div>
+
+
+</div>
+

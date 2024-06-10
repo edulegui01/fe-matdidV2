@@ -33,6 +33,7 @@ export class VentaService {
   }
 
   editForm:boolean=false;
+  detalleForm:boolean=false;
 
   constructor(private http: HttpClient) { }
 

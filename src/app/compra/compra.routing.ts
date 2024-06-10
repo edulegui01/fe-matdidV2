@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { MENU_URLS } from '../components/navbar/routes';
 import { CompraFormComponent } from './components/compra-form.component';
 import { CompraListComponent } from './components/compra-list.component';
+import { CompraDetalleComponent } from './components/compra-detalle.component';
 
 
 
@@ -11,4 +12,5 @@ export const routes: Routes = [
     { path: MENU_URLS.COMPRA.LISTAR.URL, component: CompraListComponent },
     { path: MENU_URLS.COMPRA.NUEVO.URL, component: CompraFormComponent },
     { path: MENU_URLS.COMPRA.EDITAR.URL, component: CompraFormComponent },
+    { path: MENU_URLS.COMPRA.DETALLE.URL, component: CompraDetalleComponent },
 ];

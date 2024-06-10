@@ -1,0 +1,98 @@
+<div class="titulo-detalle-container">
+    <div class="titulo-detalle">REGISTRAR COBRO</div>
+</div>
+
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="12" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="6" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>TIPO DE COBRO</mat-label>
+                    <mat-select formControlName="tipoCobro" id="gestionSelect">
+                        <mat-option>SELECCIONAR EL TIPO DE COBRO</mat-option>
+                        <mat-option *ngFor="let tipoPago of listaTipoDePago" [value]="tipoPago">
+                            {{tipoPago}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('tipoCobro') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="6" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        SALDO
+                    </mat-label>
+                    <input formControlName="saldo" matInput placeholder="SALDO" readonly>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('saldo') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="6" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA</mat-label>
+                       <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="FECHA" readonly>
+                       <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('fecha') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="6" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        MONTO
+                    </mat-label>
+                    <input formControlName="monto" matInput placeholder="MONTO" required [readonly]="soloLectura">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('monto') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            
+
+            
+          <mat-grid-tile [colspan]="6" [rowspan]="2">
+                <div class="motivo">
+                    <mat-form-field>
+                        <mat-label>
+                            COMENTARIO
+                        </mat-label>
+                        <textarea formControlName="comentario" matInput placeholder=""></textarea>
+                        <mat-error *ngIf="entityForm.invalid">
+                            {{ getErrorMessage('comentario') }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            
+            </mat-grid-tile>
+
+ 
+
+        </mat-grid-list>
+    </form>
+
+    <div class="buttons-container">
+        <button id="register"   mat-raised-button color="primary" type="button" (click)="saveCobro()">
+            REGISTRAR
+            <mat-icon>save</mat-icon>
+        </button>
+       
+        <button type="button" mat-raised-button (click)="closeForm()">
+            {{ viewText.CANCEL }}
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+</div>

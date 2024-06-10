@@ -66,7 +66,7 @@ export class ProductoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
-    this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
+    //this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
     this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
     this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
 
@@ -121,21 +121,25 @@ export class ProductoFormComponent implements OnInit {
   }
 
   saveProducto(){
+    
+    const costo = parseInt(this.entityForm.controls['costo'].value.replace('.',''));
+    const precio = parseInt(this.entityForm.controls['precio'].value.replace('.',''));
+    
     this.productoToSave = {
-      idProducto:this.entityForm.controls['idProducto'].value,
       nombre:this.entityForm.controls['nombre'].value,
       descripcion:this.entityForm.controls['descripcion'].value,
       autor:this.entityForm.controls['autor'].value,
-      editorial:this.entityForm.controls['editorial'].value,
+      idEditorial:this.entityForm.controls['editorial'].value,
       isbn:this.entityForm.controls['isbn'].value,
-      materia:this.entityForm.controls['materia'].value,
-      gradoCurso:this.entityForm.controls['gradoCurso'].value,
-      costo:this.entityForm.controls['costo'].value,
-      precio:this.entityForm.controls['precio'].value,
+      idMateria:this.entityForm.controls['materia'].value,
+      idCiclo:this.entityForm.controls['ciclo'].value,
+      idCategoria:this.entityForm.controls['categoria'].value,
+      costo:costo,
+      precio:precio,
       iva:this.entityForm.controls['iva'].value,
     }
 
-    console.log(this.productoService)
+    console.log(this.productoToSave)
 
 
     if (this.entityForm.invalid) {
@@ -296,6 +300,10 @@ export class ProductoFormComponent implements OnInit {
 
     return parseInt(numeroFormateado.replace('.',''))
 
+  }
+
+  onCicloSelect(element:any){
+    this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
   }
 
   closeForm() {

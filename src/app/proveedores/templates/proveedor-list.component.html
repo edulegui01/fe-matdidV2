@@ -45,7 +45,7 @@
                 NOMBRE
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.empresa ? element.empresa : element.nombre + " " +element.apellido}}
+                {{element.razonSocial}}
             </mat-cell>
         </ng-container>
 
@@ -56,7 +56,7 @@
                 RUC/CÉDULA
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.cedula}}
+                {{element.ruc}}
             </mat-cell>
         </ng-container>
 

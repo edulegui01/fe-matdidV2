@@ -84,8 +84,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       })
 
       this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
-      this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
       this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
+      this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
       this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
     }
 

@@ -76,7 +76,7 @@
                     <mat-label>CICLO</mat-label>
                     <mat-select formControlName="ciclo" id="gestionSelect">
                         <mat-option>SELECCIONAR CICLO</mat-option>
-                        <mat-option *ngFor="let ciclo of categoriaList" [value]="ciclo.idCiclo">
+                        <mat-option *ngFor="let ciclo of cicloList" [value]="ciclo.idCiclo" (onSelectionChange)="onCicloSelect(ciclo)">
                             {{ciclo.nombre}}
                         </mat-option>
                     </mat-select>

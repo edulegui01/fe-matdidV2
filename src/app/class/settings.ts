@@ -41,6 +41,7 @@
     static DIALOG_SMALL = '40vw';
     static DIALOG_MEDIUM = '60vw';
     static DIALOG_LARGE = '90vw';
+    static DIALOG_PAGOS = '50vw';
 
 
     static PRIMERA_PARTE_FACTURA = '001-001-';

@@ -19,6 +19,12 @@ import { routes as routerInventario} from 'src/app/inventario/inventario.routing
 import { authGuard } from 'src/app/utils/guards/auth.guard';
 import { CicloComponent } from 'src/app/ciclo/components/ciclo.component';
 import { routes as routerCiclo } from 'src/app/ciclo/ciclo.routing';
+import { PagoComponent } from 'src/app/pago/components/pago.component';
+import {routes as routerPago } from 'src/app/pago/pago.routing';
+import { CobroComponent } from 'src/app/cobro/components/cobro.component';
+import {routes as routerCobro } from 'src/app/cobro/cobro.routing';
+import { CajaComponent } from 'src/app/caja/components/caja.component';
+import {routes as routerCaja } from 'src/app/caja/caja.routing';
 
 export const routes: Routes = [
     {
@@ -73,6 +79,24 @@ export const routes: Routes = [
         path: MENU_URLS.CICLO.URL_BASE,
         component: CicloComponent,
         children: routerCiclo,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.PAGO.URL_BASE,
+        component: PagoComponent,
+        children: routerPago,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.COBRO.URL_BASE,
+        component: CobroComponent,
+        children: routerCobro,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.CAJA.URL_BASE,
+        component: CajaComponent,
+        children: routerCaja,
         canActivate:[authGuard]
     },
     

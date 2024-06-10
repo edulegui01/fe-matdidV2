@@ -1,0 +1,81 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+        <div class="form-group p-2 w-25" [formGroup]="filterForm">
+            <input formControlName="nombre" (keydown.enter)="doFilter()" type="email" class="form-control" id="exampleInputEmail1" placeholder="Buscar por ciclo">
+        </div>
+        
+
+       <mat-table [dataSource]="dataSource"  class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc" fxLayout="row">
+        <ng-container matColumnDef="fecha" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                FECHA
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{formatFechaToList(element.fecha)}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="comprobante" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                COMPROBANTE
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.comprobante}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="concepto" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                CONCEPTO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{element.concepto}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="debito" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                DÉBITO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" style="color: red;">
+                {{element.esingreso == 'E' ? formatearNumero(element.monto) : ''}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="credito" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                CRÉDITO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" style="color: #00cd00;">
+               {{element.esingreso == 'I' ? formatearNumero(element.monto) : ''}}
+            </mat-cell>
+        </ng-container>
+
+
+        
+
+        
+
+        
+        
+
+        <!--filters-->
+       
+
+        
+
+
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+        <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
+        <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 28px;  min-height: 28px !important;"></mat-row>
+        </mat-table>
+
+
+
+    </div>
+</div>
+

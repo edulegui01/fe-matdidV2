@@ -172,6 +172,10 @@ export const MENU_URLS = {
             URL: 'editar-compra',
             PERMISO: 'MODIFICAR_HORARIO'
         },
+        DETALLE: {
+            URL: 'detalle-compra',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
         ELIMINAR: {
             URL: 'eliminar-compra',
             PERMISO: 'ELIMINAR_HORARIO'
@@ -193,6 +197,10 @@ export const MENU_URLS = {
         },
         EDITAR: {
             URL: 'editar-venta',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        DETALLE: {
+            URL: 'detalle-venta',
             PERMISO: 'MODIFICAR_HORARIO'
         },
         ELIMINAR: {
@@ -243,6 +251,75 @@ export const MENU_URLS = {
         },
         ELIMINAR: {
             URL: 'eliminar-ciclo',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    PAGO: {
+        URL_BASE: 'pago',
+        ROOT: {
+            URL: 'listar-pago',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-pago',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-pago',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-pago',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-pago',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    COBRO: {
+        URL_BASE: 'cobro',
+        ROOT: {
+            URL: 'listar-cobro',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-cobro',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-cobro',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-cobro',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-cobro',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    CAJA: {
+        URL_BASE: 'caja',
+        ROOT: {
+            URL: 'listar-caja',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-caja',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-caja',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-caja',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-caja',
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },

@@ -1,0 +1,178 @@
+
+<div class="d-flex justify-content-between flex-row form-container">
+    
+    <ng-container  *ngIf="entityForm.controls['saldo'].value>0">
+      <div class="p5 m-1">
+        <button (click)="openCobroRegister(entity)"  type="button" class="btn btn-primary">REGISTRAR COBRO</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="entityForm.controls['saldo'].value==0">
+      <h5 class="pagado-msm">PAGADO</h5>
+    </ng-container>
+  </div>
+  <div class="form-container">
+  
+  
+  
+      <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+          <mat-grid-list [cols]="12" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+              
+              
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+              <mat-form-field>
+                <mat-label>TIPO DE FACTURA</mat-label>  
+                <input readonly   matInput type="text" #searchInputProveedor  formControlName="tipoFactura"/>
+              </mat-form-field>
+          </mat-grid-tile>
+            
+            
+            
+            <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>FECHA</mat-label>
+                         <input matInput readonly formControlName="fecha" [matDatepicker]="picker" (dateChange)="onFechaSelection()" (dateInput)="onFechaSelection()" placeholder="FECHA" >
+                         <mat-datepicker #picker ></mat-datepicker>
+                  </mat-form-field>
+              </mat-grid-tile>
+  
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                      RAZON SOCIAL
+                    </mat-label>
+                    <input readonly   matInput type="text" #searchInputProveedor  formControlName="razonSocial"/>
+                  </mat-form-field>
+            </mat-grid-tile>
+  
+              
+  
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>
+                          RUC/CEDULA
+                      </mat-label>
+                      <input formControlName="rucCedula" matInput placeholder="RUC/CEDULA" required readonly>
+                      <mat-error *ngIf="entityForm.invalid">
+                          {{ getErrorMessage('rucCedula') }}
+                      </mat-error>
+                  </mat-form-field>
+              </mat-grid-tile>
+  
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA DE VENCIMIENTO</mat-label>
+                       <input readonly matInput formControlName="fechaVencimiento" [matDatepicker]="picker1" placeholder="FECHA VENCIMIENTO">
+                       <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+  
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>
+                          N° FOLIO
+                      </mat-label>
+                      <input formControlName="folio" matInput placeholder="N° FOLIO" required>
+                      <mat-error *ngIf="entityForm.invalid">
+                          {{ getErrorMessage('folio') }}
+                      </mat-error>
+                  </mat-form-field>
+              </mat-grid-tile>
+  
+  
+  
+  
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                  <mat-form-field>
+                      <mat-label>
+                          TIMBRADO
+                      </mat-label>
+                      <input readonly formControlName="timbrado" matInput placeholder="TIMBRADO" required>
+                  </mat-form-field>
+              </mat-grid-tile>
+  
+  
+  
+  
+              <mat-grid-tile [colspan]="4" [rowspan]="1">
+                <mat-form-field>
+                  <mat-label>
+                    FUNCIONARIO
+                  </mat-label>
+                  <input  readonly matInput #searchInputFuncionario type="text"   formControlName="funcionario" />
+                </mat-form-field>
+              </mat-grid-tile>
+  
+  
+          </mat-grid-list>
+  
+          
+          
+            
+  
+      </form>
+  
+        <form class="list-table-container">
+          <table class="table">
+              <thead>
+                <tr class="text-uppercase text-center">
+                  <th scope="col" class="col-3">Producto</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Iva</th>
+                  <th scope="col">Descuento</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody [formGroup]="entityForm">
+                <ng-container formArrayName="detalleProducts" *ngFor="let group of getFormControls.controls; let i=index">
+                  <tr [formGroupName]="i">
+                    <td>
+                      <input type="text" class="form-control form-control-sm" formControlName="producto" readonly [disabled]="true">
+      
+                    </td>
+                    <td>
+                      <input readonly type="number" mask="separator" thousandSeparator="." class="form-control form-control-sm" name="cantidad" formControlName="cantidad" (keyup)="changeSubTotal($event,i)" placeholder="Ingrese la cantidad">
+                     
+                    </td>
+                    <td>
+                        <input readonly type="text" mask="separator" thousandSeparator="." class="form-control form-control-sm" formControlName="precio">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control form-control-sm" formControlName="iva" readonly>
+                    </td>
+                    <td>
+                      <input readonly type="text" mask="separator" thousandSeparator="." class="form-control form-control-sm"  formControlName="descuento" name="descuento" (keyup)="changeSubTotal($event,i)" placeholder="Ingrese el descuento">
+                    </td>
+                    <td>
+                        <input type="text" mask="separator" thousandSeparator="." class="form-control form-control-sm" formControlName="subTotal"  readonly>
+                      </td>
+                    
+                  </tr>
+                </ng-container>
+                
+              </tbody>
+  
+             
+            </table>
+  
+        </form>
+  
+        <div style="display: flex; justify-content: flex-end;">
+          <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-2">TOTAL: {{formatearNumero(total)}}</span>
+        </div>
+        <div style="display: flex; justify-content: flex-end;" *ngIf="entityForm.controls['saldo'].value>0">
+          <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-2">SALDO: {{formatearNumero(entityForm.controls['saldo'].value)}}</span>
+        </div>
+  
+        
+  
+      
+  
+      
+  
+  
+     
+     
+  </div>
+  

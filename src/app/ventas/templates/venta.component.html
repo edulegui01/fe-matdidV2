@@ -12,6 +12,10 @@
       MODIFICAR VENTA
     </a>
 
+    <a mat-tab-link routerLink="detalle-venta" *ngIf="ventaService.detalleForm" routerLinkActive #rl4="routerLinkActive" [active]="rl4.isActive">
+      DETALLE DEL LA VENTA
+    </a>
+
 
 
   </nav>

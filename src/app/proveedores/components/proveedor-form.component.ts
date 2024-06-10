@@ -120,7 +120,7 @@ export class ProveedorFormComponent implements OnInit {
   saveProveedorEmpresa(){
     this.proveedorToSave = {
       cedula:this.entityFormEmpresa.controls['ruc'].value,
-      esCliente:true,
+      esCliente:false,
       localidad:{
         id:this.entityFormEmpresa.controls['localidad'].value
       },
@@ -178,7 +178,7 @@ export class ProveedorFormComponent implements OnInit {
   saveProveedorPersona(){
     this.proveedorToSave = {
       cedula:this.entityFormPersona.controls['cedula'].value,
-      esCliente:true,
+      esCliente:false,
       localidad:{
         id:this.entityFormPersona.controls['localidad'].value
       },
@@ -292,7 +292,7 @@ export class ProveedorFormComponent implements OnInit {
     this.proveedorToUpdate = {
       id:this.entity.idPersona,
       cedula:this.entityFormPersona.controls['cedula'].value,
-      esCliente:true,
+      esCliente:false,
       localidad:{
         id:this.entityFormPersona.controls['localidad'].value
       },

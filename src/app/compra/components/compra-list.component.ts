@@ -15,6 +15,7 @@ import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
 import { FuncionarioData } from 'src/app/class/funcionarioData';
 import { CompraService } from '../services/compra.service';
+import { PagoListComponent } from 'src/app/pago/components/pago-list.component';
 
 @Component({
   selector: 'app-compra-list',
@@ -84,12 +85,10 @@ export class CompraListComponent  implements OnInit {
 
   doFilter(){
     
-    let cedula = this.filterForm.value.cedula;
-    let name = this.filterForm.value.name;
-
-    console.log(cedula);
+    let numFolio = this.filterForm.value.numFolio;
+    let proveedor = this.filterForm.value.proveedor;
     
-    this.compraService.getCompras('0','10',cedula,name).subscribe((compraData:any) => this.dataSource = compraData);
+    this.compraService.getCompras('0','10',numFolio,proveedor).subscribe((compraData:any) => this.dataSource = compraData);
   }
 
 
@@ -112,7 +111,7 @@ export class CompraListComponent  implements OnInit {
                     this.paginatorf.pageIndex = 0;
 
 
-                      this.compraService.deleteCompra(element.idPersona).subscribe(resp => {
+                      this.compraService.deleteCompra(element.idCompra).subscribe(resp => {
                         this.paginatorf.pageIndex = 0;
                         this.compraService.getCompras().subscribe( (compraData:any) => this.dataSource = compraData)
                       });
@@ -136,6 +135,56 @@ export class CompraListComponent  implements OnInit {
 
   }
 
+  formatFechaToList(fecha:any){
+    if(!fecha){
+      return '';
+    }
+    
+    const fechaFormat = new Date(fecha).toLocaleDateString('es-PY')
+
+
+    return fechaFormat;
+  }
+
+  formatearNumero(number:number){
+    return new Intl.NumberFormat("es-CL").format(number);
+  }
+
+  OnDetailsCliente(element:any){
+    //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
+
+    const extraParams: NavigationExtras = {
+       state: element,
+    };
+    this.compraService.detalleForm=true;
+    console.log(element);
+    this.routerInstance.navigate(['compra/detalle-compra'],extraParams);
+    
+    
+
+  }
+
+  openPagoList(element:any){
+    this.dialogInstance.open(PagoListComponent, {
+      width: Settings.DIALOG_PAGOS,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+         ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+         element:element
+      },
+
+    }).afterClosed().subscribe(res => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+
+      if (res) {
+
+        this.ngOnInit();
+
+      }
+    });
+}
+
   ChangePaginatorEspa(){
     this.paginator.itemsPerPageLabel = PaginatorEs.itemsPaginatorEs.itemsPerPage;
     this.paginator.firstPageLabel = PaginatorEs.itemsPaginatorEs.firstPageLabel;
@@ -147,7 +196,7 @@ export class CompraListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['numFolio', 'proveedor', 'nombreFuncionario', 'montoTotal', 'options'];
+  displayedColumns: string[] = ['numFolio', 'proveedor', 'fecha','nombreFuncionario', 'montoTotal', 'options'];
   displayedFilters: string[] = ['numFolio-filter', 'proveedor-filter'];
   
 }

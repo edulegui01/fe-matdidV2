@@ -90,6 +90,10 @@
   .options-column {
     display: block;
   }
+
+  .input-filters{
+    width: 25rem;
+  }
   
   @media (max-width: 800px) {
     .config-table-btn-large {
@@ -103,4 +107,8 @@
     .config-table-btn {
       display: none;
     }
+
+
+
+    
   }

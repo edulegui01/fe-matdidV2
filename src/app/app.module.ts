@@ -26,6 +26,10 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/mat
 import { InventarioModule } from './inventario/inventario.module';
 import { JwtInterceptorService } from './login/services/jwt-interceptor.service';
 import { CicloModule } from './ciclo/ciclo.module';
+import { PagoModule } from './pago/pago.module';
+import { CobroModule } from './cobro/cobro.module';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { CajaModule } from './caja/caja.module';
 registerLocaleData(localePy);
 
 
@@ -54,7 +58,11 @@ registerLocaleData(localePy);
     CompraModule,
     VentaModule,
     InventarioModule,
-    CicloModule
+    CicloModule,
+    PagoModule,
+    CobroModule,
+    CajaModule
+
   ],
   providers: [{
     provide: MAT_DATE_LOCALE,
@@ -65,7 +73,8 @@ registerLocaleData(localePy);
     useClass: MomentDateAdapter,
     deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
   },
-  {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true}
+  {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
+  provideNgxMask()
   ],
   bootstrap: [AppComponent]
 })

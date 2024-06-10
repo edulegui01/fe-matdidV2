@@ -9,6 +9,7 @@ import { InventarioListComponent } from './components/inventario-list.component'
 import { MovimientoFormComponent } from './components/movimiento-from.component';
 import { MovimientoListComponent } from './components/movimiento-list.component';
 import { MovimientoDetalleComponent } from './components/movimiento-detalle.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 
@@ -26,7 +27,8 @@ import { MovimientoDetalleComponent } from './components/movimiento-detalle.comp
     InventarioListComponent,
     MovimientoFormComponent,
     MovimientoListComponent,
-    MovimientoDetalleComponent
+    MovimientoDetalleComponent,
+
    
   ],
   imports: [
@@ -36,6 +38,8 @@ import { MovimientoDetalleComponent } from './components/movimiento-detalle.comp
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
     
     
     

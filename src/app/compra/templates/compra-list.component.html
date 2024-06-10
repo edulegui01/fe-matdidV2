@@ -2,53 +2,19 @@
 
     <div class="list-container mat-elevation-z4">
 
-        <!-- <ng-container>
-            
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="cedula" matInput placeholder="BUSCAR POR ID">
-                    </mat-form-field>
+        <div class="d-flex flex-row">
+            <div class="p-2 input-filters">
+                <div class="form-group " [formGroup]="filterForm">
+                    <input formControlName="numFolio" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por numero de folio">
                 </div>
-            
-        </ng-container>
-
-        <ng-container matColumnDef="name-filter">
-            <mat-header-cell *matHeaderCellDef>
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
-                    </mat-form-field>
+            </div>
+            <div class="p-2 input-filters">
+                <div class="form-group" [formGroup]="filterForm">
+                    <input formControlName="proveedor" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por proveedor">
                 </div>
-            </mat-header-cell>
-        </ng-container> -->
+            </div>
+        </div>
 
-
-        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR NÚMERO DE FOLIO
-                        </mat-label>
-                        <input formControlName="numFolio" matInput placeholder="INGRESE EL NÚMERO DE FOLIO" (keydown.enter)="doFilter()">
-                    </mat-form-field>
-                </div>
-
-            </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR PROVEEDOR
-                        </mat-label>
-                        <input formControlName="proveedor" matInput placeholder="INGRESE EL PROVEEDOR" (keydown.enter)="doFilter()">
-                    </mat-form-field>
-                </div>
-
-            </mat-grid-tile>
-            
-        </mat-grid-list>
 
         
 
@@ -58,7 +24,11 @@
                 N° DE FOLIO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.numFolio}}
+                <p>
+                    
+                    <a class="link-opacity-100" style="cursor:pointer" (click)="OnDetailsCliente(element)">{{element.numFolio}}</a>
+                </p>
+                
             </mat-cell>
         </ng-container>
 
@@ -69,7 +39,16 @@
                 PROVEEDOR
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.nombrePersona}}
+                {{element.razonSocial}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                FECHA
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{formatFechaToList(element.fecha)}}
             </mat-cell>
         </ng-container>
 
@@ -78,7 +57,7 @@
                 MONTO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.montoTotal}}
+                {{formatearNumero(element.montoTotal)}}
             </mat-cell>
         </ng-container>
 
@@ -120,28 +99,22 @@
                     </button>
 
                     <mat-menu #actions>
-                        <button mat-menu-item (click)="OnClickEditCliente(element)">
-                            <mat-icon class="mat-18">edit</mat-icon>
-                            EDITAR
+                        <button mat-menu-item (click)="openPagoList(element)">
+                            <mat-icon class="mat-18">attach_money</mat-icon>
+                            PAGOS
                         </button>
 
                         <mat-divider></mat-divider>
 
                         <button mat-menu-item (click)="OnClickDeleteCliente(element)">
                             <mat-icon class="mat-18">
-                                delete
+                                remove_circle_outline
                             </mat-icon>
-                            ELIMINAR
+                            ANULAR
                         </button>
 
-                        <mat-divider></mat-divider>
+                        
 
-                        <button mat-menu-item>
-                            <mat-icon class="mat-18">
-                                navigate_next
-                            </mat-icon>
-                            DETALLE
-                        </button>
                     </mat-menu>
                 </mat-cell>
             </ng-container>

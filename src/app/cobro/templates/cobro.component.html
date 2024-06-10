@@ -1,0 +1,23 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar-cobro" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR COBRO
+    </a>
+
+    <ng-container >
+      <a mat-tab-link routerLink="nuevo-cobro" (click)="cobroService.editForm=false" *ngIf="!cobroService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+        REGISTRAR COBRO
+      </a>
+    </ng-container>
+    
+    <ng-container>
+      <a mat-tab-link routerLink="editar-cobro" *ngIf="cobroService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+        MODIFICAR COBRO
+      </a>
+    </ng-container>
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>

@@ -7,6 +7,8 @@ import { NavigationModule } from '../components/navigation.module';
 import { VentaFormComponent } from './components/venta-form.component';
 import { VentaComponent } from './components/venta.component';
 import { VentaListComponent } from './components/venta-list.component';
+import { VentaDetalleComponent } from './components/venta-detalle.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 
@@ -16,7 +18,8 @@ import { VentaListComponent } from './components/venta-list.component';
   declarations: [
     VentaComponent,
     VentaFormComponent,
-    VentaListComponent
+    VentaListComponent,
+    VentaDetalleComponent
 
    
   ],
@@ -27,6 +30,8 @@ import { VentaListComponent } from './components/venta-list.component';
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ]
 })
 export class VentaModule { }

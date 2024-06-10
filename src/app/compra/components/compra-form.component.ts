@@ -175,7 +175,6 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
         rucCedula: [entity ? rucCedula : ''],
         folio: [entity ? entity.numFolio : ''],
         timbrado: [entity ? entity.timbrado : ''],
-        tipoPago: [entity ? entity.tipoPago : ''],
         razonSocial: [entity ? entity.nombrePersona : ''],
         funcionario: [entity ? `${entity.nombreFuncionario + ' '+ entity.apellidoFuncionario}` : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])
@@ -282,10 +281,12 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
 
 
   changeSubTotal(event:Event,index:number){
-    const target = event.target as HTMLInputElement;
+    let target = event.target as HTMLInputElement;
     let subTotal:number = 0;
 
-    let subTotalParaCantidad =  parseInt(target.value)*parseInt(this.getFormControls.controls[index].get('precio')?.value);
+    console.log(target.value.replace(/\D/g,''))
+
+    let subTotalParaCantidad =  parseInt(target.value.replace(/\D/g,''))*parseInt(this.getFormControls.controls[index].get('precio')?.value);
     let descuento = parseInt(this.getFormControls.controls[index].get('descuento')?.value);
     let subTotalParaDescuento = parseInt(this.getFormControls.controls[index].get('cantidad')?.value)*parseInt(this.getFormControls.controls[index].get('precio')?.value);
 
@@ -293,14 +294,13 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
     
     if(target.value && target.name == "cantidad"){
       subTotal = subTotalParaCantidad-descuento
-      console.log(subTotal);
      
 
     }
     
     
     if(target.name == "descuento" && target.value){
-      subTotal =subTotalParaDescuento-parseInt(target.value);
+      subTotal =subTotalParaDescuento-parseInt(target.value.replace(/\D/g,''));
       subTotal = subTotal<0 ? 0 :subTotal
 
     }else if(target.name == "descuento" && !target.value){
@@ -333,8 +333,8 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
    });
 
    
-   const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-dd');
-   const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-dd');
+   const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-ddTHH:mm:SS.sss');
+   const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-ddTHH:mm:SS.sss');
 
 
 
@@ -349,6 +349,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
       montoTotal:this.total,
       numFolio:this.entityForm.controls['folio'].value,
       timbrado:this.entityForm.controls['timbrado'].value,
+      saldo: this.total,
       detalleCompra:detalleCompra
     }
 
@@ -378,11 +379,19 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-              this.compraService.saveCompra(this.clienteToSave)
-              this.closeForm();
-              this._snackBar.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
-                duration:3000
-              })
+  
+            this.compraService.saveCompra(this.clienteToSave).subscribe({
+              next: (resp) => {
+                this.closeForm();
+                
+              },
+              error:(err) => {
+                this._snackBar.open(err.error.message,'ACEPTAR',{
+                  duration:4000
+                })
+              }
+            });
+              
           }
       });
 
@@ -455,6 +464,9 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
   closeForm() {
     this.routerInstance.navigate(['../compra/listar-compra']);
     this.compraService.editForm = false;
+    this._snackBar.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+      duration:3000
+    })
   }
 
 

@@ -99,7 +99,8 @@ export class VentaFormComponent implements OnInit {
 
     this.ventaService.getTimbrado().subscribe(
       (timbrado:any) =>{
-        this.entityForm.controls['timbrado'].setValue(timbrado[0].nroTimbrado);
+        this.timbrado = timbrado[0];
+        this.entityForm.controls['timbrado'].setValue(timbrado[0].numero);
       }
     );
 
@@ -109,13 +110,11 @@ export class VentaFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.buildForm(this.entity);
-    this.ventaService.getFolio().subscribe(
-      (folio:any) =>{
-        this.entityForm.controls['folio'].setValue(folio.folio);
-        
-      }
-    );
+    
+  
+    
 
 
 
@@ -137,11 +136,11 @@ export class VentaFormComponent implements OnInit {
     this.entityForm = this.formBuilder.group({
         idCompra: [entity ? entity.idCompra : ''],
         tipoFactura:[entity ? entity.tipoFactura:'contado'],
-        fecha: [entity ? entity.fecha : ''],
-        fechaVencimiento: [entity ? entity.fechaVencimiento : ''],
+        fecha: [new Date()],
+        fechaVencimiento: [new Date()],
         rucCedula: [entity ? entity.rucCedula : ''],
         folio: [entity ? entity.folio : ''],
-        timbrado: [entity ? entity.timbrado :  this.timbrado?.nroTimbrado],
+        timbrado: [entity ? entity.timbrado :  this.timbrado],
         razonSocial: [entity ? entity.razonSocial : ''],
         funcionario: [entity ? entity.funcionario : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])
@@ -152,7 +151,7 @@ export class VentaFormComponent implements OnInit {
     return this.formBuilder.group({
       idProducto:[producto.idProducto],
       producto:[producto.nombre],
-      cantidad:[1],
+      cantidad:[producto.stockActual],
       precio:[producto.precio],
       iva:[producto.iva],
       descuento:[0],
@@ -300,20 +299,26 @@ export class VentaFormComponent implements OnInit {
     });
  
     
-    const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-dd');
-    const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-dd');
+    const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-ddTHH:mm:SS.sss');
+    const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-ddTHH:mm:SS.sss');
+
+    console.log(this.entityForm.controls['fecha'].value)
 
     this.ventaToSave = {
       idFuncionario:this.currentValues.idFuncionario,
       idPersona:this.currentValues.idPersona,
+      idTimbrado:this.timbrado.idTimbrado,
+      idFolio: 1,
       tipoFactura:this.entityForm.controls['tipoFactura'].value,
       fecha:fechaCompra,
       fechaVencimiento:fechaCompraVencimiento,
       montoTotal:this.total,
-      numFactura:parseInt(this.formatFolioToSend()),
-      nroTimbrado:this.entityForm.controls['timbrado'].value,
+      saldo: this.total,
+      numFactura:'',
       detalleFacturas:detalleFactura
     }
+
+    console.log(this.ventaToSave)
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM
@@ -339,9 +344,20 @@ export class VentaFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-                this.ventaService.saveFactura(this.ventaToSave).subscribe((result:any) => {
-                this.routerInstance.navigate(['../cliente/listar-cliente'])
-              });
+                this.ventaService.saveFactura(this.ventaToSave).subscribe({
+                  next:(result:any) => {
+                    this.routerInstance.navigate(['../venta/listar-venta'])
+                    this.ventaService.editForm = false;
+                    this.snackbarInstance.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+                      duration:3000
+                    })
+                  },
+                  error: (err) => {
+                    this.snackbarInstance.open(err.error.message,'ACEPTAR',{
+                      duration:4000
+                    })
+                  }
+                });
           }
       });
 
@@ -408,6 +424,10 @@ export class VentaFormComponent implements OnInit {
 
   }
 
+  formatearNumero(number:number){
+    return new Intl.NumberFormat("es-CL").format(number);
+  }
+
   getErrorMessage(controlName: string) {
     const msg = this.entityForm.controls[controlName].hasError('required') ? 'EL CAMPO NO PUEDE ESTAR VACIO' : '';
     if (msg) {
@@ -419,8 +439,8 @@ export class VentaFormComponent implements OnInit {
   buildTimbrado(){
     this.ventaService.getTimbrado().subscribe(
       (timbrado:any) =>{
-        console.log(timbrado[0].nroTimbrado)
-        this.timbrado = timbrado[0].nroTimbrado;
+        this.timbrado = timbrado[0].numero;
+        console.log(this.timbrado);
       }
     );
   }

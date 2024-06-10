@@ -18,14 +18,14 @@
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="4" [rowspan]="1">
-                <mat-form-field>
-                  <mat-label>TIPO DE MOVIMIENTO</mat-label>  
-                  <input formControlName="esIngreso" matInput  readonly="true">
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('esIngreso') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
+              <mat-form-field>
+                <mat-label>MOTIVO</mat-label>  
+                <input formControlName="motivo" matInput placeholder="NOMBRE"  readonly="true">
+                  <mat-error *ngIf="entityForm.invalid">
+                      {{ getErrorMessage('motivo') }}
+                  </mat-error>
+              </mat-form-field>
+          </mat-grid-tile>
             
             <mat-grid-tile [colspan]="4" [rowspan]="1">
               <mat-form-field>
@@ -41,11 +41,11 @@
             <div class="motivo">
                 <mat-form-field>
                     <mat-label>
-                        MOTIVO
+                        COMENTARIO
                     </mat-label>
-                    <textarea formControlName="motivo" matInput placeholder="" readonly="true"></textarea>
+                    <textarea formControlName="comentario" matInput placeholder="" readonly="true"></textarea>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('motivo') }}
+                        {{ getErrorMessage('comentario') }}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -82,7 +82,7 @@
     
                   </td>
                   <td>
-                    <input type="number" class="form-control form-control-sm" name="cantidad" formControlName="cantidad" placeholder="Ingrese la cantidad" readonly [disabled]="true">
+                    <input type="number" mask="separator" thousandSeparator="." class="form-control form-control-sm" name="cantidad" formControlName="cantidad" placeholder="Ingrese la cantidad" readonly [disabled]="true">
                    
                   </td>
                  

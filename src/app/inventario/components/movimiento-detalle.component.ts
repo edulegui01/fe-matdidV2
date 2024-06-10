@@ -60,6 +60,7 @@ export class MovimientoDetalleComponent implements OnInit {
 
   total:number=0;
   maxInputDescuento:number=0;
+  listadoMotivo!:any[];
 
 
   @ViewChild('searchInputFuncionario')
@@ -116,7 +117,7 @@ export class MovimientoDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+    this.inventarioService.getMotivos().subscribe(motivos => this.listadoMotivo = motivos);
 
 
     
@@ -129,12 +130,12 @@ export class MovimientoDetalleComponent implements OnInit {
 
   buildForm(entity: any) {
     this.entityForm = this.formBuilder.group({
-        idMovimiento: [entity ? entity.idMovimiento : ''],
-        esIngreso:[entity ? (entity.esIngreso ? 'INGRESO':'SALIDA') : ''],
-        fecha: [entity ? entity.fecha : new Date()],
-        funcionario: [entity ? entity.nombreFuncionario+' '+entity.apellidoFuncionario : 'MARK KENNEDY'],
-        motivo: [entity ? entity.motivo : ''],
-        detalleProducts: this.formBuilder.array([], [Validators.required])
+      idMovimiento: [entity ? entity.idMovimiento : ''],
+      motivo:[entity ? entity.motivo.nombre:''],
+      fecha: [entity ? entity.fecha : new Date()],
+      funcionario: [entity ? entity.nombreFuncionario+' '+entity.apellidoFuncionario:''],
+      comentario: [entity ? entity.comentario : ''],
+      detalleProducts: this.formBuilder.array([], [Validators.required])
     });
   }
 

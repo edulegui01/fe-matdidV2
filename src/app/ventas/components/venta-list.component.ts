@@ -15,6 +15,7 @@ import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
 import { FuncionarioData } from 'src/app/class/funcionarioData';
 import { VentaService } from '../services/venta.service';
+import { CobroListComponent } from 'src/app/cobro/components/cobro-list.component';
 
 @Component({
   selector: 'app-venta-list',
@@ -62,11 +63,14 @@ export class VentaListComponent  implements OnInit {
   initDataSource(){
     this.ventaService.getVentas()
     .pipe(map(ventas =>{
-      ventas.content.forEach((item:any)=>{item.numFactura = Settings.PRIMERA_PARTE_FACTURA + this.zfill(item.numFactura) })
+      ventas.content.forEach((item:any)=>{item.numFactura = Settings.PRIMERA_PARTE_FACTURA + this.zfill(item.idFactura) })
 
       return ventas;
     }))
-    .subscribe( (ventaData:any) => this.dataSource = ventaData)
+    .subscribe( (ventaData:any) =>{
+      this.dataSource = ventaData
+      console.log(this.dataSource)
+    } )
   }
 
   zfill(numero:number){
@@ -89,6 +93,63 @@ export class VentaListComponent  implements OnInit {
         }
     }
   }
+
+  formatFechaToList(fecha:any){
+    if(!fecha){
+      return '';
+    }
+    
+    const fechaFormat = new Date(fecha).toLocaleDateString('es-PY')
+
+
+    return fechaFormat;
+  }
+
+  formatearNumero(number:number){
+    return new Intl.NumberFormat("es-CL").format(number);
+  }
+
+
+  formatFolio(element:any){
+     let ultimosNumerosFolio = this.zfill(element.idFactura)
+
+     return element.numeroFolio + ultimosNumerosFolio;
+  }
+
+  OnDetailsVenta(element:any){
+    //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
+
+    const extraParams: NavigationExtras = {
+       state: element,
+    };
+    this.ventaService.detalleForm=true;
+    console.log(element);
+    this.routerInstance.navigate(['venta/detalle-venta'],extraParams);
+    
+    
+
+  }
+
+  openCobroList(element:any){
+    this.dialogInstance.open(CobroListComponent, {
+      width: Settings.DIALOG_PAGOS,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+         ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+         element:element
+      },
+
+    }).afterClosed().subscribe(res => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+
+      if (res) {
+
+        this.ngOnInit();
+
+      }
+    });
+}
 
 
   onPaginateChange(event:PageEvent){
@@ -174,7 +235,7 @@ export class VentaListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['numFolio', 'proveedor', 'nombreFuncionario', 'montoTotal', 'options'];
+  displayedColumns: string[] = ['numFolio', 'proveedor', 'fecha','nombreFuncionario', 'montoTotal', 'options'];
   displayedFilters: string[] = ['numFolio-filter', 'proveedor-filter'];
   
 }
