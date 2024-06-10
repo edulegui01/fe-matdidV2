@@ -1,0 +1,109 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>CONCEPTO</mat-label>
+                    <mat-select formControlName="idConcepto" id="gestionSelect">
+                        <mat-option>SELECCIONAR CONCEPTO</mat-option>
+                        <mat-option *ngFor="let concepto of listadoConcepto" [value]="concepto.idConcepto">
+                            {{concepto.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('idConcepto') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FECHA</mat-label>
+                       <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="FECHA">
+                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('fecha') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        N° DE DOCUMENTO
+                    </mat-label>
+                    <input formControlName="comprobante" mask="000-000-0000000" matInput placeholder="N° DE DOCUMENTO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('comprobante') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        BENEFICIARIO
+                    </mat-label>
+                    <input formControlName="beneficiario" matInput placeholder="BENEFICIARIO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('beneficiario') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        MONTO
+                    </mat-label>
+                    <input formControlName="cantidad" matInput placeholder="MONTO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('cantidad') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <mat-form-field>
+                        <mat-label>
+                            COMENTARIO
+                        </mat-label>
+                        <textarea formControlName="comentario" matInput placeholder=""></textarea>
+                        <mat-error *ngIf="entityForm.invalid">
+                            {{ getErrorMessage('comentario') }}
+                        </mat-error>
+                    </mat-form-field>
+            </mat-grid-tile>
+        
+        
+
+            
+
+
+            
+           
+
+        </mat-grid-list>
+
+        <div class="buttons-container">
+            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveMovimientoCaja()">
+                {{ viewText.REGISTER }}
+                <mat-icon>save</mat-icon>
+            </button>
+            <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateMovimientoCaja()">
+                {{ viewText.UPDATE }}
+                <mat-icon>update</mat-icon>
+            </button>
+            <button type="button" mat-raised-button (click)="closeForm()">
+                {{ viewText.CANCEL }}
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </form>
+</div>

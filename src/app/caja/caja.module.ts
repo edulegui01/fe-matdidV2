@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
 import { CajaComponent } from './components/caja.component';
 import { CajaListComponent } from './components/caja-list.component';
+import { MovimientoCajaFormComponent } from './components/movimiento-caja-form.component';
+
 
 
 
@@ -20,7 +22,8 @@ import { CajaListComponent } from './components/caja-list.component';
 @NgModule({
   declarations: [
     CajaComponent,
-    CajaListComponent
+    CajaListComponent,
+    MovimientoCajaFormComponent
    
   ],
   imports: [

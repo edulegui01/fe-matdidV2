@@ -1,15 +1,15 @@
 <nav mat-tab-nav-bar updateActiveLink>
 
-    <a mat-tab-link routerLink="listar-ciclo" (click)="cajaService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+    <a mat-tab-link routerLink="listar-caja" (click)="cajaService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
       CAJA
     </a>
 
-    <a mat-tab-link routerLink="nuevo-ciclo" *ngIf="!cajaService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
-      REGISTRAR CICLO
+    <a mat-tab-link routerLink="nuevo-caja" *ngIf="!cajaService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR MOVIMIENTO DE CAJA
     </a>
 
-    <a mat-tab-link routerLink="editar-ciclo" *ngIf="cajaService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
-      MODIFICAR CICLO
+    <a mat-tab-link routerLink="editar-caja" *ngIf="cajaService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR MOVIMIENTO DE CAJA
     </a>
 
 

@@ -13,7 +13,8 @@ export class CajaService {
 
   httpUrls={
     urlListar:'/movimiento-caja/listar-total',
-    urlGuarda:'/ciclo/guardar',
+    urlListarConcepto:'/concepto_select/listar',
+    urlGuardar:'/movimiento-caja/guardar',
     urlActualizar:'/ciclo/actualizar/',
     urlDelete:'/ciclo/actualizar/',
 
@@ -34,14 +35,21 @@ export class CajaService {
 
   }
 
-  public saveCiclo(ciclo:any):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,ciclo,this.options);
+
+  public getConcepto():Observable<any>{
+
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarConcepto,{...this.options})
+
+  }
+
+  public saveMovimientoCaja(movimientoCaja:any):Observable<any>{
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuardar,movimientoCaja,this.options);
   }
 
 
-  public updateCiclo(id:string,ciclo:any){
+  public updateMovimientoCaja(id:string,movimientoCaja:any){
 
-    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualizar+id,ciclo,this.options);
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualizar+id,movimientoCaja,this.options);
   }
 
   public deleteLocalidad(id:string){

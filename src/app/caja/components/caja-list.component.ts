@@ -112,7 +112,7 @@ export class CajaListComponent  implements OnInit {
     };
     this.cajaService.editForm=true;
     console.log(element);
-    this.routerInstance.navigate(['ciclo/editar-ciclo'],extraParams);
+    this.routerInstance.navigate(['caja/editar-caja'],extraParams);
     
     
 
