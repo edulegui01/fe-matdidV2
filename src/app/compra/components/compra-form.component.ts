@@ -360,7 +360,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
     
 
     if (this.entityForm.invalid) {
-      this.snackbarInstance.open(this.viewText.INVALID_FORM
+      this._snackBar.open(this.viewText.INVALID_FORM
           , 'OK'
           , {
               duration: Settings.SHORT_TIME
@@ -418,7 +418,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
     }
 
     if (this.entityForm.invalid) {
-      this.snackbarInstance.open(this.viewText.INVALID_FORM
+      this._snackBar.open(this.viewText.INVALID_FORM
           , 'OK'
           , {
               duration: Settings.SHORT_TIME

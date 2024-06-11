@@ -36,7 +36,7 @@
                     <mat-label>
                         N° DE DOCUMENTO
                     </mat-label>
-                    <input formControlName="comprobante" mask="000-000-0000000" matInput placeholder="N° DE DOCUMENTO" required>
+                    <input formControlName="comprobante" mask="000-000-0000000" matInput placeholder="N° DE DOCUMENTO">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('comprobante') }}
                     </mat-error>
@@ -48,7 +48,7 @@
                     <mat-label>
                         BENEFICIARIO
                     </mat-label>
-                    <input formControlName="beneficiario" matInput placeholder="BENEFICIARIO" required>
+                    <input formControlName="beneficiario" matInput placeholder="BENEFICIARIO">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('beneficiario') }}
                     </mat-error>

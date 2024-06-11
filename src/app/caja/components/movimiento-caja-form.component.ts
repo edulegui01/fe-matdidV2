@@ -64,10 +64,10 @@ export class MovimientoCajaFormComponent implements OnInit {
         idMovimientoCaja: [entity ? entity.idMovimientoCaja : ''],
         fecha: [entity ? entity.fecha : '', Validators.required],
         idConcepto: [entity ? entity.idConcepto : '', Validators.required],
-        comprobante: [entity ? entity.comprobante : '', Validators.required],
-        beneficiario: [entity ? entity.beneficiario : '', Validators.required],
+        comprobante: [entity ? entity.comprobante : ''],
+        beneficiario: [entity ? entity.beneficiario : ''],
         cantidad: [entity ? entity.cantidad : '', Validators.required],
-        comentario: [entity ? entity.comentario : '', Validators.required]
+        comentario: [entity ? entity.comentario : '']
 
     });
   }
@@ -79,7 +79,7 @@ export class MovimientoCajaFormComponent implements OnInit {
     this.movimientoCajaToSave = {
       idFuncionario:localStorage.getItem('idFuncionario'),
       idConcepto:this.entityForm.controls['idConcepto'].value,
-      fecha:fecha,
+      fecha:this.entityForm.controls['fecha'].value,
       comprobante:this.entityForm.controls['comprobante'].value,
       beneficiario:this.entityForm.controls['beneficiario'].value,
       cantidad:this.entityForm.controls['cantidad'].value,
@@ -90,33 +90,33 @@ export class MovimientoCajaFormComponent implements OnInit {
     console.log(this.movimientoCajaToSave)
 
 
-    // if (this.entityForm.invalid) {
-    //   this.snackbarInstance.open(this.viewText.INVALID_FORM
-    //       , 'OK'
-    //       , {
-    //           duration: Settings.SHORT_TIME
-    //           , panelClass: Settings.FAILED_MESSAGE_CLASS
-    //       }
-    //   );
-    //   return;
-    // }
+    if (this.entityForm.invalid) {
+      this.snackbarInstance.open(this.viewText.INVALID_FORM
+          , 'OK'
+          , {
+              duration: Settings.SHORT_TIME
+              , panelClass: Settings.FAILED_MESSAGE_CLASS
+          }
+      );
+      return;
+    }
 
-    //   this.dialogInstance.open(CustomDialogComponent, {
-    //       width: Settings.DIALOG_MEDIUM,
-    //       data: {
-    //           typeDialog: 'confirm',
-    //           title: this.viewText.ATTENTION,
-    //           message: `${this.viewText.CONFIRM_CREATE} <b>${this.createDefaultMessage}</b>?.`,
-    //       },
-    //   }).afterClosed().pipe().subscribe(data => {
-    //       if (data) {
+      this.dialogInstance.open(CustomDialogComponent, {
+          width: Settings.DIALOG_MEDIUM,
+          data: {
+              typeDialog: 'confirm',
+              title: this.viewText.ATTENTION,
+              message: `${this.viewText.CONFIRM_CREATE} <b>${this.createDefaultMessage}</b>?.`,
+          },
+      }).afterClosed().pipe().subscribe(data => {
+          if (data) {
               
 
-    //           this.cajaService.saveMovimientoCaja(this.movimientoCajaToSave).subscribe(result => {
-    //             this.routerInstance.navigate(['../caja/listar-caja'])
-    //           });
-    //       }
-    //   });
+              this.cajaService.saveMovimientoCaja(this.movimientoCajaToSave).subscribe(result => {
+                this.routerInstance.navigate(['../caja/listar-caja'])
+              });
+          }
+      });
 
    
 

@@ -26,7 +26,7 @@
             <mat-cell *matCellDef="let element">
                 <p>
                     
-                    <a class="link-opacity-100" style="cursor:pointer" (click)="OnDetailsCliente(element)">{{element.numFolio}}</a>
+                    <a class="link-opacity-100" style="cursor:pointer" (click)="OnDetailsCliente(element)">{{separarString(element.numFolio)}}</a>
                 </p>
                 
             </mat-cell>

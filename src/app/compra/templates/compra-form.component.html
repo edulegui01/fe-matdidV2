@@ -78,7 +78,7 @@
                     <mat-label>
                         N° FACTURA
                     </mat-label>
-                    <input formControlName="folio" mask="000-000-0000000" matInput placeholder="N° FOLIO" required>
+                    <input type="text" formControlName="folio" mask="000-000-0000000" matInput placeholder="N° FACTURA" required>
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('folio') }}
                     </mat-error>

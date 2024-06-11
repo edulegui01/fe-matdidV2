@@ -150,6 +150,19 @@ export class CompraListComponent  implements OnInit {
     return new Intl.NumberFormat("es-CL").format(number);
   }
 
+  separarString(str:string) {
+    let result = "";
+    let size = 3;
+    for (let i = 0; i < str.length; i += size) {
+        result += str.substring(i, i + size) + "-";
+        if(i==3){
+          result += str.substring(i+size,str.length)
+          break;
+        }
+    }
+    return result;
+}
+
   OnDetailsCliente(element:any){
     //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
 
