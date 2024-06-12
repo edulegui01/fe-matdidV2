@@ -35,6 +35,7 @@ export class CajaListComponent  implements OnInit {
   paginatorRef!: MatPaginator;
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
   smallRowSize=true;
+  saldoDisponible:any;
   
   
   
@@ -62,6 +63,7 @@ export class CajaListComponent  implements OnInit {
 
   initDataSource(){
     this.cajaService.getCajaList().subscribe( (cajaData:any) => this.dataSource = cajaData)
+    this.cajaService.getSaldoDisponible().subscribe((saldoDisponible:any) => this.saldoDisponible = saldoDisponible)
   }
 
 

@@ -17,6 +17,7 @@ export class CajaService {
     urlGuardar:'/movimiento-caja/guardar',
     urlActualizar:'/ciclo/actualizar/',
     urlDelete:'/ciclo/actualizar/',
+    urlSaldoDisponible:'/movimiento-caja/saldo-disponible'
 
   }
 
@@ -54,6 +55,10 @@ export class CajaService {
 
   public deleteLocalidad(id:string){
     return this.http.delete(Settings.URL_BASE+this.httpUrls.urlDelete+id,this.options)
+  }
+
+  public getSaldoDisponible(){
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlSaldoDisponible,this.options)
   }
 
   createHeader(){

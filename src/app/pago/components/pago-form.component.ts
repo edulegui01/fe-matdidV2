@@ -136,7 +136,8 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
                       next: (result:any) => {
                         let responseToDetailCompra = {
                           monto: this.entityForm.controls['monto'].value,
-                          saldo: this.entityForm.controls['saldo'].value
+                          saldo: this.entityForm.controls['saldo'].value,
+                          estado: this.entityForm.controls['saldo'].value == this.entityForm.controls['monto'].value ? 'PA': 'PP'
                         }
                         this.closeForm(responseToDetailCompra);
                         this.snackbarInstance.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{

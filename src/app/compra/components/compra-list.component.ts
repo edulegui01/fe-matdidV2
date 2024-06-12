@@ -35,6 +35,14 @@ export class CompraListComponent  implements OnInit {
   deleteDefaultMessage = 'EL REGISTRO';
   paginatorRef!: MatPaginator;
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
+
+
+  estados:any = {
+    PP:"PAGO PARCIAL",
+    SP: "SIN PAGO",
+    PA: "PAGADO",
+    A : "ANULADO"
+  }
   
   
   
@@ -161,7 +169,9 @@ export class CompraListComponent  implements OnInit {
         }
     }
     return result;
-}
+  }
+  
+  
 
   OnDetailsCliente(element:any){
     //this.clienteService.searchClienteById('4').subscribe(cliente => (this.clienteToEdit = cliente))
@@ -189,12 +199,7 @@ export class CompraListComponent  implements OnInit {
       },
 
     }).afterClosed().subscribe(res => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
-
-      if (res) {
-
-        this.ngOnInit();
-
-      }
+      this.ngOnInit();
     });
 }
 
@@ -209,7 +214,7 @@ export class CompraListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['numFolio', 'proveedor', 'fecha','nombreFuncionario', 'montoTotal', 'options'];
+  displayedColumns: string[] = ['numFolio', 'proveedor', 'fecha', 'montoTotal', 'estado','options'];
   displayedFilters: string[] = ['numFolio-filter', 'proveedor-filter'];
   
 }

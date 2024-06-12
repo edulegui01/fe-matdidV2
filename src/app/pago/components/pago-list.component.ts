@@ -84,6 +84,7 @@ export class PagoListComponent  implements OnInit {
                   if (accept) {
                     this.pagoService.anularPago(element.idPago).subscribe(resp => {
                         this.pagoService.getPagos(this.data.element.idCompra).subscribe((pagoData:any) => this.dataSource = pagoData)
+                        
                       });
                   }
               });
@@ -120,6 +121,7 @@ export class PagoListComponent  implements OnInit {
 
   closeList(){
     this.dialogRef.close()
+    
   }
 
 

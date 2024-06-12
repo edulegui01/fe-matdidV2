@@ -416,6 +416,7 @@ export class CompraDetalleComponent implements OnInit, AfterViewInit, OnDestroy 
       if (res) {
         this.entityForm.controls['saldo'].setValue(parseInt(res.saldo)-parseInt(res.monto));
         this.entity.saldo = parseInt(res.saldo)-parseInt(res.monto);
+        this.entity.estado = res.estado;
       }
     });
 }

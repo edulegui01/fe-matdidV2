@@ -61,12 +61,12 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="nombreFuncionario">
+        <ng-container matColumnDef="estado">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                FUNCIONARIO
+                ESTADO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.nombreFuncionario}} {{element.apellidoFuncionario}}
+                {{estados[element.estado]}}
             </mat-cell>
         </ng-container>
 
@@ -103,10 +103,11 @@
                             <mat-icon class="mat-18">attach_money</mat-icon>
                             PAGOS
                         </button>
+                        
 
-                        <mat-divider></mat-divider>
+                        <mat-divider *ngIf="element.estado == 'SP' "></mat-divider>
 
-                        <button mat-menu-item (click)="OnClickDeleteCliente(element)">
+                        <button mat-menu-item (click)="OnClickDeleteCliente(element)" *ngIf="element.estado == 'SP' ">
                             <mat-icon class="mat-18">
                                 remove_circle_outline
                             </mat-icon>

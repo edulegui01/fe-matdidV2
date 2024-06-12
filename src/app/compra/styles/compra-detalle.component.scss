@@ -63,7 +63,13 @@
   }
 
 .pagado-msm{
-  color: lawngreen;
+  color: #00cd00;
+  border: 1px solid;
+  padding: 5px 30px;
+}
+
+.anulado-msm{
+  color: red;
   border: 1px solid;
   padding: 5px 30px;
 }
