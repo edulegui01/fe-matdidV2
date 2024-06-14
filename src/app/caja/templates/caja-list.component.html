@@ -30,7 +30,7 @@
                 COMPROBANTE
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.comprobante}}
+                {{separarString(element.comprobante)}}
             </mat-cell>
         </ng-container>
 
@@ -61,6 +61,15 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="estado" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                ESTADO
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <mat-icon color="primary">{{element.estado == 'ABIERTO' ? 'lock_open':'lock'}}</mat-icon>
+            </mat-cell>
+        </ng-container>
+
 
         
 
@@ -79,10 +88,10 @@
 
         <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
         <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
-        <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 28px;  min-height: 28px !important;" [ngClass]="{'row-cierre-caja':row.concepto=='CIERRE DE CAJA'}"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 28px;  min-height: 28px !important;" [ngClass]="{'row-cierre-caja':row.estado=='CERRADO'}"></mat-row>
         </mat-table>
         <div class="buttons-container">
-            <button id="register"   mat-raised-button color="primary" type="button" >
+            <button id="register"   mat-raised-button color="primary" type="button" (click)="cerrarCaja()">
                 CERRAR CAJA
                 <mat-icon>lock</mat-icon>
             </button>

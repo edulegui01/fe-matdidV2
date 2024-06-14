@@ -40,7 +40,18 @@
                       {{ getErrorMessage('funcionario') }}
                   </mat-error>
               </mat-form-field>
-          </mat-grid-tile> 
+          </mat-grid-tile>
+          
+          
+          <mat-grid-tile [colspan]="4" [rowspan]="1">
+            <mat-form-field>
+              <mat-label>DOCUMENTO NRO</mat-label>  
+              <input formControlName="documento" mask="0" matInput placeholder="DOCUMENTO"  readonly="true">
+                <mat-error *ngIf="entityForm.invalid">
+                    {{ getErrorMessage('documento') }}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile> 
 
           <mat-grid-tile [colspan]="4" [rowspan]="2">
             <div class="motivo">
@@ -57,7 +68,9 @@
             
             
             
-        </mat-grid-tile>
+          </mat-grid-tile>
+
+
 
 
 

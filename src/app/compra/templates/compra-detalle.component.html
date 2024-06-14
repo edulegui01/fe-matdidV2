@@ -162,10 +162,10 @@
       </form>
 
       <div style="display: flex; justify-content: flex-end;">
-        <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-2">TOTAL: {{formatearNumero(total)}}</span>
+        <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-2">TOTAL: ₲ {{formatearNumero(total)}}</span>
       </div>
       <div style="display: flex; justify-content: flex-end;" *ngIf="entityForm.controls['saldo'].value>0">
-        <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-2">SALDO: {{formatearNumero(entityForm.controls['saldo'].value)}}</span>
+        <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-2">SALDO: ₲ {{formatearNumero(entityForm.controls['saldo'].value)}}</span>
       </div>
 
       

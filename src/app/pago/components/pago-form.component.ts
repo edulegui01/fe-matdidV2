@@ -106,6 +106,7 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
         }
     
         console.log(this.pagoToSave)
+        console.log(this.entityForm.controls['saldo'].value)
     
         if (this.entityForm.invalid) {
           this.snackbarInstance.open(this.viewText.INVALID_FORM

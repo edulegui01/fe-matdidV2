@@ -35,6 +35,13 @@ export class VentaListComponent  implements OnInit {
   deleteDefaultMessage = 'EL REGISTRO';
   paginatorRef!: MatPaginator;
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
+
+  estados:any = {
+    CP:"COBRO PARCIAL",
+    SC: "PENDIENTE DE COBRO",
+    CO: "COBRADO",
+    A : "ANULADO"
+  }
   
   
   
@@ -62,11 +69,7 @@ export class VentaListComponent  implements OnInit {
 
   initDataSource(){
     this.ventaService.getVentas()
-    .pipe(map(ventas =>{
-      ventas.content.forEach((item:any)=>{item.numFactura = Settings.PRIMERA_PARTE_FACTURA + this.zfill(item.idFactura) })
-
-      return ventas;
-    }))
+    .pipe()
     .subscribe( (ventaData:any) =>{
       this.dataSource = ventaData
       console.log(this.dataSource)
@@ -114,6 +117,20 @@ export class VentaListComponent  implements OnInit {
      let ultimosNumerosFolio = this.zfill(element.idFactura)
 
      return element.numeroFolio + ultimosNumerosFolio;
+  }
+
+  separarString(str:string) {
+    let result = "";
+    let size = 3;
+    for (let i = 0; i < str.length; i += size) {
+        result += str.substring(i, i + size) + "-";
+        if(i==3){
+          result += str.substring(i+size,str.length)
+          console.log(result)
+          break;
+        }
+    }
+    return result;
   }
 
   OnDetailsVenta(element:any){
@@ -235,7 +252,7 @@ export class VentaListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['numFolio', 'proveedor', 'fecha','nombreFuncionario', 'montoTotal', 'options'];
+  displayedColumns: string[] = ['numFolio', 'proveedor', 'fecha','montoTotal', 'estado', 'options'];
   displayedFilters: string[] = ['numFolio-filter', 'proveedor-filter'];
   
 }

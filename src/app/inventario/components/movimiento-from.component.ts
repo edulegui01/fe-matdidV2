@@ -128,6 +128,7 @@ export class MovimientoFormComponent implements OnInit {
         fecha: [entity ? entity.fecha : new Date()],
         funcionario: [nombreCompletoFuncionario],
         comentario: [entity ? entity.comentario : ''],
+        documento: [entity ? entity.documento : ''],
         detalleProducts: this.formBuilder.array([], [Validators.required])
     });
   }

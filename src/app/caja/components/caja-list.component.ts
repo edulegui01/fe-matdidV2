@@ -59,6 +59,20 @@ export class CajaListComponent  implements OnInit {
         
   }
 
+  separarString(str:string) {
+    let result = "";
+    let size = 3;
+    for (let i = 0; i < str.length; i += size) {
+        result += str.substring(i, i + size) + "-";
+        if(i==3){
+          result += str.substring(i+size,str.length)
+          console.log(result)
+          break;
+        }
+    }
+    return result;
+  }
+
 
 
   initDataSource(){
@@ -120,6 +134,35 @@ export class CajaListComponent  implements OnInit {
 
   }
 
+  cerrarCaja(){
+    const movimientoCaja = {
+      fecha: new Date(),
+      concepto: 'CIERRE DE CAJA',
+      monto: this.saldoDisponible
+    }
+
+    this.dialogInstance.open(CustomDialogComponent, {
+      width: Settings.DIALOG_MEDIUM,
+      data: {
+          typeDialog: 'confirm',
+          title: this.viewText.ATTENTION,
+          message: `¿DESEA CERRAR LA CAJA?`,
+      },
+
+    }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+      if (accept) {
+        this.cajaService.cerrarCaja(movimientoCaja).subscribe(resutl => {
+          this.ngOnInit();
+        });
+
+      }
+   });
+
+ 
+
+  
+  }
+
   formatFechaToList(fecha:any){
     if(!fecha){
       return '';
@@ -147,7 +190,7 @@ export class CajaListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['fecha', 'comprobante','concepto','debito','credito'];
+  displayedColumns: string[] = ['fecha', 'comprobante','concepto','debito','credito','estado'];
   displayedFilters: string[] = ['nombre-filter'];
   
 }

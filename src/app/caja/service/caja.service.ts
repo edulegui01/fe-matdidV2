@@ -17,7 +17,8 @@ export class CajaService {
     urlGuardar:'/movimiento-caja/guardar',
     urlActualizar:'/ciclo/actualizar/',
     urlDelete:'/ciclo/actualizar/',
-    urlSaldoDisponible:'/movimiento-caja/saldo-disponible'
+    urlSaldoDisponible:'/movimiento-caja/saldo-disponible',
+    urlCerrarCaja:'/movimiento-caja/cerrar-caja'
 
   }
 
@@ -45,6 +46,10 @@ export class CajaService {
 
   public saveMovimientoCaja(movimientoCaja:any):Observable<any>{
     return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuardar,movimientoCaja,this.options);
+  }
+
+  public cerrarCaja(movimientoCaja:any){
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlCerrarCaja,movimientoCaja,this.options)
   }
 
 

@@ -7,6 +7,7 @@ import { NavigationModule } from '../components/navigation.module';
 import { CajaComponent } from './components/caja.component';
 import { CajaListComponent } from './components/caja-list.component';
 import { MovimientoCajaFormComponent } from './components/movimiento-caja-form.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 
@@ -33,6 +34,8 @@ import { MovimientoCajaFormComponent } from './components/movimiento-caja-form.c
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
     
     
     

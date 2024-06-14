@@ -26,7 +26,7 @@
             <mat-cell *matCellDef="let element">
                 <p>
                     
-                    <a class="link-opacity-100" style="cursor:pointer" (click)="OnDetailsVenta(element)">{{formatFolio(element)}}</a>
+                    <a class="link-opacity-100" style="cursor:pointer" (click)="OnDetailsVenta(element)">{{separarString(element.numFactura)}}</a>
                 </p>
                 
             </mat-cell>
@@ -62,12 +62,12 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="nombreFuncionario">
+        <ng-container matColumnDef="estado">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                FUNCIONARIO
+                ESTADO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.nombreFuncionario}} {{element.apellidoFuncionario}}
+                {{estados[element.estado]}}
             </mat-cell>
         </ng-container>
 
