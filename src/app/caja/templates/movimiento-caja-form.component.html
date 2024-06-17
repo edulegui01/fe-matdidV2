@@ -60,9 +60,9 @@
                     <mat-label>
                         MONTO
                     </mat-label>
-                    <input mask="separator" thousandSeparator="." prefix="₲ " formControlName="cantidad" matInput placeholder="MONTO" required>
+                    <input mask="separator" thousandSeparator="." prefix="₲ " formControlName="monto" matInput placeholder="MONTO" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('cantidad') }}
+                        {{ getErrorMessage('monto') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>

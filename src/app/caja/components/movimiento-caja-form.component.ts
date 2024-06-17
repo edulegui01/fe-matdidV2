@@ -66,7 +66,7 @@ export class MovimientoCajaFormComponent implements OnInit {
         idConcepto: [entity ? entity.idConcepto : '', Validators.required],
         comprobante: [entity ? entity.comprobante : ''],
         beneficiario: [entity ? entity.beneficiario : ''],
-        cantidad: [entity ? entity.cantidad : '', Validators.required],
+        monto: [entity ? entity.monto : '', Validators.required],
         comentario: [entity ? entity.comentario : '']
 
     });
@@ -82,7 +82,7 @@ export class MovimientoCajaFormComponent implements OnInit {
       fecha:this.entityForm.controls['fecha'].value,
       comprobante:this.entityForm.controls['comprobante'].value,
       beneficiario:this.entityForm.controls['beneficiario'].value,
-      cantidad:this.entityForm.controls['cantidad'].value,
+      monto:this.entityForm.controls['monto'].value,
       comentario:this.entityForm.controls['comentario'].value
       
     }
@@ -130,7 +130,7 @@ export class MovimientoCajaFormComponent implements OnInit {
         fecha:this.entityForm.controls['fecha'].value,
         comprobante:this.entityForm.controls['comprobante'].value,
         beneficiario:this.entityForm.controls['beneficiario'].value,
-        cantidad:this.entityForm.controls['cantidad'].value,
+        monto:this.entityForm.controls['monto'].value,
         comentario:this.entityForm.controls['comentario'].value
         
     }

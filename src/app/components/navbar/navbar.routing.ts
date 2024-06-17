@@ -25,6 +25,8 @@ import { CobroComponent } from 'src/app/cobro/components/cobro.component';
 import {routes as routerCobro } from 'src/app/cobro/cobro.routing';
 import { CajaComponent } from 'src/app/caja/components/caja.component';
 import {routes as routerCaja } from 'src/app/caja/caja.routing';
+import { HomeComponent } from 'src/app/home/components/home.component';
+import {routes as routerHome } from 'src/app/home/home.routing';
 
 export const routes: Routes = [
     {
@@ -97,6 +99,12 @@ export const routes: Routes = [
         path: MENU_URLS.CAJA.URL_BASE,
         component: CajaComponent,
         children: routerCaja,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.HOME,
+        component: HomeComponent,
+        children: routerHome,
         canActivate:[authGuard]
     },
     

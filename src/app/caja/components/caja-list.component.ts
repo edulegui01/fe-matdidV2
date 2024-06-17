@@ -36,6 +36,7 @@ export class CajaListComponent  implements OnInit {
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
   smallRowSize=true;
   saldoDisponible:any;
+  cajaList:any;
   
   
   
@@ -66,7 +67,6 @@ export class CajaListComponent  implements OnInit {
         result += str.substring(i, i + size) + "-";
         if(i==3){
           result += str.substring(i+size,str.length)
-          console.log(result)
           break;
         }
     }
@@ -135,10 +135,17 @@ export class CajaListComponent  implements OnInit {
   }
 
   cerrarCaja(){
+    console.log(typeof(this.saldoDisponible))
     const movimientoCaja = {
       fecha: new Date(),
-      concepto: 'CIERRE DE CAJA',
-      monto: this.saldoDisponible
+      idConcepto: 3,
+      monto: this.saldoDisponible.totalPagos,
+      estado: 'CERRADO',
+      idFuncionario: localStorage.getItem('idFuncionario'),
+      beneficiario:"",
+      comprobante:"",
+      comentario:""
+
     }
 
     this.dialogInstance.open(CustomDialogComponent, {
@@ -152,8 +159,13 @@ export class CajaListComponent  implements OnInit {
     }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
       if (accept) {
         this.cajaService.cerrarCaja(movimientoCaja).subscribe(resutl => {
-          this.ngOnInit();
+          this.cajaService.getCajaList().subscribe((cajaList:any) => this.dataSource = cajaList);
+          this.cajaService.getSaldoDisponible().subscribe((saldoDisponible:any) => this.saldoDisponible = saldoDisponible)
         });
+
+        
+
+        
 
       }
    });
