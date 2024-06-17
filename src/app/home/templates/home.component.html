@@ -5,7 +5,7 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">
                         <h5 class="card-title">TOTAL VENDIDO</h5>
-                        <h6 class="card-subtitle mb-2 ">{{datosEstadisticos.totalVendido}}</h6>
+                        <h6 class="card-subtitle mb-2 ">{{formatearNumero(datosEstadisticos.totalVendido)}}</h6>
                     </div>
                    
                 </div>
@@ -14,7 +14,7 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">
                         <h5 class="card-title">TOTAL COMPRADO</h5>
-                        <h6 class="card-subtitle mb-2 ">{{datosEstadisticos.totalComprado}}</h6>
+                        <h6 class="card-subtitle mb-2 ">{{formatearNumero(datosEstadisticos.totalComprado)}}</h6>
                     </div>
                    
                 </div>
@@ -23,7 +23,7 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">
                         <h5 class="card-title">CANTIDAD A COBRAR</h5>
-                        <h6 class="card-subtitle mb-2 ">{{datosEstadisticos.cantidadACobrar}}</h6>
+                        <h6 class="card-subtitle mb-2 ">{{formatearNumero(datosEstadisticos.cantidadACobrar)}}</h6>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">
                         <h5 class="card-title">CANTIDAD A PAGAR</h5>
-                        <h6 class="card-subtitle mb-2 ">{{datosEstadisticos.cantidadAPagar}}</h6>
+                        <h6 class="card-subtitle mb-2 ">{{formatearNumero(datosEstadisticos.cantidadAPagar)}}</h6>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <mat-icon class="pt-1">show_chart</mat-icon>
                         Ventas
                     </div>
-                    <div class="card-body"  [chart]="lineChart"></div>
+                    <canvas id="ventasChart"></canvas>
                 </div>
             </div>
             <div class="col-xl-3">
@@ -53,7 +53,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">INGRESO</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{datosEstadisticos.ingresoEnCaja}}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">{{formatearNumero(datosEstadisticos.ingresoEnCaja)}}</h6>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">EGRESO</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{datosEstadisticos.egresoEnCaja}}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">{{formatearNumero(datosEstadisticos.egresoEnCaja)}}</h6>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">TOTAL EN CAJA</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{datosEstadisticos.saldoEnCaja}}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">{{formatearNumero(datosEstadisticos.saldoEnCaja)}}</h6>
                             </div>
                            
                         </div>

@@ -15,6 +15,7 @@ export class HomeService {
 
   httpUrls={
     urlEstadisticas:'/home/estadisticas',
+    urlGrafico:'/home/cantidad-an/'
     
  
   }
@@ -32,6 +33,10 @@ export class HomeService {
 
   public getEstadistica():Observable<any>{
     return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlEstadisticas,this.options)
+  }
+
+  public getGraficoData(anho:number){
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlGrafico+anho,this.options)
   }
 
   createHeader(){

@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { HomeComponent } from './components/home.component';
-import { ChartModule } from 'angular-highcharts';
+
 
 
 
@@ -33,7 +33,7 @@ import { ChartModule } from 'angular-highcharts';
     NavigationModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    ChartModule 
+
     
     
     
