@@ -28,6 +28,7 @@ export class MovimientoCajaFormComponent implements OnInit {
   routerInstance:Router;
   movimientoCajaToUpdate:any;
   createDefaultMessage = 'EL REGISTRO';
+  listaTipoDePago = ['EFECTIVO','TRANSFERENCIA','DEPÓSITO']
 
 
 
@@ -66,6 +67,7 @@ export class MovimientoCajaFormComponent implements OnInit {
         idConcepto: [entity ? entity.idConcepto : '', Validators.required],
         comprobante: [entity ? entity.comprobante : ''],
         beneficiario: [entity ? entity.beneficiario : ''],
+        tipoPago: [entity ? entity.tipoPago : ''],
         monto: [entity ? entity.monto : '', Validators.required],
         comentario: [entity ? entity.comentario : '']
 

@@ -27,7 +27,7 @@
                     <mat-label>
                         SALDO
                     </mat-label>
-                    <input formControlName="saldo" matInput placeholder="SALDO" readonly>
+                    <input mask="separator" thousandSeparator="." prefix="₲ " formControlName="saldo" matInput placeholder="SALDO" readonly>
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('saldo') }}
                     </mat-error>
@@ -52,7 +52,7 @@
                     <mat-label>
                         MONTO
                     </mat-label>
-                    <input formControlName="monto" matInput placeholder="MONTO" required [readonly]="soloLectura">
+                    <input mask="separator" thousandSeparator="." prefix="₲ " formControlName="monto" matInput placeholder="MONTO" required [readonly]="soloLectura">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('monto') }}
                     </mat-error>

@@ -57,6 +57,19 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
+                    <mat-label>TIPO DE PAGO</mat-label>
+                    <mat-select formControlName="tipoPago" id="gestionSelect">
+                        <mat-option>SELECCIONAR EL TIPO DE PAGO</mat-option>
+                        <mat-option *ngFor="let tipoPago of listaTipoDePago" [value]="tipoPago">
+                            {{tipoPago}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('tipoPago') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
                     <mat-label>
                         MONTO
                     </mat-label>

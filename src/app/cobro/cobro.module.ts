@@ -7,6 +7,7 @@ import { NavigationModule } from '../components/navigation.module';
 import { CobroFormComponent } from './components/cobro-form.component';
 import { CobroComponent } from './components/cobro.component';
 import { CobroListComponent } from './components/cobro-list.component';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 
@@ -28,6 +29,8 @@ import { CobroListComponent } from './components/cobro-list.component';
     FormsModule,
     ReactiveFormsModule,
     NavigationModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ]
 })
 export class CobroModule { }
