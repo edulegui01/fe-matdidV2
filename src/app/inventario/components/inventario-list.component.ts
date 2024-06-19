@@ -93,6 +93,15 @@ export class InventarioListComponent  implements OnInit {
   }
 
 
+  generarPDF(){
+    this.inventarioService.getPdfInventario().subscribe(res  =>{
+      let blob:Blob = res.body as Blob;
+      let url = window.URL.createObjectURL(blob);
+      window.open(url);
+    })
+  }
+
+
  
 
   ChangePaginatorEspa(){

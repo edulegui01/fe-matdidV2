@@ -16,7 +16,8 @@ export class InventarioService {
     urlProductoListar:'/producto/listar_select',
     urlGuardarMovimiento:'/movimiento/guardar',
     urlListarMovimiento:'/movimiento/listado',
-    urlListarMotivos:'/motivo_select/listar'
+    urlListarMotivos:'/motivo_select/listar',
+    urlPdfInventario:'/inventario/report'
     
   }
 
@@ -93,6 +94,10 @@ export class InventarioService {
 
   public getMotivos(): Observable<any>{
     return this.http.get(Settings.URL_BASE+this.httpUrls.urlListarMotivos,this.options)
+  }
+
+  public getPdfInventario(){
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPdfInventario,{...this.options,observe:'response',responseType:'blob'})
   }
 
   createHeader(){
