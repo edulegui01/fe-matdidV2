@@ -163,7 +163,13 @@
                     <input type="text" class="form-control form-control-sm" formControlName="iva" readonly>
                   </td>
                   <td>
-                    <input type="text" mask="separator" thousandSeparator="."  class="form-control form-control-sm"  formControlName="descuento" name="descuento" (keyup)="changeSubTotal($event,i)" placeholder="Ingrese el descuento">
+                    <select (change)="changeSubTotal($event,i)" formControlName="descuento"  matNativeControl id="tipoCliente" name="descuento"  #selectionAtipePersona class="form-select form-select-sm" aria-label="Default select example">
+                      <option value=0 >0</option>
+                      <option value=0.05 >5%</option>
+                      <option value=0.1 >10%</option>
+                      <option value=0.15 >15%</option>
+                      
+                    </select>
                   </td>
                   <td>
                       <input type="text" mask="separator" thousandSeparator="." class="form-control form-control-sm" formControlName="subTotal"  readonly>

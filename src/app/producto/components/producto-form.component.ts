@@ -204,17 +204,21 @@ export class ProductoFormComponent implements OnInit {
 
 
   updateProducto(){
+    const costo = parseInt(this.entityForm.controls['costo'].value.replace('.',''));
+    const precio = parseInt(this.entityForm.controls['precio'].value.replace('.',''));
+    
     this.productoToUpdate = {
       idProducto:this.entityForm.controls['idProducto'].value,
       nombre:this.entityForm.controls['nombre'].value,
       descripcion:this.entityForm.controls['descripcion'].value,
       autor:this.entityForm.controls['autor'].value,
-      editorial:this.entityForm.controls['editorial'].value,
+      idEditorial:this.entityForm.controls['editorial'].value,
       isbn:this.entityForm.controls['isbn'].value,
-      materia:this.entityForm.controls['materia'].value,
-      gradoCurso:this.entityForm.controls['gradoCurso'].value,
-      costo:this.convertirStringAnumerico(this.entityForm.controls['costo'].value),
-      precio:this.convertirStringAnumerico(this.entityForm.controls['precio'].value),
+      idMateria:this.entityForm.controls['materia'].value,
+      idCiclo:this.entityForm.controls['ciclo'].value,
+      idCategoria:this.entityForm.controls['categoria'].value,
+      costo:costo,
+      precio:precio,
       iva:this.entityForm.controls['iva'].value,
     }
 

@@ -60,6 +60,8 @@ export class VentaFormComponent implements OnInit {
   maxInputDescuento:number=0;
 
 
+
+
   @ViewChild('searchInputFuncionario')
   inputSearchFun?:ElementRef
 
@@ -151,7 +153,8 @@ export class VentaFormComponent implements OnInit {
     return this.formBuilder.group({
       idProducto:[producto.idProducto],
       producto:[producto.nombre],
-      cantidad:[producto.stockActual],
+      cantidad:[1],
+      precioOriginal:[producto.precio],
       precio:[producto.precio],
       iva:[producto.iva],
       descuento:[0],
@@ -215,6 +218,10 @@ export class VentaFormComponent implements OnInit {
     productoToPush = this.createFormGroupProducts(producto);
 
     this.getFormControls.push(productoToPush);
+    
+    // this.getFormControls.controls.forEach(item => {
+    //   console.log(item.value['nombre'].setValue)
+    // })
 
     this.Products = [];
 
@@ -238,12 +245,14 @@ export class VentaFormComponent implements OnInit {
   updateTotal(){
     
     this.total = 0;
+    
     this.getFormControls.controls.forEach((element) => {
+      console.log(element.value)
       this.total = this.total + element.value.subTotal;
     });
 
 
-    console.log(this.total)
+
   }
 
 
@@ -251,14 +260,16 @@ export class VentaFormComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     let subTotal:number = 0;
 
-    let subTotalParaCantidad =  parseInt(target.value)*parseInt(this.getFormControls.controls[index].get('precio')?.value);
+    let subTotalParaCantidad =  parseInt(target.value.replace(/\D/g,''))*parseInt(this.getFormControls.controls[index].get('precio')?.value);
     let descuento = parseInt(this.getFormControls.controls[index].get('descuento')?.value);
     let subTotalParaDescuento = parseInt(this.getFormControls.controls[index].get('cantidad')?.value)*parseInt(this.getFormControls.controls[index].get('precio')?.value);
+    let precioParaDescuento = parseInt(this.getFormControls.controls[index].get('precioOriginal')?.value);
+    
 
-    
-    
     if(target.value && target.name == "cantidad"){
       subTotal = subTotalParaCantidad-descuento
+
+      
       
      
 
@@ -266,8 +277,13 @@ export class VentaFormComponent implements OnInit {
     
     
     if(target.name == "descuento" && target.value){
-      subTotal =subTotalParaDescuento-parseInt(target.value);
-      subTotal = subTotal<0 ? 0 :subTotal
+      // subTotal =subTotalParaDescuento-parseInt(target.value);
+      // subTotal = subTotal<0 ? 0 :subTotal
+
+      this.getFormControls.controls[index].get('precio')?.setValue(this.getFormControls.controls[index].get('precioOriginal')?.value -precioParaDescuento*parseFloat(target.value))
+      subTotal = this.getFormControls.controls[index].get('precio')?.value*parseInt(this.getFormControls.controls[index].get('cantidad')?.value)
+
+
 
     }else if(target.name == "descuento" && !target.value){
       subTotal = subTotalParaDescuento;
@@ -290,12 +306,23 @@ export class VentaFormComponent implements OnInit {
   saveFactura(){
     
     let listProducts = this.entityForm.controls['detalleProducts'].value;
+    let listado:any[] = [];
+    
 
-    let detalleFactura = listProducts.map((detalle:any) =>{
-       delete detalle.producto
-       delete detalle.iva
-       delete detalle.subTotal
-       return detalle;
+    listProducts.forEach((detalle:any) =>{
+      //  delete detalle.producto
+      //  delete detalle.iva
+      //  delete detalle.subTotal
+      //  return detalle;
+      
+
+      listado.push({
+        idProducto:detalle.idProducto,
+        cantidad:detalle.cantidad,
+        precio:detalle.precio,
+        descuento:parseFloat(detalle.descuento)
+
+      })
     });
  
     
@@ -315,7 +342,7 @@ export class VentaFormComponent implements OnInit {
       montoTotal:this.total,
       saldo: this.total,
       numFactura:'',
-      detalleFacturas:detalleFactura
+      detalleFacturas:listado
     }
 
     console.log(this.ventaToSave)
@@ -353,11 +380,13 @@ export class VentaFormComponent implements OnInit {
                     })
                   },
                   error: (err) => {
+                    
                     this.snackbarInstance.open(err.error.message,'ACEPTAR',{
                       duration:4000
                     })
                   }
                 });
+
           }
       });
 

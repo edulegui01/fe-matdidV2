@@ -33,7 +33,8 @@ export class FuncionarioFormComponent implements OnInit {
 
 
 
-  constructor(public funcionarioService:FuncionarioService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public funcionarioService:FuncionarioService, private formBuilder:FormBuilder, router: Router, 
+    private dialogInstance: MatDialog,  private _snackBar: MatSnackBar  ) { 
 
     this.routerInstance = router;
 
@@ -116,8 +117,15 @@ export class FuncionarioFormComponent implements OnInit {
           if (data) {
               
 
-              this.funcionarioService.saveFuncionario(this.funcionarioToSave).subscribe(result => {
-                this.routerInstance.navigate(['../funcionario/listar-funcionario'])
+              this.funcionarioService.saveFuncionario(this.funcionarioToSave).subscribe({
+                next:result => {
+                  this.routerInstance.navigate(['../funcionario/listar-funcionario'])
+                },
+                error:(err) => {
+                  this._snackBar.open(err.error.message,'ACEPTAR',{
+                    duration:4000
+                  })
+                }
               });
           }
       });
