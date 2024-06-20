@@ -100,6 +100,10 @@ export class CobroListComponent  implements OnInit {
 
   }
 
+  formatearNumero(number:number){
+    return new Intl.NumberFormat("es-CL").format(number);
+  }
+
   formatFechaToList(fecha:any){
     if(!fecha){
       return '';

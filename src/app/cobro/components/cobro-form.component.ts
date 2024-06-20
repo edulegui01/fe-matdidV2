@@ -68,7 +68,7 @@ import { CobroService } from "../service/cobro.service";
             idFactura: [entity ? entity.idFactura : ''],
             tipoFactura:[entity ? entity.tipoFactura:''],
             fecha: [new Date()],
-            monto: [entity.tipoFactura == 'contado' ? entity.saldo : ''],
+            monto: [ ''],
             saldo: [entity ? entity.saldo : ''],
             tipoCobro: [entity ? entity.tipoCobro : ''],
             comentario: [entity ? entity.comentario : ''],

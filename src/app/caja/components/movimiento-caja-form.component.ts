@@ -63,7 +63,7 @@ export class MovimientoCajaFormComponent implements OnInit {
   buildForm(entity: any) {
     this.entityForm = this.formBuilder.group({
         idMovimientoCaja: [entity ? entity.idMovimientoCaja : ''],
-        fecha: [entity ? entity.fecha : '', Validators.required],
+        fecha: [new Date(), Validators.required],
         idConcepto: [entity ? entity.idConcepto : '', Validators.required],
         comprobante: [entity ? entity.comprobante : ''],
         beneficiario: [entity ? entity.beneficiario : ''],

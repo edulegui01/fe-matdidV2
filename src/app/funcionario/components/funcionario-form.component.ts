@@ -120,6 +120,9 @@ export class FuncionarioFormComponent implements OnInit {
               this.funcionarioService.saveFuncionario(this.funcionarioToSave).subscribe({
                 next:result => {
                   this.routerInstance.navigate(['../funcionario/listar-funcionario'])
+                  this._snackBar.open(this.viewText.SUCCESS_OPERATION,'ACEPTAR',{
+                    duration:3000
+                  })
                 },
                 error:(err) => {
                   this._snackBar.open(err.error.message,'ACEPTAR',{

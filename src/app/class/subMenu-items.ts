@@ -17,14 +17,14 @@ export class subMenu{
         {nombre:'COMPRAS',menus:[],icono:'shopping_cart', url:MENU_URLS.COMPRA.URL_BASE},
         {nombre:'VENTAS',menus:[],icono:'point_of_sale',url:MENU_URLS.VENTA.URL_BASE},
         {nombre:'CAJA',menus:[],icono:'monetization_on',url:MENU_URLS.CAJA.URL_BASE},
-        {nombre:'INVENTARIO',menus:[],icono:'assignment',url:MENU_URLS.INVENTARIO.URL_BASE}
+        {nombre:'INVENTARIO',menus:[],icono:'assignment',url:MENU_URLS.INVENTARIO.URL_BASE},
+        {nombre:'LIBROS',menus:[],icono:'library_books',url:MENU_URLS.PRODUCTO.URL_BASE},
     ]
 
     static menuListAdministracion:Array<any>=[
         {nombre:'CLIENTES',menus:[],icono:'groups',url:MENU_URLS.CLIENTE.URL_BASE},
         {nombre:'PROVEEDORES',menus:[],icono:'local_shipping',url:MENU_URLS.PROVEEDOR.URL_BASE},
         {nombre:'FUNCIONARIOS',menus:[],icono:'contacts',url:MENU_URLS.FUNCIONARIO.URL_BASE},
-        {nombre:'LIBROS',menus:this.subMenuProducto,icono:'inventory',},
         {nombre:'LOCALIDADES',menus:[],icono:'location_on', url:MENU_URLS.LOCALIDAD.URL_BASE},
     ]
 

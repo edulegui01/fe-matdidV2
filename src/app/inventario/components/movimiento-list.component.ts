@@ -130,7 +130,7 @@ export class MovimientoListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['fecha','funcionario','motivo','comentario','options'];
+  displayedColumns: string[] = ['documento','fecha','motivo','comentario','options'];
   displayedFilters: string[] = ['nombre-filter'];
   
 }

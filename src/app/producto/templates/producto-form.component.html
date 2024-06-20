@@ -124,15 +124,16 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>
-                        IVA
-                    </mat-label>
-                    <input formControlName="iva" matInput placeholder="IVA" required required >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('iva') }}
-                    </mat-error>
+                    <mat-label>IVA</mat-label>
+                    <mat-select formControlName="iva" id="gestionSelect">
+                        <mat-option [value]="0">0</mat-option>
+                        <mat-option [value]=0.05>5%</mat-option>
+                        <mat-option [value]=0.1>10%</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('iva') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
+
 
             <mat-grid-tile [colspan]="1" [rowspan]="2">
                 <mat-form-field>

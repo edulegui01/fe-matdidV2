@@ -176,7 +176,7 @@ export class VentaDetalleComponent implements OnInit, AfterViewInit, OnDestroy {
       precio:[producto.costo],
       iva:[producto.iva],
       descuento:[producto.descuento ? producto.descuento:0],
-      subTotal:[producto.cantidad ? (producto.cantidad*producto.costo)-producto.descuento : producto.costo]
+      subTotal:[producto.cantidad ? producto.cantidad*producto.costo : producto.costo]
     })
   }
 

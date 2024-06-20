@@ -68,7 +68,7 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
             idCompra: [entity ? entity.idCompra : ''],
             tipoFactura:[entity ? entity.tipoFactura:''],
             fecha: [new Date()],
-            monto: [entity.tipoFactura == 'contado' ? entity.saldo : ''],
+            monto: [ ''],
             saldo: [entity ? entity.saldo : ''],
             tipoPago: [entity ? entity.tipoPago : ''],
             comentario: [entity ? entity.comentario : ''],

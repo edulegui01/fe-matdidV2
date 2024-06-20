@@ -55,8 +55,8 @@ export class VentaListComponent  implements OnInit {
     this.ChangePaginatorEspa();
     
     this.filterForm = this.fb.group({
-      numFolio: [''],
-      proveedor: ['']
+      numFactura: [''],
+      cliente: ['']
     })
   }
 
@@ -189,12 +189,12 @@ export class VentaListComponent  implements OnInit {
 
   doFilter(){
     
-    let cedula = this.filterForm.value.cedula;
-    let name = this.filterForm.value.name;
+    let numFactura = this.filterForm.value.numFactura;
+    let cliente = this.filterForm.value.cliente;
 
-    console.log(cedula);
+
     
-    this.ventaService.getVentas('0','10',cedula,name).subscribe((compraData:any) => this.dataSource = compraData);
+    this.ventaService.getVentas('0','10',numFactura,cliente).subscribe((compraData:any) => this.dataSource = compraData);
   }
 
 

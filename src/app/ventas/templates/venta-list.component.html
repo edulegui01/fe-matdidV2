@@ -5,12 +5,12 @@
         <div class="d-flex flex-row">
             <div class="p-2 input-filters">
                 <div class="form-group " [formGroup]="filterForm">
-                    <input formControlName="numFolio" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por numero de folio">
+                    <input formControlName="numFactura" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por numero de folio">
                 </div>
             </div>
             <div class="p-2 input-filters">
                 <div class="form-group" [formGroup]="filterForm">
-                    <input formControlName="proveedor" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por proveedor">
+                    <input formControlName="cliente" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por proveedor">
                 </div>
             </div>
         </div>

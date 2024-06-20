@@ -12,8 +12,7 @@
             <mat-grid-tile [colspan]="6" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>TIPO DE PAGO</mat-label>
-                    <mat-select formControlName="tipoPago" id="gestionSelect">
-                        <mat-option>SELECCIONAR EL TIPO DE PAGO</mat-option>
+                    <mat-select formControlName="tipoPago" id="gestionSelect" required>
                         <mat-option *ngFor="let tipoPago of listaTipoDePago" [value]="tipoPago">
                             {{tipoPago}}
                         </mat-option>
@@ -52,7 +51,7 @@
                     <mat-label>
                         MONTO
                     </mat-label>
-                    <input mask="separator" thousandSeparator="." prefix="₲ " type="text" formControlName="monto" matInput placeholder="MONTO" required [readonly]="soloLectura">
+                    <input mask="separator" thousandSeparator="." prefix="₲ " type="text" formControlName="monto" matInput placeholder="MONTO" required >
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('monto') }}
                     </mat-error>

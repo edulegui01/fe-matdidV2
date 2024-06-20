@@ -53,8 +53,8 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
   maxInputDescuento:number=0;
 
 
-  @ViewChild('searchInputFuncionario')
-  inputSearchFun?:ElementRef
+  // @ViewChild('searchInputFuncionario')
+  // inputSearchFun?:ElementRef
 
 
   @ViewChild('searchInputProveedor')
@@ -96,7 +96,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    this.searchFuncionarioEvent();
+    //this.searchFuncionarioEvent();
     this.searchProveedorEvent();
     this.searchProductoEvent();
   }
@@ -107,21 +107,21 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
   }
 
 
-  searchFuncionarioEvent(){
-    fromEvent<any>(this.inputSearchFun?.nativeElement,'keyup')
-    .pipe(
-      map(event => event.target.value),
-      debounceTime(500),
-      distinctUntilChanged()
-    ).subscribe(filtro => {
+  // searchFuncionarioEvent(){
+  //   fromEvent<any>(this.inputSearchFun?.nativeElement,'keyup')
+  //   .pipe(
+  //     map(event => event.target.value),
+  //     debounceTime(500),
+  //     distinctUntilChanged()
+  //   ).subscribe(filtro => {
       
-      if(filtro==='' || filtro.length < 3){
-        this.Funcionarios=[];
-        return;
-      }
-      this.searchFuncionario(filtro)
-    })
-  }
+  //     if(filtro==='' || filtro.length < 3){
+  //       this.Funcionarios=[];
+  //       return;
+  //     }
+  //     this.searchFuncionario(filtro)
+  //   })
+  // }
 
 
   searchProveedorEvent(){
@@ -214,6 +214,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
       producto:[producto.nombre],
       cantidad:[producto.cantidad ? producto.cantidad:1],
       precio:[producto.costo],
+      precioOriginal:[producto.costo],
       iva:[producto.iva],
       descuento:[producto.descuento ? producto.descuento:0],
       subTotal:[producto.cantidad ? (producto.cantidad*producto.costo)-producto.descuento : producto.costo]
@@ -289,7 +290,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
     let subTotalParaCantidad =  parseInt(target.value.replace(/\D/g,''))*parseInt(this.getFormControls.controls[index].get('precio')?.value);
     let descuento = parseInt(this.getFormControls.controls[index].get('descuento')?.value);
     let subTotalParaDescuento = parseInt(this.getFormControls.controls[index].get('cantidad')?.value)*parseInt(this.getFormControls.controls[index].get('precio')?.value);
-
+    let precioParaDescuento = parseInt(this.getFormControls.controls[index].get('precioOriginal')?.value);
     
     
     if(target.value && target.name == "cantidad"){
@@ -300,9 +301,11 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
     
     
     if(target.name == "descuento" && target.value){
-      subTotal =subTotalParaDescuento-parseInt(target.value.replace(/\D/g,''));
-      subTotal = subTotal<0 ? 0 :subTotal
+      // subTotal =subTotalParaDescuento-parseInt(target.value.replace(/\D/g,''));
+      // subTotal = subTotal<0 ? 0 :subTotal
 
+      this.getFormControls.controls[index].get('precio')?.setValue(this.getFormControls.controls[index].get('precioOriginal')?.value -precioParaDescuento*parseFloat(target.value))
+      subTotal = this.getFormControls.controls[index].get('precio')?.value*parseInt(this.getFormControls.controls[index].get('cantidad')?.value)
     }else if(target.name == "descuento" && !target.value){
       subTotal = subTotalParaDescuento;
     }
@@ -324,12 +327,17 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
   saveCliente(){
     
    let listProducts = this.entityForm.controls['detalleProducts'].value;
+   let listado:any[] = [];
+   listProducts.map((detalle:any) =>{
+   
+    
+    listado.push({
+      idProducto:detalle.idProducto,
+      cantidad:detalle.cantidad,
+      precio:detalle.precio,
+      descuento:parseFloat(detalle.descuento)
 
-   let detalleCompra = listProducts.map((detalle:any) =>{
-      delete detalle.producto
-      delete detalle.iva
-      delete detalle.subTotal
-      return detalle;
+    })
    });
 
    
@@ -341,7 +349,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
     
     
     this.clienteToSave = {
-      idFuncionario:this.currentValues.idFuncionario,
+      idFuncionario:localStorage.getItem('idFuncionario'),
       idPersona:this.currentValues.idPersona,
       tipoFactura:this.entityForm.controls['tipoFactura'].value,
       fecha:fechaCompra,
@@ -350,7 +358,7 @@ export class CompraFormComponent implements OnInit, AfterViewInit {
       numFolio:this.entityForm.controls['folio'].value,
       timbrado:this.entityForm.controls['timbrado'].value,
       saldo: this.total,
-      detalleCompra:detalleCompra
+      detalleCompra:listado
     }
 
 

@@ -245,6 +245,7 @@ export class MovimientoFormComponent implements OnInit {
       idMotivo:this.entityForm.controls['idMotivo'].value,
       fecha:this.entityForm.controls['fecha'].value,
       comentario:this.entityForm.controls['comentario'].value,
+      documento:this.entityForm.controls['documento'].value,
       detalleMovimientos:detalleMovimiento
     }
 

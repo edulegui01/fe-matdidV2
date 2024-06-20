@@ -46,7 +46,7 @@
           <mat-grid-tile [colspan]="4" [rowspan]="1">
             <mat-form-field>
               <mat-label>DOCUMENTO NRO</mat-label>  
-              <input formControlName="documento" mask="0" matInput placeholder="DOCUMENTO"  readonly="true">
+              <input formControlName="documento" mask="999999999999" matInput placeholder="DOCUMENTO"  >
                 <mat-error *ngIf="entityForm.invalid">
                     {{ getErrorMessage('documento') }}
                 </mat-error>
