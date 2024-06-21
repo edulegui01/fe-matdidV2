@@ -255,7 +255,7 @@ export class ClienteFormComponent implements OnInit {
 
   updateClienteEmpresa(){
     this.clienteToUpdate = {
-      id:this.entity.idPersona,
+      idPersona:this.entity.idPersona,
       cedula:this.entityFormEmpresa.controls['ruc'].value,
       esCliente:true,
       localidad:{
@@ -310,7 +310,7 @@ export class ClienteFormComponent implements OnInit {
 
   updateClientePersona(){
     this.clienteToUpdate = {
-      id:this.entity.idPersona,
+      idPersona:this.entity.idPersona,
       cedula:this.entityFormPersona.controls['cedula'].value,
       esCliente:true,
       localidad:{

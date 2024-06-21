@@ -107,7 +107,7 @@
 
                         <mat-divider></mat-divider>
 
-                        <button mat-menu-item (click)="OnClickDeleteCliente(element)">
+                        <button mat-menu-item (click)="OnClickDeleteCliente(element)" *ngIf="element.estado == 'SC' ">
                             <mat-icon class="mat-18">
                                 remove_circle_outline
                             </mat-icon>

@@ -235,9 +235,9 @@ export class ProveedorFormComponent implements OnInit {
 
   updateProveedorEmpresa(){
     this.proveedorToUpdate = {
-      id:this.entity.idPersona,
+      idPersona:this.entity.idPersona,
       cedula:this.entityFormEmpresa.controls['ruc'].value,
-      esCliente:true,
+      esCliente:false,
       localidad:{
         id:this.entityFormEmpresa.controls['localidad'].value
       },
@@ -290,7 +290,7 @@ export class ProveedorFormComponent implements OnInit {
 
   updateProveedorPersona(){
     this.proveedorToUpdate = {
-      id:this.entity.idPersona,
+      idPersona:this.entity.idPersona,
       cedula:this.entityFormPersona.controls['cedula'].value,
       esCliente:false,
       localidad:{

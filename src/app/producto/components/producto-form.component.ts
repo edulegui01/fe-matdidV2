@@ -66,7 +66,7 @@ export class ProductoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
-    //this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
+    this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
     this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
     this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
 
@@ -99,6 +99,7 @@ export class ProductoFormComponent implements OnInit {
         precio: [entity ? entity.precio : '', Validators.required],
         iva: [entity ? entity.iva : '', Validators.required],
         categoria: [entity ? entity.categoria?.idCategoria : '', Validators.required],
+        image:[entity ? entity.image : ''],
        
         
         
@@ -220,6 +221,7 @@ export class ProductoFormComponent implements OnInit {
       costo:costo,
       precio:precio,
       iva:this.entityForm.controls['iva'].value,
+      image:this.entityForm.controls['image'].value
     }
 
 
@@ -258,6 +260,7 @@ export class ProductoFormComponent implements OnInit {
         this.productoService.updateProducto(this.entity.idProducto,this.productoToUpdate).subscribe(result => {
       
           if(result && this.formData.get('image')){
+            this.formData.get('image')
             this.formData.append('idProducto',this.entity.idProducto)
             this.productoService.uploadImage(this.formData).subscribe(result => {
               this.routerInstance.navigate(['../producto/listar-producto']);
