@@ -31,6 +31,7 @@ import { CobroModule } from './cobro/cobro.module';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { CajaModule } from './caja/caja.module';
 import { HomeModule } from './home/home.module';
+import { AutorModule } from './autor/autor.module';
 registerLocaleData(localePy);
 
 
@@ -63,7 +64,8 @@ registerLocaleData(localePy);
     PagoModule,
     CobroModule,
     CajaModule,
-    HomeModule
+    HomeModule,
+    AutorModule
   
 
   ],

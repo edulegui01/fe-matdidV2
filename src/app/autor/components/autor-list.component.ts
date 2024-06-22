@@ -6,13 +6,11 @@ import { NavigationExtras, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { GlobalMessage } from "src/app/class/global-message";
 import { ProductoData } from "src/app/class/productoData";
-import { ProductoService } from "../services/producto.service";
 import { PaginatorEs } from "src/app/utils/paginatorEs";
-import { ProductoFormComponent } from "./producto-form.component";
 import { Settings } from "src/app/class/settings";
-import { ProductoDetalleComponent } from "./producto-detalle.component";
 import { CustomDialogComponent } from "src/app/components/custom-dialog/components/custom-dialog.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AutorService } from "../service/autor.service";
 
 
 
@@ -22,13 +20,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
-    selector: 'app-producto-list-card',
-    templateUrl: '../templates/producto-list-card.component.html',
-    styleUrls: ['../styles/producto-list-card.component.scss'],
+    selector: 'app-autor-list',
+    templateUrl: '../templates/autor-list.component.html',
+    styleUrls: ['../styles/autor-list.component.scss'],
     
   })
 
-  export class ProductoListCardComponent implements OnInit{
+  export class AutorListComponent implements OnInit{
     dataSource!:any;
     clienteToEdit!:any;
     params:any=null;
@@ -41,7 +39,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     deleteDefaultMessage = 'EL REGISTRO';
     paginatorRef!: MatPaginator;
     @ViewChild(MatPaginator) paginatorf!: MatPaginator;
-    urlBase = Settings.URL_BASE+'/producto/imagen?searchImagen='
+    urlBase = Settings.URL_BASE+'/autor/imagen?searchImagen='
     cicloList!:any
     categoriaList!:any
     materiaList!:any
@@ -50,7 +48,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     rol:string|null = localStorage.getItem('role');
 
 
-    constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, 
+    constructor(private autorService:AutorService, private paginator: MatPaginatorIntl, private fb:FormBuilder, 
       private routerInstance: Router, private dialogInstance: MatDialog,  private  snackbarInstance: MatSnackBar) {
         if (this.routerInstance.getCurrentNavigation()) {
           this.params = this.routerInstance?.getCurrentNavigation()?.extras.state
@@ -61,34 +59,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     
 
     ngOnInit(): void {
-      if(this.params){
-        let idAutor = this.params.idAutor ? this.params.idAutor : '';
-        let idEditorial = this.params.idEditorial ? this.params.idEditorial : '';
-        let idMateria = this.params.idMateria ? this.params.idMateria : '';
-        let idCategoria = this.params.idCategoria ? this.params.idCategoria : '';
-
-
-        
-        this.productoService.getProductos('0','12','','',idCategoria,idMateria,idEditorial,idAutor).subscribe((
-          productoData:any) => this.dataSource = productoData);
-
-          this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
-          this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
-          this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
-          this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
-      }else{
-        this.initDataSource();
-      }
+      
+      this.initDataSource(this.params.idAutor);
+      
       
       
       this.ChangePaginatorEspa();
       
       this.filterForm = this.fb.group({
         nombre: [''],
-        idCiclo:[this.params?.idCiclo ? this.params.idCiclo: ''],
-        idCategoria:[this.params?.idCategoria ? this.params.idCategoria: ''],
-        idMateria:[this.params?.idMateria ? this.params.idMateria: ''],
-        idEditorial:[this.params?.idEditorial ? this.params.idEditorial: ''],
+        idCiclo:[''],
+        idCategoria:[''],
+        idMateria:[''],
+        idEditorial:['']
         
       })
     }
@@ -100,16 +83,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   
   
   
-    initDataSource(){
-      this.productoService.getProductos().subscribe( (productoData:any) => {
+    initDataSource(idAutor:string){
+      this.autorService.getProductos('0','12','','','','','',idAutor).subscribe( (productoData:any) => {
         this.dataSource = productoData
-        console.log(productoData);
       })
 
-      this.productoService.listarSelectCiclo().subscribe((cicloList:any) => this.cicloList = cicloList)
-      this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
-      this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
-      this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
+      
     }
 
 
@@ -127,7 +106,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       }
   
   
-      this.productoService.getProductos(page,size,nombre).subscribe((productoData:any) => {
+      this.autorService.getProductos(page,size,nombre).subscribe((productoData:any) => {
         
         
         this.dataSource = productoData
@@ -138,8 +117,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       const extraParams: NavigationExtras = {
         state: element,
      };
-     this.productoService.detalleForm=true;
-     this.productoService
+     this.autorService.detalleForm=true;
+     this.autorService
      this.routerInstance.navigate(['producto/detalle-producto'],extraParams);
       
       
@@ -153,7 +132,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       const extraParams: NavigationExtras = {
          state: element,
       };
-      this.productoService.editForm=true;
+      this.autorService.editForm=true;
       this.routerInstance.navigate(['producto/editar-producto'],extraParams);
       
       
@@ -179,10 +158,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
                       this.paginatorf.pageIndex = 0;
   
   
-                        this.productoService.deleteProducto(element.idProducto).subscribe({
+                        this.autorService.deleteProducto(element.idProducto).subscribe({
                           next: (resp) => {
                             this.paginatorf.pageIndex = 0;
-                            this.productoService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
+                            this.autorService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
                           },
                           error:(err) => {
                             this.snackbarInstance.open(err.error.message,'ACEPTAR',{
@@ -202,7 +181,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       let idMateria = this.filterForm.value.idMateria;
       let idEditorial = this.filterForm.value.idEditorial;
       
-      this.productoService.getProductos('0','12',nombre,idCiclo,idCategoria,idMateria,idEditorial,'').subscribe((
+      this.autorService.getProductos('0','12',nombre,idCiclo,idCategoria,idMateria,idEditorial,'').subscribe((
         productoData:any) => this.dataSource = productoData);
     }
 

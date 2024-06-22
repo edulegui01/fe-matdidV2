@@ -27,6 +27,9 @@ import { CajaComponent } from 'src/app/caja/components/caja.component';
 import {routes as routerCaja } from 'src/app/caja/caja.routing';
 import { HomeComponent } from 'src/app/home/components/home.component';
 import {routes as routerHome } from 'src/app/home/home.routing';
+import { AutorListComponent } from 'src/app/autor/components/autor-list.component';
+import {routes as routerAutor } from 'src/app/autor/autor.routing';
+
 
 export const routes: Routes = [
     {
@@ -105,6 +108,12 @@ export const routes: Routes = [
         path: MENU_URLS.HOME,
         component: HomeComponent,
         children: routerHome,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.AUTOR.URL_BASE,
+        component: AutorListComponent,
+        children: routerAutor,
         canActivate:[authGuard]
     },
     

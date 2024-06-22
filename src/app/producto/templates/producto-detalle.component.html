@@ -19,11 +19,11 @@
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>AUTOR:</b> </span>
-                    <span>{{entity.autor}}</span>
+                    <span><a class="link-opacity-100" style="cursor:pointer" (click)="OnClickFilterAutor(entity.autor)">{{entity.autor?.nombre}}</a></span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>EDITORIAL:</b> </span>
-                    <span>{{entity.editorial?.nombre}}</span>
+                    <span><a class="link-opacity-100" style="cursor:pointer" (click)="OnClickFilterSelect(entity.editorial)">{{entity.editorial?.nombre}}</a></span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>ISBN:</b> </span>
@@ -31,11 +31,11 @@
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>MATERIA:</b> </span>
-                    <span>{{entity.materia?.nombre}}</span>
+                    <span><a class="link-opacity-100" style="cursor:pointer" (click)="OnClickFilterSelect(entity.materia)">{{entity.materia?.nombre}}</a></span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>CATEGORÍA:</b> </span>
-                    <span>{{entity.categoria?.nombre}}</span>
+                    <span><a class="link-opacity-100" style="cursor:pointer" (click)="OnClickFilterSelect(entity.categoria)">{{entity.categoria?.nombre}}</a></span>
                 </li>
                 <li class="list-group-item">
                     <span style="margin-right: 0.5rem;"><b>PRECIO COSTO:</b> </span>

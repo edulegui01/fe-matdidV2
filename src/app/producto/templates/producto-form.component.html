@@ -23,13 +23,14 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
-                    <mat-label>
-                        AUTOR
-                    </mat-label>
-                    <input formControlName="autor" matInput placeholder="AUTOR" required >
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('autor') }}
-                    </mat-error>
+                    <mat-label>AUTOR</mat-label>
+                    <mat-select formControlName="autor" id="gestionSelect">
+                        <mat-option>SELECCIONAR AUTOR</mat-option>
+                        <mat-option *ngFor="let autor of autorList" [value]="autor.idAutor">
+                            {{autor.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('autor') }}</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 

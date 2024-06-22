@@ -2,13 +2,15 @@
 
     <div class="list-container mat-elevation-z4">
         
-        <div class="d-flex flex-row">
+
+        
+
+        <!-- <div class="d-flex flex-row">
             <div class="p-1 select-filters">
                 <div class="form-group " [formGroup]="filterForm">
                     <select (change)="doFilter()" formControlName="idCategoria"  matNativeControl id="tipoCliente"  #selectionAtipePersona class="form-select" aria-label="Default select example">
                         <option value='' >Todas las categorias</option>
                         <option [value]="categoria.idCategoria" *ngFor="let categoria of categoriaList">{{categoria.nombre}}</option>
-            
                     </select>
                 </div>
             </div>
@@ -52,7 +54,7 @@
             </div>
 
             
-        </div>
+        </div> -->
 
 
 
@@ -64,6 +66,27 @@
             </div>
         </div> -->
         <div  class="" style="padding: 10px 24px 0px 24px ;">
+
+
+            <section class="py-5">
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-60 col-md-auto text-center">
+                            <img src="{{ urlBase+params.image}}" class="radius-15px w-300px">
+                        </div>
+                        <div class="col mt-5 mt-md-0 px-4 text-justify bg-autor radius-15px">
+                            <h1>{{params.nombre}}</h1>
+                            <p class="bio-author">{{params.biografia}}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="p-0">
+                <div class="container">
+                    <h2>LIBROS DE {{params.nombre}}</h2>
+                </div>
+            </section>
+            
            
            <div class="row list-table-container">
                 <div class="col-sm-2 product-item" *ngFor="let card of dataSource.content">

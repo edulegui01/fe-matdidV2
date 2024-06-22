@@ -34,6 +34,7 @@ export class ProductoFormComponent implements OnInit {
   categoriaList!:any
   materiaList!:any
   editorialList!:any
+  autorList!:any
 
 
 
@@ -69,6 +70,7 @@ export class ProductoFormComponent implements OnInit {
     this.productoService.listarSelectCategoria().subscribe((categoriaList:any) => this.categoriaList = categoriaList)
     this.productoService.listarSelectMateria().subscribe((materiaList:any) => this.materiaList = materiaList)
     this.productoService.listarSelectEditorial().subscribe((editorialList:any) => this.editorialList = editorialList)
+    this.productoService.listarSelectAutor().subscribe((autorList:any) => this.autorList = autorList)
 
     this.entityForm.valueChanges.subscribe( form =>{
       if(form.precio){
@@ -90,7 +92,7 @@ export class ProductoFormComponent implements OnInit {
         idProducto: [entity ? entity.idProducto : ''],
         nombre: [entity ? entity.nombre : '', Validators.required],
         descripcion: [entity ? entity.descripcion : '', Validators.required],
-        autor: [entity ? entity.autor : '', Validators.required],
+        autor: [entity ? entity.autor?.idAutor : '', Validators.required],
         editorial: [entity ? entity.editorial?.idEditorial : '', Validators.required],
         isbn: [entity ? entity.isbn : '', Validators.required],
         materia: [entity ? entity.materia?.idMateria : '', Validators.required],

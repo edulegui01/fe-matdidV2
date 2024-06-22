@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { Persona } from 'src/app/class/clienteToSave';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -67,6 +67,30 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
   buildForm(entity: any) {
     console.log(entity)
     
+  }
+
+  OnClickFilterSelect(element:any){
+    const extraParams: NavigationExtras = {
+      state: element,
+   };
+   this.productoService.detalleForm=true;
+   this.productoService
+   this.routerInstance.navigate(['producto/listar-producto'],extraParams);
+    
+    
+
+  }
+
+  OnClickFilterAutor(element:any){
+    const extraParams: NavigationExtras = {
+      state: element,
+   };
+   this.productoService.detalleForm=true;
+   this.productoService
+   this.routerInstance.navigate(['autor/listar-autor'],extraParams);
+    
+    
+
   }
 
 

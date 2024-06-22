@@ -11,7 +11,7 @@ import {Settings} from 'src/app/class/settings';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductoService {
+export class AutorService {
 
   httpUrls={
     urlListar:'/producto/listar',
