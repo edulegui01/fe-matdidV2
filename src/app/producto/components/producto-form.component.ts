@@ -131,7 +131,7 @@ export class ProductoFormComponent implements OnInit {
     this.productoToSave = {
       nombre:this.entityForm.controls['nombre'].value,
       descripcion:this.entityForm.controls['descripcion'].value,
-      autor:this.entityForm.controls['autor'].value,
+      idAutor:this.entityForm.controls['autor'].value,
       idEditorial:this.entityForm.controls['editorial'].value,
       isbn:this.entityForm.controls['isbn'].value,
       idMateria:this.entityForm.controls['materia'].value,
@@ -214,7 +214,7 @@ export class ProductoFormComponent implements OnInit {
       idProducto:this.entityForm.controls['idProducto'].value,
       nombre:this.entityForm.controls['nombre'].value,
       descripcion:this.entityForm.controls['descripcion'].value,
-      autor:this.entityForm.controls['autor'].value,
+      idAutor:this.entityForm.controls['autor'].value,
       idEditorial:this.entityForm.controls['editorial'].value,
       isbn:this.entityForm.controls['isbn'].value,
       idMateria:this.entityForm.controls['materia'].value,

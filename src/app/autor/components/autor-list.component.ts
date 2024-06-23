@@ -96,17 +96,13 @@ import { AutorService } from "../service/autor.service";
       let page = event.pageIndex;
       let size = event.pageSize;
   
-      let nombre:string='';
+      let idAutor:string=this.params.idAutor;
       
   
-      if (this.filterForm.value.cedula || this.filterForm.value.name){
-        nombre = this.filterForm.value.nombre;
-        
-  
-      }
+      
   
   
-      this.autorService.getProductos(page,size,nombre).subscribe((productoData:any) => {
+      this.autorService.getProductos(page,size,'','','','','',idAutor).subscribe((productoData:any) => {
         
         
         this.dataSource = productoData

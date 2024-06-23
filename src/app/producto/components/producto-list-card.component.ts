@@ -117,17 +117,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       let page = event.pageIndex;
       let size = event.pageSize;
   
-      let nombre:string='';
+      let nombre:string=this.filterForm.value.nombre;
+      let idCiclo:string=this.filterForm.value.idCiclo;
+      let idCategoria:string=this.filterForm.value.idCategoria;
+      let idEditorial:string=this.filterForm.value.idEditorial;
+      let idMateria:string=this.filterForm.value.idMateria;
+      let idAutor:string=this.filterForm.value.idAutor;
       
   
-      if (this.filterForm.value.cedula || this.filterForm.value.name){
-        nombre = this.filterForm.value.nombre;
+      // if (this.filterForm.value.cedula || this.filterForm.value.name){
+      //   nombre = this.filterForm.value.nombre;
         
   
-      }
-  
-  
-      this.productoService.getProductos(page,size,nombre).subscribe((productoData:any) => {
+      // }
+      
+      
+      
+      this.productoService.getProductos(page,size,nombre,idCiclo,idCategoria,idMateria,idEditorial,idAutor).subscribe((productoData:any) => {
         
         
         this.dataSource = productoData
