@@ -10,7 +10,7 @@
         <div class="d-flex flex-row">
             
                 <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
-                    <mat-label>CATEGORIA</mat-label>
+                    <mat-label>TIPO DE REPORTE</mat-label>
                     <mat-select formControlName="filtroSelect" id="gestionSelect">
                         <mat-option>SELECCIONAR CATEGORIA</mat-option>
                         <mat-option *ngFor="let opt of optionList" [value]="opt.value">
