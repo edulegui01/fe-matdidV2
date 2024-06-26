@@ -1,0 +1,56 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+
+        <!-- <div class="form-group p-2 w-25" [formGroup]="filterForm">
+            <input formControlName="nombre" (keydown.enter)="doFilter()" type="email" class="form-control" id="exampleInputEmail1" placeholder="Buscar por nombre">
+        </div> -->
+
+        <div class="d-flex flex-row">
+            
+                <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                    <mat-label>CATEGORIA</mat-label>
+                    <mat-select formControlName="filtroSelect" id="gestionSelect">
+                        <mat-option>SELECCIONAR CATEGORIA</mat-option>
+                        <mat-option *ngFor="let opt of optionList" [value]="opt.value">
+                            {{opt.optionText}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            
+
+            
+                <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                    <mat-label>FECHA DESDE</mat-label>
+                       <input matInput formControlName="fechaDesde" [matDatepicker]="picker" placeholder="FECHA DESDE">
+                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                    <mat-label>FECHA HASTA</mat-label>
+                       <input matInput formControlName="fechaHasta" [matDatepicker]="picker1" placeholder="FECHA HASTA">
+                       <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                       <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+
+            <div class="p-3 input-filters">
+                <div class="form-group" [formGroup]="filterForm">
+                    <button mat-flat-button color="primary" (click)="generarPDF()"><mat-icon class="mat-18">print</mat-icon>Generar Reporte</button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="list-table-container">
+            <ngx-extended-pdf-viewer [src]="pdfView"></ngx-extended-pdf-viewer>
+        </div>
+       
+
+
+
+    </div>
+</div>
+

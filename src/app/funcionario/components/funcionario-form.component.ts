@@ -94,6 +94,8 @@ export class FuncionarioFormComponent implements OnInit {
       
     }
 
+    console.log(this.entityForm.controls['fechaNac'].value)
+
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM

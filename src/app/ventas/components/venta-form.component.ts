@@ -326,10 +326,10 @@ export class VentaFormComponent implements OnInit {
     });
  
     
-    const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-ddTHH:mm:SS.sss');
+    const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-ddTHH:mm:SS');
     const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-ddTHH:mm:SS.sss');
 
-    console.log(this.entityForm.controls['fecha'].value)
+    
 
     this.ventaToSave = {
       idFuncionario:this.currentValues.idFuncionario,
@@ -345,7 +345,7 @@ export class VentaFormComponent implements OnInit {
       detalleFacturas:listado
     }
 
-    console.log(this.ventaToSave)
+    
 
     if (this.entityForm.invalid) {
       this.snackbarInstance.open(this.viewText.INVALID_FORM

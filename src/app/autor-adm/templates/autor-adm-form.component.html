@@ -1,0 +1,77 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('nombre') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="2">
+                <mat-form-field>
+                    <mat-label>
+                        BIOGRAFÍA
+                    </mat-label>
+                    <textarea formControlName="biografia" matInput placeholder="BIOGRAFÍA" required ></textarea>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('biografia') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1" translate="no">
+                <input type="file" class="file-input" accept="image/png,image/jpeg"
+                    (change)="onFileSelected($event)" #fileUpload>
+
+                
+                <div class="file-upload">
+
+                    {{fileName || viewText.SELECT_IMAGE}}
+
+                    <button mat-mini-fab color="primary" class="upload-btn"
+                        (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+
+
+
+            </mat-grid-tile>
+        
+
+            
+
+
+            
+           
+
+        </mat-grid-list>
+
+        <div class="buttons-container">
+            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProducto()">
+                {{ viewText.REGISTER }}
+                <mat-icon>save</mat-icon>
+            </button>
+            <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateLocalidad()">
+                {{ viewText.UPDATE }}
+                <mat-icon>update</mat-icon>
+            </button>
+            <button type="button" mat-raised-button (click)="closeForm()">
+                {{ viewText.CANCEL }}
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </form>
+</div>

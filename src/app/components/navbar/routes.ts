@@ -346,5 +346,51 @@ export const MENU_URLS = {
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },
+    REPORTE: {
+        URL_BASE: 'reporte',
+        ROOT: {
+            URL: 'listar-reporte',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-reporte',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-reporte',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-reporte',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-reporte',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    AUTORADM: {
+        URL_BASE: 'autor-adm',
+        ROOT: {
+            URL: 'listar-autor-adm',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-autor-adm',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-autor-adm',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-autor-adm',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-autor-adm',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
     
 };

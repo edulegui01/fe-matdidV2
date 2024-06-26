@@ -19,6 +19,7 @@ export class subMenu{
         {nombre:'CAJA',menus:[],icono:'monetization_on',url:MENU_URLS.CAJA.URL_BASE},
         {nombre:'INVENTARIO',menus:[],icono:'assignment',url:MENU_URLS.INVENTARIO.URL_BASE},
         {nombre:'LIBROS',menus:[],icono:'library_books',url:MENU_URLS.PRODUCTO.URL_BASE},
+        {nombre:'REPORTES',menus:[],icono:'picture_as_pdf',url:MENU_URLS.REPORTE.URL_BASE},
     ]
 
     static menuListAdministracion:Array<any>=[
@@ -26,6 +27,7 @@ export class subMenu{
         {nombre:'PROVEEDORES',menus:[],icono:'local_shipping',url:MENU_URLS.PROVEEDOR.URL_BASE},
         {nombre:'FUNCIONARIOS',menus:[],icono:'contacts',url:MENU_URLS.FUNCIONARIO.URL_BASE},
         {nombre:'LOCALIDADES',menus:[],icono:'location_on', url:MENU_URLS.LOCALIDAD.URL_BASE},
+        {nombre:'AUTOR',menus:[],icono:'contacts', url:MENU_URLS.AUTORADM.URL_BASE},
     ]
 
 

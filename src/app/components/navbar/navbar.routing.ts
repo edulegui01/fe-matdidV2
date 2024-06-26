@@ -29,6 +29,10 @@ import { HomeComponent } from 'src/app/home/components/home.component';
 import {routes as routerHome } from 'src/app/home/home.routing';
 import { AutorListComponent } from 'src/app/autor/components/autor-list.component';
 import {routes as routerAutor } from 'src/app/autor/autor.routing';
+import { GenerarReportesListComponent } from 'src/app/reportes/components/generar-reportes.component';
+import {routes as routerReporte } from 'src/app/reportes/reportes.routing';
+import { AutorAdmComponent } from 'src/app/autor-adm/components/autor-adm.component';
+import {routes as routerAutorAdm } from 'src/app/autor-adm/autor-adm.routing';
 
 
 export const routes: Routes = [
@@ -116,7 +120,18 @@ export const routes: Routes = [
         children: routerAutor,
         canActivate:[authGuard]
     },
-    
+    {
+        path: MENU_URLS.REPORTE.URL_BASE,
+        component: GenerarReportesListComponent,
+        children: routerReporte,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.AUTORADM.URL_BASE,
+        component: AutorAdmComponent,
+        children: routerAutorAdm,
+        canActivate:[authGuard]
+    },
    
 
 ];
