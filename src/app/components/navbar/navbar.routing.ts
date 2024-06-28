@@ -33,6 +33,8 @@ import { GenerarReportesListComponent } from 'src/app/reportes/components/genera
 import {routes as routerReporte } from 'src/app/reportes/reportes.routing';
 import { AutorAdmComponent } from 'src/app/autor-adm/components/autor-adm.component';
 import {routes as routerAutorAdm } from 'src/app/autor-adm/autor-adm.routing';
+import { EstadisticaComponent } from 'src/app/estadistica/components/estadistica.component';
+import {routes as routerEstadistica } from 'src/app/estadistica/estadistica.routing';
 
 
 export const routes: Routes = [
@@ -132,6 +134,13 @@ export const routes: Routes = [
         children: routerAutorAdm,
         canActivate:[authGuard]
     },
+    {
+        path: MENU_URLS.ESTADISTICA.URL_BASE,
+        component: EstadisticaComponent,
+        children: routerEstadistica,
+        canActivate:[authGuard]
+    },
+   
    
 
 ];

@@ -4,6 +4,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
+import { EstadisticaComponent } from './components/estadistica.component';
 
 
 
@@ -16,7 +17,7 @@ import { NavigationModule } from '../components/navigation.module';
 
 @NgModule({
   declarations: [
-
+    EstadisticaComponent
    
   ],
   imports: [

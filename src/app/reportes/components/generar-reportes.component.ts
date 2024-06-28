@@ -44,6 +44,18 @@ export class GenerarReportesListComponent  implements OnInit {
     {
       optionText:"REPORTE DE VENTAS",
       value: "/reporte/vendidos"
+    },
+    {
+      optionText:"REPORTE DE COMPRAS",
+      value: "/reporte/comprados"
+    },
+    {
+      optionText:"REPORTE DE PAGOS",
+      value: "/reporte/pagos"
+    },
+    {
+      optionText:"REPORTE DE COBROS",
+      value: "/reporte/cobros"
     }
   ]
 

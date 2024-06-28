@@ -20,6 +20,7 @@ export class subMenu{
         {nombre:'INVENTARIO',menus:[],icono:'assignment',url:MENU_URLS.INVENTARIO.URL_BASE},
         {nombre:'LIBROS',menus:[],icono:'library_books',url:MENU_URLS.PRODUCTO.URL_BASE},
         {nombre:'REPORTES',menus:[],icono:'picture_as_pdf',url:MENU_URLS.REPORTE.URL_BASE},
+        {nombre:'ESTADISTICAS',menus:[],icono:'bar_chart',url:MENU_URLS.ESTADISTICA.URL_BASE},
     ]
 
     static menuListAdministracion:Array<any>=[

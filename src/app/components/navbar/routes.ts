@@ -392,5 +392,28 @@ export const MENU_URLS = {
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },
+    ESTADISTICA: {
+        URL_BASE: 'estadistica',
+        ROOT: {
+            URL: 'listar-estadistica',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-estadistica',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-estadistica',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-estadistica',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-estadistica',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
     
 };

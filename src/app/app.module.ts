@@ -34,6 +34,7 @@ import { HomeModule } from './home/home.module';
 import { AutorModule } from './autor/autor.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { AutorAdmModule } from './autor-adm/autor-adm.module';
+import { EstadisticaModule } from './estadistica/estadistica.module';
 registerLocaleData(localePy);
 
 
@@ -69,7 +70,8 @@ registerLocaleData(localePy);
     HomeModule,
     AutorModule,
     ReportesModule,
-    AutorAdmModule
+    AutorAdmModule,
+    EstadisticaModule
     
   
 
