@@ -12,6 +12,8 @@ export class EstadisticaService {
 
   httpUrls={
     urlListar:'/localidad/listar',
+    urlCantidadProductos:'/estadistica/cantidad/producto',
+    urlMontoPorVenta:'/estadistica/cantidad/ventas'
   }
 
   editForm:boolean=false;
@@ -39,9 +41,24 @@ export class EstadisticaService {
 
   }
 
-//   public saveLocalidad(localidad:any):Observable<any>{
-//     return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,localidad,this.options);
-//   }
+  public getCantidadProductoVendidos(fechaDesde:any,fechaHasta:any):Observable<any>{
+
+    let params = new HttpParams();
+
+    params = params.append('fechaDesde',String(fechaDesde));
+    params = params.append('fechaHasta',String(fechaHasta));
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlCantidadProductos,{...this.options,params:params});
+  }
+
+
+  public getMontosPorVentas(fechaDesde:any,fechaHasta:any):Observable<any>{
+
+    let params = new HttpParams();
+
+    params = params.append('fechaDesde',String(fechaDesde));
+    params = params.append('fechaHasta',String(fechaHasta));
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlMontoPorVenta,{...this.options,params:params});
+  }
 
 
 //   public updateLocalidad(id:string,localidad:any){

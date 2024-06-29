@@ -1,21 +1,52 @@
 <div class="container-fluid px-4">
     <div class="row">
         <div class="col-md-6 mt-3">
+            <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                <mat-label>FECHA DESDE</mat-label>
+                   <input matInput formControlName="fechaDesde1" [matDatepicker]="picker" placeholder="FECHA DESDE">
+                   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                   <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                <mat-label>FECHA HASTA</mat-label>
+                   <input matInput formControlName="fechaHasta1" [matDatepicker]="picker1" placeholder="FECHA HASTA">
+                   <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                   <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary"  (click)="onGraficoUno()">APLICAR</button>
             <div class="card mb-4">
+                
                 <div class="card-header">
                     <mat-icon class="pt-1">show_chart</mat-icon>
                     Cantidad de Productos Vendidos
                 </div>
-                <canvas id="cantidadProducto"></canvas>
+                <canvas id="cantidadProducto" ></canvas>
             </div>
         </div>
         <div class="col-md-6 mt-3">
+            <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                <mat-label>FECHA DESDE</mat-label>
+                   <input matInput formControlName="fechaDesde2" [matDatepicker]="picker2" placeholder="FECHA DESDE">
+                   <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                   <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
+                <mat-label>FECHA HASTA</mat-label>
+                   <input matInput formControlName="fechaHasta2" [matDatepicker]="picker3" placeholder="FECHA HASTA">
+                   <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                   <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" (click)="onGraficoDos()">APLICAR</button>
             <div class="card mb-4">
                 <div class="card-header">
                     <mat-icon class="pt-1">show_chart</mat-icon>
                     Monto Total de Ventas
                 </div>
-                <canvas id="cantidadVentas"></canvas>
+                <canvas id="montosVentas"></canvas>
             </div>
         </div>
         <div class="col-md-6">
