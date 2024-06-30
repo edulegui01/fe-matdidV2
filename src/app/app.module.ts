@@ -18,7 +18,7 @@ import { LocalidadModule } from './localidad/localidad.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CompraModule } from './compra/compra.module';
 import { VentaModule } from './ventas/venta.module';
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import localePy from '@angular/common/locales/es-PY';
 import { DatePipe, registerLocaleData } from '@angular/common';
@@ -35,6 +35,7 @@ import { AutorModule } from './autor/autor.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { AutorAdmModule } from './autor-adm/autor-adm.module';
 import { EstadisticaModule } from './estadistica/estadistica.module';
+import { MY_FORMATS } from './estadistica/components/estadistica.component';
 registerLocaleData(localePy);
 
 
@@ -86,7 +87,8 @@ registerLocaleData(localePy);
     deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
   },
   {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
-  provideNgxMask()
+  provideNgxMask(),
+  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
   bootstrap: [AppComponent]
 })

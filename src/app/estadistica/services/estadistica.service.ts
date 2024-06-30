@@ -13,7 +13,9 @@ export class EstadisticaService {
   httpUrls={
     urlListar:'/localidad/listar',
     urlCantidadProductos:'/estadistica/cantidad/producto',
-    urlMontoPorVenta:'/estadistica/cantidad/ventas'
+    urlMontoPorVenta:'/estadistica/cantidad/ventas',
+    urlVentaPorMes:'/estadistica/cobrado/mes',
+    urlPagadosPorMes:'/estadistica/pagado/mes'
   }
 
   editForm:boolean=false;
@@ -58,6 +60,20 @@ export class EstadisticaService {
     params = params.append('fechaDesde',String(fechaDesde));
     params = params.append('fechaHasta',String(fechaHasta));
     return this.http.get(Settings.URL_BASE+this.httpUrls.urlMontoPorVenta,{...this.options,params:params});
+  }
+
+  public getVentasPorMes(anho:any):Observable<any>{
+    let params = new HttpParams();
+
+    params = params.append('anho',String(anho));
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlVentaPorMes,{...this.options,params:params});
+  }
+
+  public getPagadosPorMes(anho:any):Observable<any>{
+    let params = new HttpParams();
+
+    params = params.append('anho',String(anho));
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlPagadosPorMes,{...this.options,params:params});
   }
 
 
