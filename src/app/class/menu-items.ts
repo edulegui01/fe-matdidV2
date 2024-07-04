@@ -7,9 +7,9 @@ export class menu{
 
 
     static menuList:Array<any>=[
-        {nombre:'INICIO',menus:[],icono:'home',url:MENU_URLS.HOME},
-        {nombre:'ACCIONES', menus:subMenu.menuListAcciones},
-        {nombre:'ADMINISTRACION',menus:subMenu.menuListAdministracion},
+        {nombre:'INICIO',menus:[],icono:'home',url:MENU_URLS.HOME,permiso:'CAJERO',permiso1:'VENDEDOR',permiso2:'ADMIN'},
+        {nombre:'ACCIONES', menus:subMenu.menuListAcciones,permiso:'CAJERO',permiso1:'VENDEDOR',permiso2:'ADMIN'},
+        {nombre:'ADMINISTRACION',menus:subMenu.menuListAdministracion, permiso:'ADMIN'},
         
     ]
 

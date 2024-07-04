@@ -21,6 +21,8 @@ export class MenuNavigationComponent implements OnInit {
   @Input() paddingL = 0;
   paddingMenu = '';
 
+  role = localStorage.getItem('role');
+
   icons = {};
   constructor(
       private router: Router,

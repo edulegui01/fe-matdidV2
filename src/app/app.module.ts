@@ -88,7 +88,7 @@ registerLocaleData(localePy);
   },
   {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
   provideNgxMask(),
-  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  
   ],
   bootstrap: [AppComponent]
 })

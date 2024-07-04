@@ -4,8 +4,9 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
-import { EstadisticaComponent, MY_FORMATS } from './components/estadistica.component';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { LocalidadComponent } from './components/localidad.component';
+import { LocalidadFormComponent } from './components/localidad-form.component';
+import { LocalidadListComponent } from './components/localidad-list.component';
 
 
 
@@ -18,7 +19,9 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 @NgModule({
   declarations: [
-    EstadisticaComponent
+    LocalidadComponent,
+    LocalidadFormComponent,
+    LocalidadListComponent
    
   ],
   imports: [
@@ -31,7 +34,6 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
     
     
     
-  ],
-
+  ]
 })
-export class EstadisticaModule { }
+export class LocalidadModule { }

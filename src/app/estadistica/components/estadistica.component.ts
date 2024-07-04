@@ -5,9 +5,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import * as _moment from 'moment';
 //import { Moment } from 'moment';
-import { default as _rollupMoment, Moment } from 'moment';
 
-const moment = _rollupMoment || _moment;
+
+
 
 export const MY_FORMATS = {
   parse: {
@@ -41,11 +41,14 @@ export class EstadisticaComponent implements OnInit {
   montoTotal:any = [];
   clientes:any = [];
 
+  anhoActual:any = this.hoy.getFullYear()
 
   montoMes:any=[];
   pagadoMes:any=[];
 
-  date = new FormControl(moment());
+  anhoList:any=[this.anhoActual-9,this.anhoActual-8,this.anhoActual-7,this.anhoActual-6,
+    this.anhoActual-5,this.anhoActual-4,this.anhoActual-3,this.anhoActual-2,this.anhoActual-1,this.anhoActual
+  ]
   
   constructor(public estadisticaService:EstadisticaService,private fb:FormBuilder,private datePipe: DatePipe,) { }
 
@@ -65,8 +68,8 @@ export class EstadisticaComponent implements OnInit {
     fechaHasta1: [''],
     fechaDesde2: [''],
     fechaHasta2: [''],
-    anho1: [moment()],
-    anho2: [moment()],
+    anho1: [this.anhoActual],
+    anho2: [],
   })
   
   this.estadisticaService.getCantidadProductoVendidos(fechaDesde,fechaHasta).subscribe((estadisticaData:any) => {
@@ -147,24 +150,7 @@ export class EstadisticaComponent implements OnInit {
 
   }
 
-  chosenYearHandler(normalizedYear: Moment, dp: any) {
-    const ctrlValue = this.filterForm.controls['anho1'].value;
-    ctrlValue!.year(normalizedYear.year());
-    this.filterForm.controls['anho1'].setValue(ctrlValue);
-    dp.close();
 
-    console.log(this.datePipe.transform(this.filterForm.controls['anho1'].value,'YYYY'))
-  }
-
-
-  chosenYearHandler2(normalizedYear: Moment, dp: any) {
-    const ctrlValue = this.filterForm.controls['anho2'].value;
-    ctrlValue!.year(normalizedYear.year());
-    this.filterForm.controls['anho2'].setValue(ctrlValue);
-    dp.close();
-
-    
-  }
 
 
 
@@ -266,8 +252,8 @@ export class EstadisticaComponent implements OnInit {
 
   onGraficoTres(){
     
-    const anho = this.datePipe.transform(this.filterForm.controls['anho1'].value,'YYYY');
-    this.estadisticaService.getVentasPorMes(anho).subscribe((result:any) =>{
+    
+    this.estadisticaService.getVentasPorMes(this.filterForm.controls['anho1'].value).subscribe((result:any) =>{ 
       this.montoMes = result.monto;
       this.cobradoMes.destroy()
       this.renderGrafico3()

@@ -50,16 +50,16 @@
             </div>
         </div>
         <div class="col-md-6">
-            <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
-                <input formControlName="anho1" matInput [matDatepicker]="dp" placeholder="Month and Year" >
-                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-                <mat-datepicker #dp
-                                startView="multi-year"
-                                (yearSelected)="chosenYearHandler($event, dp)"
-                               
-                                panelClass="example-month-picker">
-                </mat-datepicker>
-              </mat-form-field>
+            
+                <mat-form-field [formGroup]="filterForm" class="p-3 select-filters">
+                    <mat-label>AÑO</mat-label>
+                    <mat-select formControlName="anho1" >
+                        <mat-option *ngFor="let anho of anhoList" [value]="anho">
+                            {{anho}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
 
               <button mat-flat-button color="primary" (click)="onGraficoTres()">APLICAR</button>
             <div class="card mb-4">
@@ -71,16 +71,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <mat-form-field class="p-3 select-filters" [formGroup]="filterForm">
-                <input formControlName="anho2" matInput [matDatepicker]="dp2" placeholder="Month and Year" >
-                <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
-                <mat-datepicker #dp2
-                                startView="multi-year"
-                                (yearSelected)="chosenYearHandler2($event, dp2)"
-                               
-                                panelClass="example-month-picker">
-                </mat-datepicker>
-              </mat-form-field>
+            
 
               <button mat-flat-button color="primary" (click)="onGraficoCuatro()">APLICAR</button>
             <div class="card mb-4">
