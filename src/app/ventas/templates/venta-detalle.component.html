@@ -1,13 +1,21 @@
 
 <div class="d-flex justify-content-between flex-row form-container">
     
-    <ng-container  *ngIf="entityForm.controls['saldo'].value>0">
+    <ng-container  *ngIf="entityForm.controls['saldo'].value>0 && (entity.estado == 'CP' || entity.estado == 'SC') ">
       <div class="p5 m-1">
         <button (click)="openCobroRegister(entity)"  type="button" class="btn btn-primary">REGISTRAR COBRO</button>
       </div>
     </ng-container>
-    <ng-container *ngIf="entityForm.controls['saldo'].value==0">
+    <ng-container *ngIf="entityForm.controls['saldo'].value==0 && entity.estado == 'CO'">
       <h5 class="pagado-msm">PAGADO</h5>
+    </ng-container>
+    <ng-container *ngIf="entityForm.controls['saldo'].value==0 && entity.estado == 'A' ">
+      <h5 class="anulado-msm">ANULADO</h5>
+    </ng-container>
+    <ng-container  *ngIf="entity.estado != 'A'">
+      <div class="imprimir-factura">
+        <button mat-flat-button color="primary" (click)="imprimirFactura()"><mat-icon class="mat-18">print</mat-icon>Imprimir Factura</button>
+      </div>
     </ng-container>
   </div>
   <div class="form-container">

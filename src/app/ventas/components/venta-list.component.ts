@@ -126,7 +126,6 @@ export class VentaListComponent  implements OnInit {
         result += str.substring(i, i + size) + "-";
         if(i==3){
           result += str.substring(i+size,str.length)
-          console.log(result)
           break;
         }
     }
@@ -212,12 +211,12 @@ export class VentaListComponent  implements OnInit {
               }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
       
                   if (accept) {
-                    console.log(this.paginatorRef)
+                    console.log(element.idFactura)
                     
                     this.paginatorf.pageIndex = 0;
 
 
-                      this.ventaService.deleteVenta(element.idPersona).subscribe(resp => {
+                      this.ventaService.deleteVenta(element.idFactura).subscribe(resp => {
                         this.paginatorf.pageIndex = 0;
                         this.ventaService.getVentas().subscribe( (compraData:any) => this.dataSource = compraData)
                       });

@@ -69,7 +69,7 @@ export class EstadisticaComponent implements OnInit {
     fechaDesde2: [''],
     fechaHasta2: [''],
     anho1: [this.anhoActual],
-    anho2: [],
+    anho2: [this.anhoActual],
   })
   
   this.estadisticaService.getCantidadProductoVendidos(fechaDesde,fechaHasta).subscribe((estadisticaData:any) => {
@@ -262,8 +262,8 @@ export class EstadisticaComponent implements OnInit {
 
   onGraficoCuatro(){
     
-    const anho = this.datePipe.transform(this.filterForm.controls['anho2'].value,'YYYY');
-    this.estadisticaService.getPagadosPorMes(anho).subscribe((result:any) =>{
+    
+    this.estadisticaService.getPagadosPorMes(this.filterForm.controls['anho2'].value).subscribe((result:any) =>{
       this.pagadoMes = result.monto;
       this.pagadoMesGrafico.destroy()
       this.renderGrafico4()

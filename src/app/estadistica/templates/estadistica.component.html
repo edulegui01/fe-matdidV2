@@ -71,7 +71,14 @@
             </div>
         </div>
         <div class="col-md-6">
-            
+            <mat-form-field [formGroup]="filterForm" class="p-3 select-filters">
+                <mat-label>AÑO</mat-label>
+                <mat-select formControlName="anho2" >
+                    <mat-option *ngFor="let anho of anhoList" [value]="anho">
+                        {{anho}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
               <button mat-flat-button color="primary" (click)="onGraficoCuatro()">APLICAR</button>
             <div class="card mb-4">

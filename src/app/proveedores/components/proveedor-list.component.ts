@@ -63,7 +63,11 @@ export class ProveedorListComponent  implements OnInit {
 
 
   initDataSource(){
-    this.proveedorService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
+    this.proveedorService.getClientes().subscribe( (clienteData:ClienteData) =>{
+      console.log(clienteData)
+      this.dataSource = clienteData
+    } )
+      
   }
 
 

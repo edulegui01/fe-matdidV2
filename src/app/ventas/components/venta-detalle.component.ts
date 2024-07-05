@@ -127,7 +127,7 @@ export class VentaDetalleComponent implements OnInit, AfterViewInit, OnDestroy {
    
     
     this.entityForm = this.formBuilder.group({
-        idVenta: [entity ? entity.idVenta : ''],
+        idFactura: [entity ? entity.idFactura : ''],
         tipoFactura:[entity ? entity.tipoFactura.toUpperCase():''],
         saldo:[entity ? entity.saldo: ''],
         fecha: [entity ? entity.fecha : ''],
@@ -434,6 +434,14 @@ export class VentaDetalleComponent implements OnInit, AfterViewInit, OnDestroy {
   closeForm() {
     this.routerInstance.navigate(['../venta/listar-venta']);
     this.ventaService.editForm = false;
+  }
+
+  imprimirFactura(){
+    this.ventaService.facturaImprimir(this.entityForm.controls['idFactura'].value).subscribe(res  =>{
+      let blob:Blob = res.body as Blob;
+      let url = window.URL.createObjectURL(blob);
+      window.open(url);
+    })
   }
 
   

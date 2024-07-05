@@ -29,7 +29,9 @@ export class VentaService {
     urlFacturaFolio:'/factura/folio',
     urlFacturaNumeracion:'/factura/numeracion',
     urlFacturaGuardar:'/factura/guardar',
-    urlFacturaListar:'/factura/listar'
+    urlFacturaListar:'/factura/listar',
+    urlFacturaBorrar:'/factura/anular/',
+    urlImprimirFactura:'/factura/imprimir'
   }
 
   editForm:boolean=false;
@@ -139,7 +141,15 @@ export class VentaService {
   }
 
   public deleteVenta(id:string){
-    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id,this.options)
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlFacturaBorrar+id,this.options)
+  }
+
+  public facturaImprimir(idFactura:any):Observable<any>{
+    let params = new HttpParams();
+
+
+    params = params.append('idFactura',Number(idFactura));
+    return this.http.get(Settings.URL_BASE+this.httpUrls.urlImprimirFactura,{...this.options,params:params,observe:'response',responseType:'blob'})
   }
 
   createHeader(){
