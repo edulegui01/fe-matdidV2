@@ -121,7 +121,8 @@ export class EstadisticaComponent implements OnInit {
           y: {
             beginAtZero: true
           }
-        }
+        },
+        aspectRatio: 2
       }
     });
 
@@ -161,7 +162,7 @@ export class EstadisticaComponent implements OnInit {
       data: {
         labels: this.clientes,
         datasets: [{
-          label: 'Libros vendidos',
+          label: 'Monto total',
           data: this.montoTotal,
           borderWidth: 1
         }]
@@ -171,7 +172,9 @@ export class EstadisticaComponent implements OnInit {
           y: {
             beginAtZero: true
           }
-        }
+          
+        },
+        aspectRatio: 2
       }
     });
   }
@@ -184,7 +187,8 @@ export class EstadisticaComponent implements OnInit {
         datasets: [{
           label: 'TOTAL COBRADO',
           data: this.montoMes,
-          borderWidth: 1
+          borderWidth: 1,
+          backgroundColor:'#C6FABB'
         }]
       },
       options: {
@@ -203,9 +207,10 @@ export class EstadisticaComponent implements OnInit {
       data: {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
         datasets: [{
-          label: 'TOTAL COBRADO',
+          label: 'TOTAL PAGADO',
           data: this.pagadoMes,
-          borderWidth: 1
+          borderWidth: 1,
+          backgroundColor:'#FB9595'
         }]
       },
       options: {
@@ -214,7 +219,7 @@ export class EstadisticaComponent implements OnInit {
             beginAtZero: true
           }
         }
-      }
+      },
     });
   }
 

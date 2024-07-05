@@ -56,6 +56,10 @@ export class GenerarReportesListComponent  implements OnInit {
     {
       optionText:"REPORTE DE COBROS",
       value: "/reporte/cobros"
+    },
+    {
+      optionText:"REPORTE DE FACTURA CON DETALLE",
+      value: "/reporte/facturas-detallado"
     }
   ]
 

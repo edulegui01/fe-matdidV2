@@ -326,8 +326,8 @@ export class VentaFormComponent implements OnInit {
     });
  
     
-    const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-ddTHH:mm:SS');
-    const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-ddTHH:mm:SS.sss');
+    //const fechaCompra = this.datePipe.transform(this.entityForm.controls['fecha'].value,'YYYY-MM-ddTHH:mm:SS');
+    //const fechaCompraVencimiento = this.datePipe.transform(this.entityForm.controls['fechaVencimiento'].value,'YYYY-MM-ddTHH:mm:SS.sss');
 
     
 
@@ -337,8 +337,8 @@ export class VentaFormComponent implements OnInit {
       idTimbrado:this.timbrado.idTimbrado,
       idFolio: 1,
       tipoFactura:this.entityForm.controls['tipoFactura'].value,
-      fecha:fechaCompra,
-      fechaVencimiento:fechaCompraVencimiento,
+      fecha:this.entityForm.controls['fecha'].value,
+      fechaVencimiento:this.entityForm.controls['fechaVencimiento'].value,
       montoTotal:this.total,
       saldo: this.total,
       numFactura:'',
