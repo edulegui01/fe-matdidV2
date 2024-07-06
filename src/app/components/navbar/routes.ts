@@ -415,5 +415,50 @@ export const MENU_URLS = {
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },
-    
+    USUARIO: {
+        URL_BASE: 'usuario',
+        ROOT: {
+            URL: 'listar-usuario',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-usuario',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-usuario',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-usuario',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-usuario',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    CONCEPTO: {
+        URL_BASE: 'concepto',
+        ROOT: {
+            URL: 'listar-concepto',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-concepto',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-concepto',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-concepto',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-concepto',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
 };

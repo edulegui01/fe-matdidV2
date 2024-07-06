@@ -46,7 +46,7 @@ export class EstadisticaComponent implements OnInit {
   montoMes:any=[];
   pagadoMes:any=[];
 
-  anhoList:any=[this.anhoActual-9,this.anhoActual-8,this.anhoActual-7,this.anhoActual-6,
+  anhoList:any=[this.anhoActual-10,this.anhoActual-9,this.anhoActual-8,this.anhoActual-7,this.anhoActual-6,
     this.anhoActual-5,this.anhoActual-4,this.anhoActual-3,this.anhoActual-2,this.anhoActual-1,this.anhoActual
   ]
   

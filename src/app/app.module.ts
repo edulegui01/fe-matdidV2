@@ -36,6 +36,8 @@ import { ReportesModule } from './reportes/reportes.module';
 import { AutorAdmModule } from './autor-adm/autor-adm.module';
 import { EstadisticaModule } from './estadistica/estadistica.module';
 import { MY_FORMATS } from './estadistica/components/estadistica.component';
+import { UsuarioModule } from './usuario/usuario.module';
+import { ConceptoModule } from './concepto/concepto.module';
 registerLocaleData(localePy);
 
 
@@ -72,7 +74,9 @@ registerLocaleData(localePy);
     AutorModule,
     ReportesModule,
     AutorAdmModule,
-    EstadisticaModule
+    EstadisticaModule,
+    UsuarioModule,
+    ConceptoModule
     
   
 

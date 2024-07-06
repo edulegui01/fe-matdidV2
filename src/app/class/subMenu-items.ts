@@ -29,6 +29,8 @@ export class subMenu{
         {nombre:'FUNCIONARIOS',menus:[],icono:'contacts',url:MENU_URLS.FUNCIONARIO.URL_BASE,permiso:'ADMIN'},
         {nombre:'LOCALIDADES',menus:[],icono:'location_on', url:MENU_URLS.LOCALIDAD.URL_BASE,permiso:'ADMIN'},
         {nombre:'AUTOR',menus:[],icono:'contacts', url:MENU_URLS.AUTORADM.URL_BASE,permiso:'ADMIN'},
+        {nombre:'USUARIO',menus:[],icono:'supervised_user_circle', url:MENU_URLS.USUARIO.URL_BASE,permiso:'ADMIN'},
+        {nombre:'CONCEPTO',menus:[],icono:'receipt', url:MENU_URLS.CONCEPTO.URL_BASE,permiso:'ADMIN'},
     ]
 
 

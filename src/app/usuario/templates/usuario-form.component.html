@@ -1,0 +1,84 @@
+<div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        USERNAME
+                    </mat-label>
+                    <input formControlName="username" matInput placeholder="USERNAME" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('username') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        PASSWORD
+                    </mat-label>
+                    <input formControlName="password" matInput placeholder="PASSWORD" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('password') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>FUNCIONARIO</mat-label>
+                    <mat-select formControlName="idFuncionario" id="gestionSelect">
+                        <mat-option>SELECCIONAR USUARIO</mat-option>
+                        <mat-option *ngFor="let funcionario of funcionarioList" [value]="funcionario.idFuncionario">
+                            {{funcionario.nombre}} {{funcionario.apellido}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('idFuncionario') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>ROL</mat-label>
+                    <mat-select formControlName="role" id="gestionSelect">
+                        <mat-option>SELECCIONAR ROL</mat-option>
+                        <mat-option *ngFor="let role of roleList" [value]="role">
+                            {{role}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('role') }}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            
+
+
+            
+           
+
+        </mat-grid-list>
+
+        <div class="buttons-container">
+            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProducto()">
+                {{ viewText.REGISTER }}
+                <mat-icon>save</mat-icon>
+            </button>
+            <!-- <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateLocalidad()">
+                {{ viewText.UPDATE }}
+                <mat-icon>update</mat-icon>
+            </button> -->
+            <button type="button" mat-raised-button (click)="closeForm()">
+                {{ viewText.CANCEL }}
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </form>
+</div>

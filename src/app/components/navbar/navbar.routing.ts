@@ -35,7 +35,10 @@ import { AutorAdmComponent } from 'src/app/autor-adm/components/autor-adm.compon
 import {routes as routerAutorAdm } from 'src/app/autor-adm/autor-adm.routing';
 import { EstadisticaComponent } from 'src/app/estadistica/components/estadistica.component';
 import {routes as routerEstadistica } from 'src/app/estadistica/estadistica.routing';
-
+import { UsuarioComponent } from 'src/app/usuario/components/usuario.component';
+import {routes as routerUsuario } from 'src/app/usuario/usuario.routing';
+import { ConceptoComponent } from 'src/app/concepto/components/concepto.component';
+import {routes as routerConcepto } from 'src/app/concepto/concepto.routing';
 
 export const routes: Routes = [
     {
@@ -138,6 +141,18 @@ export const routes: Routes = [
         path: MENU_URLS.ESTADISTICA.URL_BASE,
         component: EstadisticaComponent,
         children: routerEstadistica,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.USUARIO.URL_BASE,
+        component: UsuarioComponent,
+        children: routerUsuario,
+        canActivate:[authGuard]
+    },
+    {
+        path: MENU_URLS.CONCEPTO.URL_BASE,
+        component: ConceptoComponent,
+        children: routerConcepto,
         canActivate:[authGuard]
     },
    

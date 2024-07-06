@@ -1,0 +1,16 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+
+    <a mat-tab-link routerLink="nuevo-usuario" *ngIf="!usuarioService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR USUARIO
+    </a>
+
+    <!-- <a mat-tab-link routerLink="editar-localidad" *ngIf="usuarioService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR USUARIO
+    </a> -->
+
+
+
+  </nav>
+
+  <router-outlet></router-outlet>
