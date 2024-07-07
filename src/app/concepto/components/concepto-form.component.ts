@@ -165,7 +165,7 @@ export class ConceptoFormComponent implements OnInit {
   }
 
   closeForm() {
-    this.routerInstance.navigate(['../localidad/listar-localidad']);
+    this.routerInstance.navigate(['../concepto/listar-concepto']);
     this.conceptoService.editForm = false;
   }
 
