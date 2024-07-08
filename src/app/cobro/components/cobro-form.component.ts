@@ -23,7 +23,7 @@ import { CobroService } from "../service/cobro.service";
     routerInstance:Router;
     entityForm!:FormGroup;
     colsSize=2;
-    listaTipoDePago = ['EFECTIVO','TRANSFERENCIA','DEPÓSITO']
+    listaTipoDePago = ['EFECTIVO','TRANSFERENCIA','CHEQUE']
     viewText = GlobalMessage.VIEW_LABELS;
     cobroToSave!:any;
     createDefaultMessage = 'EL REGISTRO';

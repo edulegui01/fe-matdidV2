@@ -3,13 +3,17 @@
     <div class="list-container mat-elevation-z4">
 
         <div class="d-flex justify-content-between">
-            <div class="p-2 input-filters">
-                <!-- <div class="form-group " [formGroup]="filterForm">
-                    <input formControlName="numFolio" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por numero de folio">
-                </div> -->
+            <div class="p-2 input-filters mt-2">
+                <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-1">TOTAL EFECTIVO: {{formatearNumero(totalEfectivo)}}</span>
             </div>
             <div class="p-2 input-filters mt-2">
-                <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-1">SALDO DISPONIBLE: {{formatearNumero(saldoDisponible.totalPagos)}}</span>
+                <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-1">TOTAL TRANSFERENCIA: {{formatearNumero(totalTransferencia)}}</span>
+            </div>
+            <div class="p-2 input-filters mt-2">
+                <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-1">TOTAL CHEQUE: {{formatearNumero(totalCheque)}}</span>
+            </div>
+            <div class="p-2 input-filters mt-2">
+                <span style="margin-right: 2rem; font-size:22px;" class="h5 mt-1 border border-info rounded bg-white p-1">SALDO DISPONIBLE: {{formatearNumero(saldoDisponible)}}</span>
             </div>
         </div>
 

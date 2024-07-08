@@ -23,7 +23,7 @@ import { CustomDialogComponent } from "src/app/components/custom-dialog/componen
     routerInstance:Router;
     entityForm!:FormGroup;
     colsSize=2;
-    listaTipoDePago = ['EFECTIVO','TRANSFERENCIA','DEPÓSITO']
+    listaTipoDePago = ['EFECTIVO','TRANSFERENCIA','CHEQUE']
     viewText = GlobalMessage.VIEW_LABELS;
     pagoToSave!:any;
     createDefaultMessage = 'EL REGISTRO';

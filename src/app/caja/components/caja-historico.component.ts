@@ -202,7 +202,7 @@ export class CajaHistoricoComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['fecha', 'comprobante','concepto','debito','credito','estado'];
+  displayedColumns: string[] = ['fecha', 'comprobante','concepto','debito','credito','tipo-transaccion','estado'];
   displayedFilters: string[] = ['nombre-filter'];
   
 }

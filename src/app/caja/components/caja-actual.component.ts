@@ -35,8 +35,13 @@ export class CajaActualComponent  implements OnInit {
   paginatorRef!: MatPaginator;
   @ViewChild(MatPaginator) paginatorf!: MatPaginator;
   smallRowSize=true;
-  saldoDisponible:any;
+ 
   cajaList:any;
+  totalCheque:any;
+  totalEfectivo:any;
+  totalPagos:any;
+  totalTransferencia:any;
+  saldoDisponible:any;
   
   
   
@@ -77,7 +82,12 @@ export class CajaActualComponent  implements OnInit {
 
   initDataSource(){
     this.cajaService.getCajaListActual().subscribe( (cajaData:any) => this.dataSource = cajaData)
-    this.cajaService.getSaldoDisponible().subscribe((saldoDisponible:any) => this.saldoDisponible = saldoDisponible)
+    this.cajaService.getSaldoDisponible().subscribe((saldoDisponible:any) => {
+      this.totalCheque = saldoDisponible.totalCheque
+      this.totalEfectivo = saldoDisponible.totalEfectivo
+      this.totalTransferencia = saldoDisponible.totalTransferencia
+      this.saldoDisponible = saldoDisponible.totalPagos
+    })
   }
 
 
