@@ -18,10 +18,10 @@ import { CajaService } from '../service/caja.service';
 
 @Component({
   selector: 'app-caja-list',
-  templateUrl: '../templates/caja-list.component.html',
-  styleUrls: ['../styles/caja-list.component.scss']
+  templateUrl: '../templates/caja-historico.component.html',
+  styleUrls: ['../styles/caja-historico.component.scss']
 })
-export class CajaListComponent  implements OnInit {
+export class CajaHistoricoComponent  implements OnInit {
   
   dataSource!:any;
   clienteToEdit!:any;

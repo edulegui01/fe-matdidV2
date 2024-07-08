@@ -322,6 +322,10 @@ export const MENU_URLS = {
             URL: 'eliminar-caja',
             PERMISO: 'ELIMINAR_HORARIO'
         },
+        ACTUAL: {
+            URL: 'actual-caja',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
     },
     AUTOR: {
         URL_BASE: 'autor',

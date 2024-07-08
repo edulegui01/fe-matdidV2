@@ -5,9 +5,11 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
 import { CajaComponent } from './components/caja.component';
-import { CajaListComponent } from './components/caja-list.component';
+
 import { MovimientoCajaFormComponent } from './components/movimiento-caja-form.component';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { CajaHistoricoComponent } from './components/caja-historico.component';
+import { CajaActualComponent } from './components/caja-actual.component';
 
 
 
@@ -23,8 +25,9 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 @NgModule({
   declarations: [
     CajaComponent,
-    CajaListComponent,
-    MovimientoCajaFormComponent
+    MovimientoCajaFormComponent,
+    CajaHistoricoComponent,
+    CajaActualComponent
    
   ],
   imports: [

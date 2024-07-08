@@ -1,16 +1,22 @@
 <nav mat-tab-nav-bar updateActiveLink>
 
-    <a mat-tab-link routerLink="listar-caja" (click)="cajaService.editForm=false" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+    <a mat-tab-link routerLink="actual-caja" routerLinkActive routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
       CAJA
     </a>
+  
+    <a mat-tab-link routerLink="listar-caja" (click)="cajaService.editForm=false" routerLinkActive routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      HISTORICO
+    </a>
 
-    <a mat-tab-link routerLink="nuevo-caja" *ngIf="!cajaService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+    <a mat-tab-link routerLink="nuevo-caja" *ngIf="!cajaService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
       REGISTRAR MOVIMIENTO DE CAJA
     </a>
 
-    <a mat-tab-link routerLink="editar-caja" *ngIf="cajaService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+    <a mat-tab-link routerLink="editar-caja" *ngIf="cajaService.editForm" routerLinkActive #rl4="routerLinkActive" [active]="rl4.isActive">
       MODIFICAR MOVIMIENTO DE CAJA
     </a>
+
+    
 
 
 
