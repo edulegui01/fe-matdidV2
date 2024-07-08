@@ -76,7 +76,7 @@ export class CajaActualComponent  implements OnInit {
 
 
   initDataSource(){
-    this.cajaService.getCajaList().subscribe( (cajaData:any) => this.dataSource = cajaData)
+    this.cajaService.getCajaListActual().subscribe( (cajaData:any) => this.dataSource = cajaData)
     this.cajaService.getSaldoDisponible().subscribe((saldoDisponible:any) => this.saldoDisponible = saldoDisponible)
   }
 
@@ -159,7 +159,7 @@ export class CajaActualComponent  implements OnInit {
     }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
       if (accept) {
         this.cajaService.cerrarCaja(movimientoCaja).subscribe(resutl => {
-          this.cajaService.getCajaList().subscribe((cajaList:any) => this.dataSource = cajaList);
+          this.cajaService.getCajaListActual().subscribe((cajaList:any) => this.dataSource = cajaList);
           this.cajaService.getSaldoDisponible().subscribe((saldoDisponible:any) => this.saldoDisponible = saldoDisponible)
         });
 
@@ -202,7 +202,7 @@ export class CajaActualComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['fecha', 'comprobante','concepto','debito','credito','estado'];
+  displayedColumns: string[] = ['fecha', 'comprobante','concepto','debito','credito','tipo-transaccion','estado'];
   displayedFilters: string[] = ['nombre-filter'];
   
 }

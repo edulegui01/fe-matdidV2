@@ -61,6 +61,15 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="tipo-transaccion" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                TIPO TRANSACCIÓN
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+               {{element.tipo}}
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="estado" >
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
                 ESTADO

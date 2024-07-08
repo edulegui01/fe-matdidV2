@@ -18,7 +18,8 @@ export class CajaService {
     urlActualizar:'/ciclo/actualizar/',
     urlDelete:'/ciclo/actualizar/',
     urlSaldoDisponible:'/movimiento-caja/saldo-disponible',
-    urlCerrarCaja:'/movimiento-caja/cerrar-caja'
+    urlCerrarCaja:'/movimiento-caja/cerrar-caja',
+    urlListarActual:'/movimiento-caja/listar-actual'
 
   }
 
@@ -35,6 +36,12 @@ export class CajaService {
       map((cajaList:any) => cajaList)
     )
 
+  }
+
+  public getCajaListActual():Observable<any>{
+    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListarActual,{...this.options}).pipe(
+      map((cajaList:any) => cajaList)
+    )
   }
 
 

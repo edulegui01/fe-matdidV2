@@ -5,7 +5,7 @@
     </a>
   
     <a mat-tab-link routerLink="listar-caja" (click)="cajaService.editForm=false" routerLinkActive routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
-      HISTORICO
+      HISTÓRICO
     </a>
 
     <a mat-tab-link routerLink="nuevo-caja" *ngIf="!cajaService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">

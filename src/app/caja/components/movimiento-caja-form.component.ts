@@ -115,7 +115,7 @@ export class MovimientoCajaFormComponent implements OnInit {
               
 
               this.cajaService.saveMovimientoCaja(this.movimientoCajaToSave).subscribe(result => {
-                this.routerInstance.navigate(['../caja/listar-caja'])
+                this.routerInstance.navigate(['../caja/actual-caja'])
               });
           }
       });

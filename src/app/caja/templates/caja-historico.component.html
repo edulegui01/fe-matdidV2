@@ -8,9 +8,9 @@
                     <input formControlName="numFolio" (keydown.enter)="doFilter()" type="text" class="form-control" placeholder="Buscar por numero de folio">
                 </div> -->
             </div>
-            <div class="p-2 input-filters mt-2">
+            <!-- <div class="p-2 input-filters mt-2">
                 <span style="margin-right: 2rem;" class="h5 mt-1 border border-primary rounded bg-white p-1">SALDO DISPONIBLE: {{formatearNumero(saldoDisponible.totalPagos)}}</span>
-            </div>
+            </div> -->
         </div>
 
         
@@ -90,14 +90,14 @@
         <!-- <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row> -->
         <mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 28px;  min-height: 28px !important;" [ngClass]="{'row-cierre-caja':row.estado=='CERRADO'}"></mat-row>
         </mat-table>
-        <div class="buttons-container">
+        <!-- <div class="buttons-container">
             <button id="register"   mat-raised-button color="primary" type="button" (click)="cerrarCaja()" disabled="{{saldoDisponible.totalPagos==0 ? true:false}}">
                 CERRAR CAJA
                 <mat-icon>lock</mat-icon>
             </button>
            
          
-        </div>
+        </div> -->
 
 
     </div>
