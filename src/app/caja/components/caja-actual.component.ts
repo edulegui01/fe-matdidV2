@@ -149,7 +149,7 @@ export class CajaActualComponent  implements OnInit {
     const movimientoCaja = {
       fecha: new Date(),
       idConcepto: 3,
-      monto: this.saldoDisponible.totalPagos,
+      monto: this.saldoDisponible,
       estado: 'CERRADO',
       idFuncionario: localStorage.getItem('idFuncionario'),
       beneficiario:"",
